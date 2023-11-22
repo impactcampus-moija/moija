@@ -41,9 +41,9 @@ public class BaseResponse<T> {
                 .build();
     }
 
-    public static BaseResponse<?> fail(MoijaHttpStatus moijaHttpStatus) {
-        return BaseResponse.builder()
-                .status(moijaHttpStatus)
+    public static BaseResponse<Void> fail(ApiException e) {
+        return BaseResponse.<Void>builder()
+                .status(e.getStatus())
                 .build();
     }
 
