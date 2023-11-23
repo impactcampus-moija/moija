@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Noto Sans KR;
+}
+footer{
+    display: flex;
+    color:#5D5D5D;
+    font-size:1rem;
+    padding: 2.5rem 0rem 1.75rem 0rem;
+    justify-content: center;
+    align-items: center;
+    gap: 38.8125rem;
+    border-top:1px solid #5D5D5D;
+    width: 1280;
+    margin-top: 2rem;
+}
+.bold-footer{
+    font-weight: 700;
+}
+.light-footer{
+    font-weight: 300;
+}
+
+.right-footer{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

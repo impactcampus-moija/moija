@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Noto Sans KR;
+}
+body{
+    background-color: #FAFAFA;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    width: 1280px;
+    height:100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h3{
+    color :  #181818;
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.033rem;
+    margin-bottom : 4.5rem;
+}
+.login-logo-input-container{
+    background-color: #FFFFFF;
+    padding: 4rem 12.25rem 5rem 12.25rem;
+    width:28.375rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    border: 1px solid #D8D8D8;
+    border-radius: 1.25rem;
+}
+.logo-img{
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.login-input-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+}
+.login-input-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+.login-input-div input{
+    width: 23.61056rem;
+    padding:0.81rem 3.38rem 0.81rem 1.39rem  ;
+    border: 1px solid #D9D9D9;
+    border-radius: 0.625rem;
+    font-size: 0.9375rem;
+    font-weight: 400;
+}
+.login-input-div input::placeholder{
+    color : #D9D9D9;
+}
+.login-input-div p{
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #181818;
+}
+.login-button{
+    padding: 0.75rem 12.625rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.25rem;
+    background-color: #FCA340;
+}
+.login-button p{
+    color : #FFF;
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+.login-button-container{
+    margin-top:4rem;
+}
+.sub-buttons{
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.625rem;
+}
+.sub-buttons a p{
+    color : #181818;
+}
