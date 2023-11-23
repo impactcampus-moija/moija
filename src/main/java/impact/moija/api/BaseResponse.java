@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 
 @Getter
-@Builder(access = AccessLevel.PROTECTED)
+@Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -45,6 +45,10 @@ public class BaseResponse<T> {
         return BaseResponse.<Void>builder()
                 .status(e.getStatus())
                 .build();
+    }
+
+    private static <T> CustomBaseResponseBuilder<T> builder() {
+        return new CustomBaseResponseBuilder<>();
     }
 
     private static class CustomBaseResponseBuilder<T> extends BaseResponseBuilder<T> {
