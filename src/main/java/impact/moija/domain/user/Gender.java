@@ -1,4 +1,4 @@
-package impact.moija.dto.user;
+package impact.moija.domain.user;
 
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;

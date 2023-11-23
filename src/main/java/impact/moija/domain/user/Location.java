@@ -6,7 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -33,7 +35,12 @@ public enum Location {
     ;
 
     private static final Map<String, Location> names = Arrays.stream(Location.values())
-            .collect(Collectors.toMap(Location::getName, Function.identity()));
+            .collect(Collectors.toMap(
+                    Location::getName,
+                    Function.identity(),
+                    (existing, replacement) -> existing,
+                    LinkedHashMap::new
+            ));
 
     private final String name;
     private final String code;
@@ -43,5 +50,9 @@ public enum Location {
             throw new ApiException(MoijaHttpStatus.INVALID_LOCATION_NAME);
         }
         return names.get(name);
+    }
+
+    public static Set<String> getNames() {
+        return names.keySet();
     }
 }

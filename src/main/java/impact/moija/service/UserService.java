@@ -2,6 +2,7 @@ package impact.moija.service;
 
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
+import impact.moija.domain.user.Location;
 import impact.moija.domain.user.RefreshToken;
 import impact.moija.domain.user.User;
 import impact.moija.dto.jwt.TokenResponseDto;
@@ -27,6 +28,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service

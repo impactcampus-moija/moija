@@ -1,7 +1,6 @@
 package impact.moija.domain.user;
 
 import impact.moija.domain.common.BaseTimeEntity;
-import impact.moija.dto.user.Gender;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -36,10 +36,13 @@ public class User extends BaseTimeEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @Column(unique = true)
     String email;
+
     String password;
     String nickname;
-    LocalDate birthDay;
+    LocalDate birthday;
 
     @Enumerated(EnumType.STRING)
     Location location;

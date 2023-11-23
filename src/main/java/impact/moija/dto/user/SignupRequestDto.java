@@ -1,5 +1,6 @@
 package impact.moija.dto.user;
 
+import impact.moija.domain.user.Gender;
 import impact.moija.domain.user.Location;
 import impact.moija.domain.user.User;
 import impact.moija.domain.user.UserRole;
@@ -15,7 +16,7 @@ public class SignupRequestDto {
     String email;
     String password;
     String nickname;
-    String birthDay;
+    String birthday;
     String location;
     String gender;
 
@@ -24,7 +25,7 @@ public class SignupRequestDto {
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .nickname(nickname)
-                .birthDay(LocalDate.parse(birthDay))
+                .birthday(LocalDate.parse(birthday))
                 .location(Location.findByName(location))
                 .gender(Gender.findByName(gender))
                 .role(UserRole.ROLE_USER)
