@@ -1,6 +1,7 @@
 package impact.moija.domain.user;
 
 import impact.moija.domain.common.BaseTimeEntity;
+import impact.moija.dto.user.Gender;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +43,9 @@ public class User extends BaseTimeEntity implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     Location location;
+
+    @Enumerated(EnumType.STRING)
+    Gender gender;
 
     @Enumerated(EnumType.STRING)
     UserRole role;

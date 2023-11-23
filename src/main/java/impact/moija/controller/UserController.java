@@ -4,6 +4,7 @@ import impact.moija.api.BaseResponse;
 import impact.moija.domain.user.User;
 import impact.moija.dto.jwt.TokenResponseDto;
 import impact.moija.dto.user.AuthRequestDto;
+import impact.moija.dto.user.SignupRequestDto;
 import impact.moija.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -21,10 +22,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/user/signup")
-    public User signup(@RequestBody AuthRequestDto authRequestDto){
-        return userService.signup(authRequestDto);
+    public User signup(@RequestBody SignupRequestDto signupRequestDto){
+        return userService.signup(signupRequestDto);
     }
-
 
     @PostMapping("/user/login")
     public BaseResponse<TokenResponseDto> login(HttpServletResponse response, @RequestBody AuthRequestDto authRequestDto) {
