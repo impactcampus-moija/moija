@@ -1,0 +1,254 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Noto Sans KR;
+    color: #181818;
+}
+body{
+    background-color: #FAFAFA;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    width: 1280px;
+    min-height:100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h3{
+    color :  #181818;
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.033rem;
+    margin-bottom : 4.5rem;
+}
+.signup-container-1, .signup-container-2, .signup-container-3{
+    background-color: #FFFFFF;
+    width: 52.875rem;
+    height: 40.75rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    border: 1px solid #D8D8D8;
+    border-radius: 1.25rem;
+}
+.signup-container-1-left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center; 
+}
+.signup-explain-container{
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+}
+.explain-bold-font{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+.explain-light-font{
+    font-size: 1rem;
+    font-weight: 400;
+}
+.explain-gray-font{
+    font-size: 1rem;
+    font-weight: 350;
+    color: #969696;
+    margin-top:3rem;
+    margin-bottom: -1rem;
+}
+.signup-container-1 .signup-input-container{
+    display:flex;
+    flex-direction: column;
+    gap : 4rem;
+}
+.signup-container-1 .signup-input-div{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    width:28.5rem;
+}
+.signup-input-div p{
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+.signup-container-1 input{
+    border: 1px solid #D9D9D9;
+    border-radius: 0.625rem;
+    font-size : 0.9375rem;
+    font-weight: 400;
+    padding : 0.81rem 1rem 0.81rem 1.06rem;
+    width: 17rem;
+}
+.signup-input-div input::placeholder{
+    color : #D9D9D9;
+}
+.signup-input-login-div{
+    display:flex;
+    align-items: center;
+    gap:1.25rem;
+}
+.signup-id-check{
+    padding: 0.81rem 0rem;
+    border : 1px solid #D9D9D9;
+    border-radius: 0.625rem;
+}
+.signup-id-check p{
+    text-align: center;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    width:6.75rem;
+    
+}
+.signup-button-1, .signup-button-2{
+    width: 25.8125rem;
+    height: 3.125rem;
+    border : 1px solid #D9D9D9;
+    border-radius: 1.25rem;
+    margin-top : 4rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.signup-button-3{
+    width: 25.8125rem;
+    height: 3.125rem;
+    background-color: #FCA340;
+    opacity: 0.9;
+    border-radius: 1.25rem;
+    margin-top : 4rem;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.signup-button p {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color : #D9D9D9
+}
+.signup-button-3 p {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color : #FFF;
+}
+/* container-2 */
+.signup-container-2 .signup-input-div{
+    display:flex;
+    align-items: center;
+    gap: 4rem;
+}
+.signup-container-2 .signup-input-container{
+    display:flex;
+    flex-direction: column;
+    gap : 2rem;
+}
+.contianer-2-p{
+    width:5.5rem;
+    font-weight: 500;
+}
+.signup-input-name{
+    width: 20.0725rem;
+    font-size : 0.9375rem;
+    font-weight: 400;
+    padding: 0.81rem 1.25rem 0.81rem 1.18rem;
+    border: 1px solid #D9D9D9;
+    border-radius: 0.625rem;
+}
+select{
+    padding:0.81rem 0.75rem 0.81rem 0.75rem;
+    background-color: #FFFFFF;
+    border : 1px solid #D9D9D9;
+    border-radius: 0.625rem;
+    color : #D9D9D9;
+}
+select option:checked {
+    color : #181818;
+}
+.signup-input-name::placeholder{
+    color : #D9D9D9;
+}
+.signup-input-birthday-container{
+    display: flex;
+}
+
+.signup-input-birthday-container{
+    display:flex;
+    gap:1rem;
+}
+.input-birthday-year-container, .input-birthday-month-container , .input-birthday-day-container{
+    display:flex;
+    align-items: center;
+    gap:0.38rem;
+}
+/* container-3 */
+.signup-container-3 .signup-input-div{
+    display:flex;
+    align-items: center;
+}
+.signup-container-3 .signup-input-container{
+    display:flex;
+    flex-direction: column;
+    gap : 2rem;
+}
+.contianer-3-p{
+    width:8.5rem;
+    font-size:1.125rem;
+    font-weight: 500;
+}
+.contianer-3-p-2{
+    width:5.5rem;
+    font-size:1.125rem;
+    font-weight: 500;
+}
+.signup-radio-div{
+    display:flex;
+}
+.signup-input-div-2{
+    display:flex;
+    align-items: center;
+    gap: 5.25rem;
+}
+/* 라디오 버튼 */
+.radio{
+    width:1.125rem;
+}
+.radio_box{
+    display:flex;
+    gap: 0.5rem;
+}
+input[type='radio'] {
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    appearance: none; 
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc; 
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+  }
+  
+input[type='radio']:checked{
+    background-color: #FCA340;
+    border: 3px solid #FFFFFF;
+    box-shadow: 0 0 0 1.6px #FCA340;
+}
+.signup-radio-container{
+    display:flex;
+    gap: 0.5rem;
+
+}
+label{
+    font-size: 1rem;
+    font-weight: 500;
+}
