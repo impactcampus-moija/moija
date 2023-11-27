@@ -26,8 +26,12 @@ public enum MoijaHttpStatus {
      * 403
      */
     FORBIDDEN(403, HttpStatus.FORBIDDEN, "권한이 없습니다."),
-    ;
 
+
+    /**
+     * 500
+     */
+    FAIL_CONVERT_XML(500, HttpStatus.INTERNAL_SERVER_ERROR, "XML 데이터를 변환에 실패했습니다.");
     private final int statusCode;
     private final HttpStatus httpStatus;
     private final String message;
