@@ -87,6 +87,7 @@ finishButton.addEventListener('click',function(){
     submit()
 });
 
+// 생일 날짜 형식 반환하는 함수
 function returnBirth(year,month,day){
     month = String(month).padStart(2,'0');
     day = String(month).padStart(2,'0');
@@ -95,6 +96,7 @@ function returnBirth(year,month,day){
     return date;
 }
 
+// 라디오 선택한 value 반환하는 함수
 function returnSelect(value){
     let selectedValue = ''
     value.forEach(radio=>{
@@ -151,6 +153,7 @@ checksamepw.addEventListener('change',function(){
     validSamePW(checksamepw.value)
 })
 
+// 백엔드 통신
 function submit(){
     const url = '/users/signup';
     fetch(url,{
@@ -161,9 +164,9 @@ function submit(){
         method:"POST"
     })
     .then((Response)=>{
-        if(Response.code === 200){
+        if(Response.statusCode === 200){
             console.log('가입성공')
-        }else if(Response.code===40002){
+        }else if(Response.statusCode===40002){
             console.log('전화번호 중복')
         }
     })
