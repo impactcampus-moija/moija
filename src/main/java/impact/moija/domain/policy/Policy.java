@@ -1,6 +1,7 @@
 package impact.moija.domain.policy;
 
 import impact.moija.domain.common.BaseTimeEntity;
+import impact.moija.domain.user.Location;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import lombok.AccessLevel;
@@ -32,6 +33,9 @@ public class Policy extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     PolicyType type;
+
+    @Enumerated(EnumType.STRING)
+    Location location;
 
     String name;
 
