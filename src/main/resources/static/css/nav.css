@@ -20,7 +20,13 @@
     width: 1280px;
     display: flex;
     align-items: center;
-    gap: 6.25rem;
+    gap: 12.5rem;
+}
+
+.nav-left{
+    display: flex;
+    align-items: center;
+    gap: 6.1875rem;
 }
 
 .nav-logo-img{
@@ -31,7 +37,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 9rem;
+    gap: 12.8125rem;
 }
 
 .nav-menu-category{
