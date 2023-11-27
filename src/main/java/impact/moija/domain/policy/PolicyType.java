@@ -14,4 +14,14 @@ public enum PolicyType {
 
     private final String name;
     private final String code;
+
+    public static PolicyType findByCode(String code) {
+        for(PolicyType policy : PolicyType.values()) {
+            if(policy.getCode().equals(code)) {
+                return policy;
+            }
+        }
+
+        return null;
+    }
 }
