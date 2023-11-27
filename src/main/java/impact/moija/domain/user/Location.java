@@ -1,5 +1,6 @@
 package impact.moija.domain.user;
 
+import impact.moija.domain.policy.PolicyType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -27,4 +28,14 @@ public enum Location {
 
     private final String name;
     private final String code;
+
+    public static Location findByCode(String code) {
+        for(Location location : Location.values()) {
+            if(location.getCode().equals(code)) {
+                return location;
+            }
+        }
+
+        return null;
+    }
 }
