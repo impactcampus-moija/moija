@@ -40,6 +40,9 @@ h3{
     border: 1px solid #D8D8D8;
     border-radius: 1.25rem;
 }
+.signup-container-1-left, .signup-container-2-left, .signup-container-3-left{
+    width: 39.375rem;
+}
 .signup-container-1-left{
     display: flex;
     flex-direction: column;
@@ -70,7 +73,7 @@ h3{
 .signup-container-1 .signup-input-container{
     display:flex;
     flex-direction: column;
-    gap : 4rem;
+    gap : 2rem;
 }
 .signup-container-1 .signup-input-div{
     display:flex;

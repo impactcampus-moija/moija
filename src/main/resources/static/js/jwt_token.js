@@ -20,10 +20,10 @@ export function tokenValid(){
             headers:myHeaders
         })
         .then((Response)=>{
-            if (Response.status ===200){
+            if (Response.statusCode ===200){
                 return Response.json();
             }
-        }).catch((error)=>console.log(error))
+        }).catch((error)=>console.error(error))
         .then((Response)=>{
             localStorage.setItem('access_token',Response.data.token);
             localStorage.setItem('expiredAt',Response.data.expiredAt);
