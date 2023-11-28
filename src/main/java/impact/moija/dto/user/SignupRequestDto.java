@@ -9,6 +9,8 @@ import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Collections;
 
 @Getter
 @Builder
@@ -28,7 +30,7 @@ public class SignupRequestDto {
                 .birthday(LocalDate.parse(birthday))
                 .location(Location.findByName(location))
                 .gender(Gender.findByName(gender))
-                .role(UserRole.ROLE_USER)
+                .role(Collections.singleton(UserRole.ROLE_USER))
                 .build();
     }
 }
