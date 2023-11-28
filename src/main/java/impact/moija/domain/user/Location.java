@@ -2,6 +2,7 @@ package impact.moija.domain.user;
 
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
+import impact.moija.domain.policy.PolicyType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -54,5 +55,14 @@ public enum Location {
 
     public static Set<String> getNames() {
         return names.keySet();
+
+    public static Location findByCode(String code) {
+        for(Location location : Location.values()) {
+            if(location.getCode().equals(code)) {
+                return location;
+            }
+        }
+
+        return null;
     }
 }

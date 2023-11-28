@@ -25,4 +25,12 @@ public class Image extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    String targetTable;
+
+    Long targetId;
+
+    String name;
+
+    String url;
 }

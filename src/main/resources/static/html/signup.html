@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href = "../css/signup.css" rel = 'stylesheet'>
+    <link href = "../css/footer.css" rel = 'stylesheet'>
+    <title>moija</title>
+</head>
+<body>
+    <main>
+        <div class = 'signup-containers'>
+            <h3>회원가입</h3>
+            <div id = 'signup-container-1' class = 'signup-container-1'>
+                <div class = "signup-container-1-left">
+                    <div class = "signup-explain-container">
+                        <p class = "explain-bold-font">필수 항목</p>
+                        <p class = "explain-light-font">회원 가입을 위한 필수 항목으로 반드시 입력해 주세요.</p>
+                    </div>
+                    <div class = 'signup-input-container'>
+                        <div class = 'signup-input-login-div'>
+                            <div class = 'signup-input-div'>
+                                <p>이메일</p>
+                                <input id = 'signup-input-email'class = 'signup-input' id = 'signup-login-input' name = 'email' type = 'text' placeholder="userid@gmail.com">
+                            </div>
+                            <div class = "signup-id-check" id = "sign-up-check">
+                                <p>중복확인</p>
+                            </div> 
+                        </div>
+                        <div class = 'signup-input-div'>
+                            <p>비밀번호</p>
+                            <input id = 'signup-input-pw'class = 'signup-input' name = 'pw' type = 'password' placeholder="10자리 이상 특수문자 포함">
+                        </div>
+                        <div class = 'signup-input-div'>
+                            <p>비밀번호 확인</p>
+                            <input id = 'signup-input-pw-check'class = 'signup-input' name = 'pw-cf' type = 'password' placeholder="10자리 이상 특수문자 포함">
+                        </div>
+                        <div class = 'signup-input-div'>
+                            <p>닉네임</p>
+                            <input id = 'signup-input-nickname'class = 'signup-input' name = 'nickname' type = 'text' placeholder="닉네임">
+                        </div>
+                    </div>
+                </div>
+                <div class = 'signup-button-container'>
+                    <div class='signup-button-1' id = 'signup-button-1'>
+                        <p>다음으로</p>
+                    </div>
+                </div>
+            </div>
+            <div id = 'signup-container-2' class = 'signup-container-2'>
+                <div class = "signup-container-2-left">
+                    <div class = "signup-explain-container">
+                        <p class = "explain-bold-font">선택 항목</p>
+                        <p class = "explain-light-font">모이자의 다양한 서비스를 이용하기 위한 항목으로 선택하여 입력해 주세요.</p>
+                        <p class = "explain-gray-font">맞춤형 정책 추천과 멘토링을 위해 이름, 생년월일, 거주 지역과 성별 정보를 수집합니다.</p>
+                    </div>
+                    <div class = 'signup-input-container'>
+                        <div class = 'signup-input-div'>
+                            <p class = 'contianer-2-p'>이름</p>
+                            <input id = 'signup-input-name'class = 'signup-input-name' name = 'name' type = 'text' placeholder="이름">
+                        </div>
+                        <div class = 'signup-input-div'>
+                            <p class = 'contianer-2-p'>생년월일</p>
+                            <div class = 'signup-input-birthday-container'>
+                                <div class = 'input-birthday-year-container'>
+                                    <select name = "연도" class =  "birthday-year" id = "birthday-year">
+                                        <option disabled selected>yyyy</option>
+                                    </select>
+                                    <p class = "selectbox-p">년</p>
+                                </div>
+                                <div class = 'input-birthday-month-container'>
+                                    <select name = "월별" class =  "birthday-month" id = "birthday-month">
+                                        <option disabled selected>mm</option>
+                                    </select>
+                                    <p class = "selectbox-p">월</p>
+                                </div>
+                                <div class = 'input-birthday-day-container'>
+                                    <select name = "일별" class =  "birthday-day" id = "birthday-day">
+                                        <option disabled selected>dd</option>
+                                    </select>
+                                    <p class = "selectbox-p">일</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class = 'signup-input-div'>
+                            <p class = 'contianer-2-p'>거주지역</p>
+                            <select name = "region" class =  "region" id = "signup-input-region">
+                                <option disabled selected class = "disabled-selected-option">거주 지역 선택</option>
+                                <option value = "서울">서울</option>
+                                <option value = "부산">부산</option>
+                                <option value = "대구">대구</option>
+                                <option value = "인천">인천</option>
+                                <option value = "광주">광주</option>
+                                <option value = "대전">대전</option>
+                                <option value = "울산">울산</option>
+                                <option value = "경기">경기</option> 
+                                <option value = "강원">강원</option> 
+                                <option value = "충북">충북</option> 
+                                <option value = "충남">충남</option> 
+                                <option value = "전북">전북</option> 
+                                <option value = "전남">전남</option> 
+                                <option value = "경북">경북</option> 
+                                <option value = "경남">경남</option> 
+                                <option value = "제주">제주</option> 
+                                <option value = "세종">세종</option> 
+                            </select>
+                        </div>
+                        <div class = 'signup-input-div'>
+                            <p class = 'contianer-2-p'>성별</p>
+                            <div class = 'signup-radio-container'>
+                                <label for = "male" class = "radio_box">
+                                    남자
+                                    <input class = 'radio' type = "radio" id = 'male' name = "gender" value ="남성" checked = "checked">
+                                    <span class = "male"></span>
+                                </label>
+                                <label for = "female" class = "radio_box">
+                                    여자
+                                    <input class = 'radio' type = "radio" id = 'female' name = "gender" value = "여성">
+                                    <span class = "female"></span>
+                                </label>
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+                <div class = 'signup-button-container'>
+                    <div class='signup-button-2' id = 'signup-button-2'>
+                        <p>다음으로</p>
+                    </div>
+                </div>
+            </div>
+            <div id = 'signup-container-3' class = 'signup-container-3'>
+                <div class = "signup-container-3-left">
+                    <div class = "signup-explain-container">
+                        <p class = "explain-bold-font">선택 항목</p>
+                        <p class = "explain-light-font">모이자의 다양한 서비스를 이용하기 위한 항목으로 선택하여 입력해 주세요.</p>
+                        <p class = "explain-gray-font">맞춤형 정책 추천과 멘토링을 위해 자립 시작 년도, 관심 분야, 학력 상태, 취업 유무 정보를 수집합니다.</p>
+                    </div>
+                    <div class = 'signup-input-container'>
+                        <div class = 'signup-input-div'>
+                            <p class = 'contianer-3-p'>관심 분야</p>
+                            <select name = "interest" class =  "interest" id = "interest">
+                                <option disabled selected>관심 분야 선택</option>
+                                <option value = "일자리">일자리</option>
+                                <option value = "주거">주거</option>
+                                <option value = "교육">교육</option>
+                                <option value = "생활지원">생활지원</option>
+                            </select>
+                        </div>
+                        <div class = 'signup-input-div'>
+                            <p class = 'contianer-3-p'>학력 상태</p>
+                            <select name = "study" class =  "study" id = "study">
+                                <option disabled selected>학력 상태 선택</option>
+                                <option value = "중학교 졸업">중학교 졸업</option>
+                                <option value = "고등학교 재학">고등학교 재학</option>
+                                <option value = "고등학교 졸업">고등학교 졸업</option>
+                                <option value = "전문대학 재학">전문대학 재학</option>
+                                <option value = "전문대학 휴학">전문대학 휴학</option>
+                                <option value = "전문대학 졸업">전문대학 졸업</option>
+                                <option value = "대학교 재학">대학교 재학</option>
+                                <option value = "대학교 휴학">대학교 휴학</option>
+                                <option value = "대학교 졸업">대학교 졸업</option>
+                            </select>
+                        </div>
+                        <div class = 'signup-input-div'>
+                            <p class = 'contianer-3-p'>자립 시작 연도</p>
+                            <select name = "start-year" class =  "start-year" id = "start-year">
+                                <option disabled selected>자립 연도 선택</option>
+                            </select>
+                        </div>
+                        <div class = 'signup-input-div-2'>
+                            <div class = 'signup-radio-div'>
+                                <p class = 'contianer-3-p-2'>취업 유무</p>
+                                <div class = 'signup-radio-container'>
+                                    <label for = "yes" class = "radio_box">
+                                        예
+                                        <input type = "radio" id = 'job-yes' name = "radio-independent" value = "yes" checked = "checked">
+                                        <span class = "yes"></span>
+                                    </label>
+                                    <label for = "female" class = "radio_box">
+                                        아니요
+                                        <input type = "radio" id = 'job-no' name = "radio-independent" value = "no">
+                                        <span class = "no"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class = 'signup-radio-div'>
+                                <p class = 'contianer-3-p-2'>역할</p>
+                                <div class = 'signup-radio-container'>
+                                    <label for = "mentor" class = "radio_box">
+                                        멘토
+                                        <input type = "radio" id = 'mentor' name = "radio-mentor" value = "mentor" checked = "checked">
+                                        <span class = "yes"></span>
+                                    </label>
+                                    <label for = "female" class = "radio_box">
+                                        멘티
+                                        <input type = "radio" id = 'mentee' name = "radio-mentor" value = "mentee">
+                                        <span class = "no"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                        </div> 
+                    </div> 
+                </div>
+                <div class = 'signup-button-container'>
+                    <div class='signup-button-3' id = 'signup-button-3'>
+                        <p>모이자와 자립생활 함께하기</p>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <footer>
+        <div class = 'left-footer'>
+            <p class = 'bold-footer'>임팩트 캠퍼스 IT 서비스 공모전 출품작</p>
+            <p class = 'light-footer'>프론트엔드 | 신민경 조유진  백엔드 | 최세민 박민수</p>
+        </div>
+        <div class = 'right-footer'>
+            <img class = 'footerlogo' src = '../src/footer-logo.png'>
+            <p class = 'bold-footer'>Copyright 2023. moija. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src = '../js/signup.js'></script>
+    
+</body>

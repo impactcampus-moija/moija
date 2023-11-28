@@ -1,6 +1,9 @@
 package impact.moija.domain.policy;
 
 import impact.moija.domain.common.BaseTimeEntity;
+import impact.moija.domain.user.Location;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,4 +28,30 @@ public class Policy extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    String number;
+
+    @Enumerated(EnumType.STRING)
+    PolicyType type;
+
+    @Enumerated(EnumType.STRING)
+    Location location;
+
+    String name;
+
+    String introduction;
+
+    String content;
+
+    String age;
+
+    String major;
+
+    String employment;
+
+    String special;
+
+    String period;
+
+    String url;
 }

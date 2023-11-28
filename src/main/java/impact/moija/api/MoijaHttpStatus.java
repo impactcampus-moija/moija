@@ -31,8 +31,17 @@ public enum MoijaHttpStatus {
      * 403
      */
     FORBIDDEN(403, HttpStatus.FORBIDDEN, "권한이 없습니다."),
-    ;
 
+    /**
+     * 404
+     */
+    NOT_FOUND_IMAGE(40401, HttpStatus.BAD_REQUEST, "이미지가 존재하지 않습니다."),
+
+    /**
+     * 500
+     */
+    FAIL_CONVERT_XML(500, HttpStatus.INTERNAL_SERVER_ERROR, "XML 데이터 변환에 실패했습니다."),
+    FAIL_UPLOAD_S3(500, HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
     private final int statusCode;
     private final HttpStatus httpStatus;
     private final String message;
