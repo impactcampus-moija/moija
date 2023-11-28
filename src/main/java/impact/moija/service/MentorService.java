@@ -7,6 +7,7 @@ import impact.moija.domain.mentoring.MentoringRecruitment;
 import impact.moija.domain.mentoring.MentoringTag;
 import impact.moija.domain.user.User;
 import impact.moija.dto.common.ImageResponseDto;
+import impact.moija.dto.mentoring.MentorDetailResponseDto;
 import impact.moija.dto.mentoring.MentorListResponseDto;
 import impact.moija.dto.mentoring.MentorRequestDto;
 import impact.moija.repository.mentoring.MentorRepository;
@@ -35,6 +36,11 @@ public class MentorService {
     private MentoringTag findTag(String name) {
         return tagRepository.findByName(name)
                 .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_TAG));
+    }
+
+    private Mentor findMentor(Long mentorId) {
+        return mentorRepository.findById(mentorId)
+                .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_MENTOR));
     }
 
     public void applyMentor(MentorRequestDto dto, MultipartFile file) {
@@ -88,4 +94,11 @@ public class MentorService {
             return MentorListResponseDto.of(mentor, image.getUrl());
         });
     }
+
+    public MentorDetailResponseDto getMentor(Long mentorId) {
+        Mentor mentor = findMentor(mentorId);
+        ImageResponseDto image = imageService.getImage("mentor", mentor.getId());
+        return MentorDetailResponseDto.of(mentor, image.getUrl());
+    }
+
 }
