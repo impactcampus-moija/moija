@@ -14,17 +14,16 @@ public class MentorRequestDto {
     String introduction;
     String career;
     String phone;
-    boolean activate;
     List<String> tags;
 
-    public Mentor toEntity(User user) {
+    public Mentor toEntity(User user, boolean activate) {
         return Mentor.builder()
                 .occupation(this.occupation)
                 .brief(this.brief)
                 .introduction(this.introduction)
                 .career(this.career)
                 .phone(this.phone)
-                .activate(this.activate)
+                .activate(activate)
                 .user(user)
                 .build();
     }

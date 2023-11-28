@@ -15,6 +15,7 @@ public class MentorDetailResponseDto {
     private String brief;
     private String introduction;
     private String career;
+    private boolean activate;
     private List<String> tags;
 
     public static MentorDetailResponseDto of(Mentor mentor,String url) {
@@ -25,6 +26,7 @@ public class MentorDetailResponseDto {
                 .brief(mentor.getBrief())
                 .introduction(mentor.getIntroduction())
                 .career(mentor.getCareer())
+                .activate(mentor.isActivate())
                 .tags(mentor.getRecruitments()
                         .stream()
                         .map(recruitment -> recruitment.getTag().getName())
