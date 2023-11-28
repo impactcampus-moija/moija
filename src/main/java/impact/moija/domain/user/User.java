@@ -51,8 +51,7 @@ public class User extends BaseTimeEntity implements UserDetails {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     RefreshToken refreshToken;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mentor_id")
+    @OneToOne(mappedBy = "user")
     Mentor mentor;
 
     @Override
