@@ -3,6 +3,11 @@
     padding: 0;
     font-family: Noto Sans KR;
 }
+
+body{
+    background-color: #FAFAFA;
+}
+
 .banner-container{
     background-color: #F5F5F5;
     width: 100vw;
