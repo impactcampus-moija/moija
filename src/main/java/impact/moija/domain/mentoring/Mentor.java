@@ -43,5 +43,5 @@ public class Mentor extends BaseTimeEntity {
     User user;
 
     @OneToMany(mappedBy = "mentor")
-    List<Mentoring> mentorings;
+    List<MentoringRecruitment> recruitments;
 }

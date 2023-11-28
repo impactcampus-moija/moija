@@ -23,8 +23,8 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "mentorings")
-public class Mentoring extends BaseTimeEntity {
+@Table(name = "mentoring_recruitments")
+public class MentoringRecruitment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

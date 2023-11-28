@@ -3,16 +3,16 @@ package impact.moija.service;
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
 import impact.moija.domain.mentoring.Mentor;
-import impact.moija.domain.mentoring.Mentoring;
+import impact.moija.domain.mentoring.MentoringRecruitment;
 import impact.moija.domain.mentoring.MentoringTag;
 import impact.moija.domain.user.User;
 import impact.moija.dto.mentoring.MentorListResponseDto;
 import impact.moija.dto.mentoring.MentorRequestDto;
 import impact.moija.repository.mentoring.MentorRepository;
-import impact.moija.repository.mentoring.MentoringRepository;
+import impact.moija.repository.mentoring.MentoringRecruitmentRepository;
 import impact.moija.repository.mentoring.MentoringTagRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MentorService {
 
     private final MentorRepository mentorRepository;
-    private final MentoringRepository mentoringRepository;
+    private final MentoringRecruitmentRepository recruitmentRepository;
     private final MentoringTagRepository tagRepository;
     private final UserService userService;
     private final ImageService imageService;
@@ -47,8 +47,8 @@ public class MentorService {
         for(String tagName : dto.getTags()) {
             MentoringTag tag = findTag(tagName);
 
-            mentoringRepository.save(
-                    Mentoring.builder()
+            recruitmentRepository.save(
+                    MentoringRecruitment.builder()
                         .mentor(mentor)
                         .tag(tag)
                         .activation(true) // TODO : 수정 가능성 있음
@@ -56,5 +56,4 @@ public class MentorService {
             );
         }
     }
-
 }

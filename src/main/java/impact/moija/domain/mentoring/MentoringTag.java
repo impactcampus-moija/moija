@@ -30,5 +30,5 @@ public class MentoringTag extends BaseTimeEntity {
     String name;
 
     @OneToMany(mappedBy = "tag")
-    List<Mentoring> mentorings;
+    List<MentoringRecruitment> recruitments;
 }
