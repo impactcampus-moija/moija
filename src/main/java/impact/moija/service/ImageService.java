@@ -20,7 +20,7 @@ public class ImageService {
 
     private Image findImage(String table, Long id) {
         return imageRepository.findByTargetTableAndTargetId(table, id)
-                .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_IMAGE));
+                .orElse(new Image());
     }
 
     @Transactional
