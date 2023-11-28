@@ -37,5 +37,9 @@ public class MentorController {
         return BaseResponse.ok(mentorService.getMentors(tag, pageable));
     }
 
-
+    @GetMapping("/mentors/search")
+    public BaseResponse<Page<MentorListResponseDto>> getSearchMentors(@RequestParam String keyword,
+                                                                      @PageableDefault(size = 12) Pageable pageable) {
+        return BaseResponse.ok(mentorService.getSearchMentors(keyword, pageable));
+    }
 }

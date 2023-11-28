@@ -79,4 +79,13 @@ public class MentorService {
         int end = Math.min((start + pageable.getPageSize()), dtos.size());
         return new PageImpl<>(dtos.subList(start, end), pageable, dtos.size());
     }
+
+    public Page<MentorListResponseDto> getSearchMentors(String keyword, Pageable pageable) {
+        Page<Mentor> mentors = mentorRepository.findByBriefContainingAndActivateIsTrue(keyword, pageable);
+
+        return mentors.map(mentor -> {
+            ImageResponseDto image = imageService.getImage("mentor", mentor.getId());
+            return MentorListResponseDto.of(mentor, image.getUrl());
+        });
+    }
 }

@@ -3,6 +3,8 @@ package impact.moija.repository.mentoring;
 import impact.moija.domain.mentoring.Mentor;
 import impact.moija.domain.mentoring.MentoringTag;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,4 +16,6 @@ public interface MentorRepository extends JpaRepository<Mentor, Long> {
             + "on mr.mentor = m "
             + "where mr.tag = :tag and m.activate = true")
     List<Mentor> findByTagAndActivateIsTrue(@Param("tag") MentoringTag tag);
+
+    Page<Mentor> findByBriefContainingAndActivateIsTrue(String brief, Pageable pageable);
 }
