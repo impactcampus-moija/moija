@@ -55,6 +55,7 @@ public enum Location {
 
     public static Set<String> getNames() {
         return names.keySet();
+    }
 
     public static Location findByCode(String code) {
         for(Location location : Location.values()) {
