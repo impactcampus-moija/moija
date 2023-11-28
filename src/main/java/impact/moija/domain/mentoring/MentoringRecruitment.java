@@ -36,6 +36,4 @@ public class MentoringRecruitment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
     MentoringTag tag;
-
-    boolean activation;
 }

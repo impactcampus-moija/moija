@@ -14,7 +14,7 @@ public class MentorRequestDto {
     String introduction;
     String career;
     String phone;
-
+    boolean activate;
     List<String> tags;
 
     public Mentor toEntity(User user) {
@@ -24,6 +24,8 @@ public class MentorRequestDto {
                 .introduction(this.introduction)
                 .career(this.career)
                 .phone(this.phone)
+                .activate(this.activate)
+                .user(user)
                 .build();
     }
 }

@@ -4,9 +4,11 @@ import impact.moija.domain.common.BaseTimeEntity;
 import impact.moija.domain.user.User;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -39,7 +41,10 @@ public class Mentor extends BaseTimeEntity {
 
     String phone;
 
-    @OneToOne(mappedBy = "mentor")
+    boolean activate;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     User user;
 
     @OneToMany(mappedBy = "mentor")
