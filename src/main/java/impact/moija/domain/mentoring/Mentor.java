@@ -2,6 +2,7 @@ package impact.moija.domain.mentoring;
 
 import impact.moija.domain.common.BaseTimeEntity;
 import impact.moija.domain.user.User;
+import impact.moija.dto.mentoring.MentorRequestDto;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,4 +50,16 @@ public class Mentor extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "mentor")
     List<MentoringRecruitment> recruitments;
+
+    public void updateMentor(MentorRequestDto dto) {
+        this.occupation = dto.getOccupation() != null ? dto.getOccupation() : this.occupation;
+        this.brief = dto.getBrief() != null ? dto.getBrief() : this.brief;
+        this.introduction = dto.getIntroduction() != null ? dto.getIntroduction() : this.introduction;
+        this.career = dto.getCareer() != null ? dto.getCareer() : this.career;
+        this.phone = dto.getPhone() != null ? dto.getPhone() : this.phone;
+    }
+
+    public void updateActivate(boolean activate) {
+        this.activate = activate;
+    }
 }

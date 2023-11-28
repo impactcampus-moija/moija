@@ -14,12 +14,12 @@ import impact.moija.repository.mentoring.MentorRepository;
 import impact.moija.repository.mentoring.MentoringRecruitmentRepository;
 import impact.moija.repository.mentoring.MentoringTagRepository;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -43,12 +43,14 @@ public class MentorService {
                 .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_MENTOR));
     }
 
+    @Transactional
     public void applyMentor(MentorRequestDto dto, MultipartFile file) {
 
         Mentor mentor = mentorRepository.save(dto.toEntity(
                 User.builder()
                     .id(userService.getLoginMemberId())
                     .build()
+                , true
         ));
 
         if (file != null && !file.isEmpty()) {
@@ -67,6 +69,7 @@ public class MentorService {
         }
     }
 
+    @Transactional
     public Page<MentorListResponseDto> getMentors(String tagName, Pageable pageable) {
         List<Mentor> mentors;
         if (tagName != null) {
@@ -86,6 +89,7 @@ public class MentorService {
         return new PageImpl<>(dtos.subList(start, end), pageable, dtos.size());
     }
 
+    @Transactional
     public Page<MentorListResponseDto> getSearchMentors(String keyword, Pageable pageable) {
         Page<Mentor> mentors = mentorRepository.findByBriefContainingAndActivateIsTrue(keyword, pageable);
 
@@ -95,10 +99,38 @@ public class MentorService {
         });
     }
 
+    @Transactional
     public MentorDetailResponseDto getMentor(Long mentorId) {
         Mentor mentor = findMentor(mentorId);
         ImageResponseDto image = imageService.getImage("mentor", mentor.getId());
         return MentorDetailResponseDto.of(mentor, image.getUrl());
     }
 
+    @Transactional
+    public void updateMentor(MentorRequestDto mentor, MultipartFile file, Long mentorId) {
+        Mentor oldMentor = findMentor(mentorId);
+
+        if(!oldMentor.getUser().getId().equals(userService.getLoginMemberId())) {
+            throw new ApiException(MoijaHttpStatus.FORBIDDEN);
+        }
+
+        if(file != null) {
+            imageService.deleteImage("mentor", oldMentor.getId());
+            imageService.createImage("mentor", oldMentor.getId(), file);
+        }
+
+        recruitmentRepository.deleteAllByMentor(oldMentor);
+
+        oldMentor.updateMentor(mentor);
+        Mentor newMentor = mentorRepository.save(oldMentor);
+
+        for(String tagName : mentor.getTags()) {
+            recruitmentRepository.save(
+                    MentoringRecruitment.builder()
+                            .mentor(newMentor)
+                            .tag(findTag(tagName))
+                            .build()
+            );
+        }
+    }
 }
