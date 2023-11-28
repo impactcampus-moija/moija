@@ -133,4 +133,17 @@ public class MentorService {
             );
         }
     }
+
+    @Transactional
+    public void deleteMentor(Long mentorId) {
+        Mentor mentor = findMentor(mentorId);
+
+        if(!mentor.getUser().getId().equals(userService.getLoginMemberId())) {
+            throw new ApiException(MoijaHttpStatus.FORBIDDEN);
+        }
+
+        imageService.deleteImage("mentor", mentor.getId());
+        recruitmentRepository.deleteAllByMentor(mentor);
+        mentorRepository.delete(mentor);
+    }
 }

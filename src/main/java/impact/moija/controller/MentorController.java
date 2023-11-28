@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,5 +57,12 @@ public class MentorController {
                                            @PathVariable Long mentorId) {
         mentorService.updateMentor(mentor, image, mentorId);
         return BaseResponse.ok();
+    }
+
+    @DeleteMapping("/meentors/{mentorId}")
+    public BaseResponse<Void> deleteMentor(@PathVariable Long mentorId) {
+        mentorService.deleteMentor(mentorId);
+        return BaseResponse.ok();
+
     }
 }
