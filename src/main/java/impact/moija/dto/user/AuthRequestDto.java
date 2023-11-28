@@ -9,12 +9,4 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AuthRequestDto {
     String email;
     String password;
-
-    public User toEntity(PasswordEncoder passwordEncoder) {
-        return User.builder()
-                .email(email)
-                .password(passwordEncoder.encode(password))
-                .role(UserRole.ROLE_USER)
-                .build();
-    }
 }

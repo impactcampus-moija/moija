@@ -2,10 +2,12 @@ package impact.moija.service;
 
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
+import impact.moija.domain.user.Location;
 import impact.moija.domain.user.RefreshToken;
 import impact.moija.domain.user.User;
 import impact.moija.dto.jwt.TokenResponseDto;
 import impact.moija.dto.user.AuthRequestDto;
+import impact.moija.dto.user.SignupRequestDto;
 import impact.moija.jwt.TokenProvider;
 import impact.moija.jwt.TokenType;
 import impact.moija.repository.user.RefreshTokenRepository;
@@ -26,6 +28,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
@@ -38,8 +42,8 @@ public class UserService implements UserDetailsService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     @Transactional
-    public User signup(AuthRequestDto authRequestDto) {
-        User user = authRequestDto.toEntity(passwordEncoder);
+    public User signup(SignupRequestDto signupRequestDto) {
+        User user = signupRequestDto.toEntity(passwordEncoder);
 
         return userRepository.save(user);
     }

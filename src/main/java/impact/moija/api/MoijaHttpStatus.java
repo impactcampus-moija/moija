@@ -14,11 +14,16 @@ public enum MoijaHttpStatus {
     CREATED(201, HttpStatus.CREATED, "리소스를 생성하였습니다."),
 
     /**
+     * 400
+     */
+    INVALID_LOCATION_NAME(40001, HttpStatus.BAD_REQUEST, "올바르지 않은 않은 지역입니다."),
+    INVALID_GENDER_NAME(40002, HttpStatus.BAD_REQUEST, "올바르지 않은 성별입니다."),
+
+    /**
      * 401
      */
     UNAUTHORIZED(401, HttpStatus.UNAUTHORIZED, "허가되지 않은 접근입니다."),
     INVALID_TOKEN(40101, HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다."),
-
     EXPIRED_TOKEN(40102, HttpStatus.UNAUTHORIZED, "만료된 토큰입니다."),
     INVALID_EMAIL_OR_PASSWORD(401, HttpStatus.UNAUTHORIZED, "이메일, 패스워드를 확인하세요"),
 
