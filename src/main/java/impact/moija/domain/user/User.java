@@ -1,6 +1,8 @@
 package impact.moija.domain.user;
 
 import impact.moija.domain.common.BaseTimeEntity;
+import impact.moija.domain.mentoring.Mentor;
+import javax.persistence.JoinColumn;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,6 +50,10 @@ public class User extends BaseTimeEntity implements UserDetails {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     RefreshToken refreshToken;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentor_id")
+    Mentor mentor;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
