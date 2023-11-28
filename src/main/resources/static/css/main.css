@@ -1,0 +1,234 @@
+* {
+    font-family: Noto Sans KR;
+    text-decoration-line: none;
+    list-style: none;
+    border-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #fafafa;
+}
+
+.banner-container{
+    background-color: #F5F5F5;
+    width: 120rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:9.69rem;
+    padding:3.5rem 0rem;
+}
+
+.banner-left-container{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+.banner-explain-container{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap:0.75rem;
+}
+
+.banner-demilight-font{
+    color: #181818;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 350;
+    letter-spacing: -0.16rem;
+}
+
+.banner-bold-font{
+    color: #181818;
+    font-size: 6rem;
+    font-weight: 900;
+    letter-spacing: -0.18rem;
+}
+
+.banner-light-font{
+    color: #181818;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.first-contents{
+    padding: 4.5rem 0 5.81rem;
+    margin-left: 20rem;
+}
+
+.first-contents-div{
+    gap: 2.31rem;
+}
+
+.first-contents-text-div{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3.5rem;
+    margin-bottom: 7.34rem;
+}
+
+.first-contents-text{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3.5rem;
+}
+
+.first-contents-text-top{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+
+.first-contents-text-bold{
+    color: #181818;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.03rem;
+}
+
+.first-contents-text-medium{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.first-contents-text-regular > p{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.01875rem;
+}
+
+.first-contents-img{
+    width: 59.6875rem;
+    height: 18.77138rem;
+    margin-top: 9.89rem;
+}
+
+
+.second-contents{
+    padding: 4.5rem 0 5.81rem;
+    margin-left: 20rem;
+
+}
+
+.second-contents-div{
+    gap: 2.31rem;
+}
+
+.second-contents-text{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3.5rem;
+}
+
+.second-contents-text-div{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3.5rem;
+}
+
+.second-contents-text-top{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+
+.second-contents-text-bold{
+    color: #181818;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.03rem;
+}
+
+.second-contents-text-medium{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.second-contents-text-regular > p{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.01875rem;
+}
+
+.second-contents-img{
+    width: 15rem;
+    height: 58.3125rem;
+}
+
+.third-contents{
+    padding: 4.5rem 0 5.81rem;
+    margin-left: 20rem;
+}
+
+.third-contents-div{
+    display: inline-flex;
+    gap: 3rem;
+    flex-direction: column;
+}
+
+.third-contents-text-div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+}
+
+
+.third-contents-text{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3.5rem;
+}
+
+.third-contents-text-top{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+
+.third-contents-text-bold{
+    color: #181818;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -0.03rem;
+}
+
+.third-contents-text-medium{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.third-contents-text-regular > p{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.01875rem;
+}
+
+.third-contents-img{
+    width: 80.0625rem;
+    height: 25.12481rem;
+}
+
+.main-contents-img{
+    margin-top: 4.5rem;
+    margin-left: 20rem;
+}
