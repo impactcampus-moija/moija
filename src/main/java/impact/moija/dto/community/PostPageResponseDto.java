@@ -1,6 +1,7 @@
 package impact.moija.dto.community;
 
 import impact.moija.domain.community.Post;
+import impact.moija.dto.common.RecommendationResponseDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,10 +18,10 @@ public class PostPageResponseDto {
     String independenceYear;
     String formattedCreatedAt;
     String createdAt;
-    int thumbsUpCount;
     String content;
+    RecommendationResponseDto recommendation;
 
-    public static PostPageResponseDto of(Post post) {
+    public static PostPageResponseDto of(Post post, RecommendationResponseDto recommendation) {
         return PostPageResponseDto.builder()
                 .id(post.getId())
                 .category(post.getCategory().getName())
@@ -30,7 +31,7 @@ public class PostPageResponseDto {
                 .independenceYear(post.getUser().calculateIndependenceStatus())
                 .formattedCreatedAt(post.getCreatedDateTimeToString())
                 .createdAt(post.getFormattedCreatedAt())
-                .thumbsUpCount(0)
+                .recommendation(recommendation)
                 .build();
     }
 }

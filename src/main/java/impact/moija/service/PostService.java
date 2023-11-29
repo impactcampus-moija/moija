@@ -56,16 +56,28 @@ public class PostService {
 
         Page<Post> postsPage = postRepository.findAllByFilters(category, keywordFilter, pageable);
 
-        return PageResponse.of(postsPage.map(PostPageResponseDto::of));
+        return PageResponse.of(
+                postsPage.map(
+                        post -> PostPageResponseDto.of(post, getRecommendation(post.getId()))
+                )
+        );
     }
 
     public PostDetailResponseDto getPostById(Long postId) {
-        long loginUserId = userService.getLoginMemberId();
+        Long loginUserId = userService.getLoginMemberId();
         Post post = postRepository.findById(postId).orElseThrow(() ->
                 new ApiException(MoijaHttpStatus.NOT_FOUND_POST)
         );
 
-        return PostDetailResponseDto.of(loginUserId, post);
+        return PostDetailResponseDto.of(loginUserId, post, getRecommendation(postId));
+    }
+
+    private RecommendationResponseDto getRecommendation(Long postId) {
+        Long loginUserId = userService.getLoginMemberId();
+        return RecommendationResponseDto.builder()
+                .hasRecommend(postRecommendationRepository.findByUserIdAndPostId(loginUserId, postId).isPresent())
+                .recommendationCount(postRepository.countRecommendation(postId))
+                .build();
     }
 
     public PkResponseDto updatePost(Long postId, PostRequestDto postRequestDto) {
@@ -128,31 +140,35 @@ public class PostService {
                 new ApiException(MoijaHttpStatus.NOT_FOUND_POST)
         );
 
-        Optional<PostRecommendation> postRecommendation = postRecommendationRepository.findByUserIdAndPost(loginUserId, post);
+        Optional<PostRecommendation> postRecommendation =
+                postRecommendationRepository.findByUserIdAndPostId(loginUserId, postId);
+
         if (postRecommendation.isPresent()) {
-            unlikePost(postRecommendation.get());
-            return RecommendationResponseDto.builder()
-                    .recommendationCount(postRepository.countRecommendation(postId))
-                    .hasRecommend(false)
-                    .build();
+            return unlikePost(postId, postRecommendation.get());
         }
 
-        likePost(loginUserId, post);
+        return likePost(loginUserId, postId);
+    }
+
+    private RecommendationResponseDto likePost(long loginUserId, Long postId) {
+        PostRecommendation recommendation = PostRecommendation.builder()
+                .user(User.builder().id(loginUserId).build())
+                .post(Post.builder().id(postId).build())
+                .build();
+        postRecommendationRepository.save(recommendation);
+
         return RecommendationResponseDto.builder()
                 .recommendationCount(postRepository.countRecommendation(postId))
                 .hasRecommend(true)
                 .build();
     }
 
-    private void likePost(long loginUserId, Post post) {
-        PostRecommendation recommendation = PostRecommendation.builder()
-                .user(User.builder().id(loginUserId).build())
-                .post(post)
-                .build();
-        postRecommendationRepository.save(recommendation);
-    }
-
-    private void unlikePost(PostRecommendation postRecommendation) {
+    private RecommendationResponseDto unlikePost(Long postId, PostRecommendation postRecommendation) {
         postRecommendationRepository.delete(postRecommendation);
+
+        return RecommendationResponseDto.builder()
+                .recommendationCount(postRepository.countRecommendation(postId))
+                .hasRecommend(false)
+                .build();
     }
 }
