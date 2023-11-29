@@ -32,6 +32,7 @@ public class Mentor extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    String name;
     String occupation;
 
     String brief;
@@ -39,8 +40,6 @@ public class Mentor extends BaseTimeEntity {
     String introduction;
 
     String career;
-
-    String phone;
 
     boolean activate;
 
@@ -56,7 +55,7 @@ public class Mentor extends BaseTimeEntity {
         this.brief = dto.getBrief() != null ? dto.getBrief() : this.brief;
         this.introduction = dto.getIntroduction() != null ? dto.getIntroduction() : this.introduction;
         this.career = dto.getCareer() != null ? dto.getCareer() : this.career;
-        this.phone = dto.getPhone() != null ? dto.getPhone() : this.phone;
+        this.name = dto.getName() != null ? dto.getName() : this.name;
     }
 
     public void updateActivate(boolean activate) {

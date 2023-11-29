@@ -20,7 +20,7 @@ public class MentorListResponseDto {
         return MentorListResponseDto.builder()
                 .id(mentor.getId())
                 .imageUrl(url)
-                .name(mentor.getUser().getNickname())
+                .name(mentor.getName())
                 .brief(mentor.getBrief())
                 .tags(mentor.getRecruitments()
                         .stream()

@@ -9,11 +9,11 @@ import lombok.Data;
 @Data
 @Builder
 public class MentorRequestDto {
+    String name;
     String occupation;
     String brief;
     String introduction;
     String career;
-    String phone;
     List<String> tags;
 
     public Mentor toEntity(User user, boolean activate) {
@@ -22,7 +22,7 @@ public class MentorRequestDto {
                 .brief(this.brief)
                 .introduction(this.introduction)
                 .career(this.career)
-                .phone(this.phone)
+                .name(this.name)
                 .activate(activate)
                 .user(user)
                 .build();

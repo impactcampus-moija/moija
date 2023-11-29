@@ -22,7 +22,7 @@ public class MentorDetailResponseDto {
         return MentorDetailResponseDto.builder()
                 .id(mentor.getId())
                 .imageUrl(url)
-                .name(mentor.getUser().getNickname())
+                .name(mentor.getName())
                 .brief(mentor.getBrief())
                 .introduction(mentor.getIntroduction())
                 .career(mentor.getCareer())
