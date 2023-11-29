@@ -9,10 +9,10 @@ main{
     flex-direction: column;
     align-items: center;
 }
-.mentoring-application-status-home{
+.container{
     width:1280px;
 }
-.application-status-title p{
+.home-title p{
     color: #181818;
     text-align: center;
     font-size: 2.25rem;
