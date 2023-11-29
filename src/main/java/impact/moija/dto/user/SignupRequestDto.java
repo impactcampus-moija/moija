@@ -30,7 +30,7 @@ public class SignupRequestDto {
                 .birthday(LocalDate.parse(birthday))
                 .location(Location.findByName(location))
                 .gender(Gender.findByName(gender))
-                .role(Collections.singleton(UserRole.ROLE_USER))
+                .roles(Collections.singleton(UserRole.ROLE_USER))
                 .build();
     }
 }

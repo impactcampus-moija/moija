@@ -25,9 +25,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
-import java.time.Year;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -63,7 +61,7 @@ public class User extends BaseTimeEntity implements UserDetails {
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
-    Set<UserRole> role;
+    Set<UserRole> roles;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     RefreshToken refreshToken;
@@ -80,7 +78,11 @@ public class User extends BaseTimeEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.stream().map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toSet());
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toSet());
+    }
+
+    public void addRole(UserRole role) {
+        roles.add(role);
     }
 
     @Override
