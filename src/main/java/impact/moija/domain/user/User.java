@@ -69,13 +69,13 @@ public class User extends BaseTimeEntity implements UserDetails {
     RefreshToken refreshToken;
 
     public String calculateIndependenceStatus() {
-        int currentYear = Year.now().getValue();
-        int independenceYears = currentYear - independenceYear;
-
-        if (independenceYear == null || independenceYears < 0) {
+//        int currentYear = Year.now().getValue();
+//        int independenceYears = currentYear - independenceYear;
+//
+//        if (independenceYear == null || independenceYears < 0) {
             return "자립 청소년";
-        }
-        return "자립 준비 " + independenceYears + " 년차";
+//        }
+//        return "자립 준비 " + independenceYears + " 년차";
     }
 
     @Override

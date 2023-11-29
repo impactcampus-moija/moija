@@ -10,6 +10,7 @@ import impact.moija.dto.community.PostRequestDto;
 import impact.moija.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,7 +34,7 @@ public class PostController {
     public BaseResponse<PageResponse<PostPageResponseDto>> getAllPosts(
             @RequestParam(required = false, defaultValue = "") String categoryFilter,
             @RequestParam(required = false) String keywordFilter,
-            Pageable pageable
+            @PageableDefault(size = 12) Pageable pageable
     ) {
         return BaseResponse.ok(postService.getAllPosts(categoryFilter, keywordFilter, pageable));
     }
