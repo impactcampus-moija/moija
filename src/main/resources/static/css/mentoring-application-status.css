@@ -1,0 +1,228 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Noto Sans KR;
+}
+main{
+    background: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mentoring-application-status-home{
+    width:1280px;
+}
+.application-status-title p{
+    color: #181818;
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.03375rem;
+    margin-top:6.5rem;
+    margin-bottom: 4.5rem;
+}
+.mentoring-application-status-upper-home{
+    display:flex;
+    flex-direction: column;
+    color: #969696;
+}
+.application-status-text{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid;
+}
+.application-status-text p{
+    color: #181818;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.0225rem;
+}
+.application-status-list-container{
+    display: flex;
+    flex-direction: column;
+    margin:1.5rem 0rem 3rem 0rem;
+    gap:1.5rem;
+}
+.application-status-list{
+    background-color: #FFF;
+    border-radius: 1.5rem;
+    border: 1px solid #D9D9D9;
+    padding:2.31rem 2.22rem;
+}
+.application-status-list-bold-font{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.0125rem;
+}
+.application-status-list-light-font{
+    color: #181818;
+    font-size: 1rem;
+    font-weight: 350;
+}
+.application-status-orange-btn, .application-status-white-btn{
+    display:flex;
+    gap:0.62rem;
+    padding:0.38rem 1rem;
+    border-radius: 1rem;
+    align-items: center;
+}
+.application-status-right-list{
+    display: flex;
+    justify-content: flex-end;
+}
+.application-status-btn-container{
+    display:flex;
+    gap:0.75rem;
+}
+.application-status-orange-btn{
+    background-color:  #FB9119;
+    color:#FFF;
+}
+.application-status-white-btn{
+    color:#969696;
+    background-color: #FFF;
+    border: 1px solid #969696;
+}
+.application-mentee-status-orange-btn, .application-mentee-status-gray-btn,.application-mentee-status-white-btn{
+    text-align: center;
+    font-size:1rem;
+    font-weight: 400;
+    padding:0.375rem 1rem;
+    border-radius: 1rem;
+    width:9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.application-mentee-status-orange-btn{
+    color:#FFF;
+    background-color: #FB9119;
+}
+.application-mentee-status-gray-btn{
+    color:#FFF;
+    background-color: #D9D9D9;
+}
+.application-mentee-status-white-btn{
+    background-color: #FFF;
+    border-radius: 1rem;
+    color:#969696;
+    border: 1px solid #969696;
+}
+.mentoring-application-status-lower-home{
+    display:flex;
+    gap:7.5rem;
+}
+.mentors-list-container ,.mentees-list-container{
+    width: 36.25rem;
+}
+.list-container-title{
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #969696;
+    
+}
+.list-container-title p{
+    color: #181818;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.0225rem;
+}
+.mentors-list{
+    display: flex;
+    flex-direction: column;
+    gap:1.75rem;
+    margin-top: 1.75rem;
+}
+.mentors-info-container{
+    display:flex;
+    gap:1.5rem;
+    background-color: #FFF;
+    border-radius: 1.5rem;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+    width: 21rem;
+    height: 6.25rem;
+    padding:1.88rem 13.75rem 1.88rem 1.5rem;
+}
+.mentors-list-img{
+    width:6.25rem;
+    height:6.25rem;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+}
+.mentors-list-right-upper{
+    display: flex;
+    flex-direction: column;
+    gap:0.38rem;
+}
+.mentor-list-right-lower{
+    display:flex;
+    gap:0.38rem;
+}
+.mentors-list-name{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.01875rem;
+}
+.mentors-list-explain{
+    color: #181818;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.mentor-list-label{
+    color: #5D5D5D;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: -0.01313rem;
+    padding:0.38rem 0.75rem;
+}
+.mentor-list-label{
+    border-radius: 0.625rem;
+    border: 1px solid #FFF;
+    background: #FAFAFA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mentees-list-container{
+    display: flex;
+    flex-direction: column;
+    gap:1.75rem;
+}
+.mentees-info-list{
+    width: 36.25rem;
+    height: 57rem;
+    background-color: #FFF;
+    border-radius:1.5rem;
+    border: 1px solid #D9D9D9;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:0.75rem;
+}
+.no-mentee{
+    color: #969696;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: -0.01875rem;
+}
+.be-mentee{
+    display:flex;
+    padding: 0.75em 1.5rem;
+    justify-content: center;
+    align-items: center;
+    background: var(--o-110, #FB9119);
+    border-radius: 1.25rem;
+}
+.be-mentee p{
+    color:#FFF;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01rem;
+}
