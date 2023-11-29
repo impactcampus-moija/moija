@@ -59,10 +59,22 @@ public class MentorController {
         return BaseResponse.ok();
     }
 
-    @DeleteMapping("/meentors/{mentorId}")
+    @DeleteMapping("/mentors/{mentorId}")
     public BaseResponse<Void> deleteMentor(@PathVariable Long mentorId) {
         mentorService.deleteMentor(mentorId);
         return BaseResponse.ok();
 
+    }
+
+    @PutMapping("/mentors/{mentorId}/activate")
+    public BaseResponse<Void> activateMentor(@PathVariable Long mentorId) {
+        mentorService.activateMentor(mentorId);
+        return BaseResponse.ok();
+    }
+
+    @PutMapping("/mentors/{mentorId}/deactivate")
+    public BaseResponse<Void> deactivateMentor(@PathVariable Long mentorId) {
+        mentorService.deactivateMentor(mentorId);
+        return BaseResponse.ok();
     }
 }

@@ -146,4 +146,36 @@ public class MentorService {
         recruitmentRepository.deleteAllByMentor(mentor);
         mentorRepository.delete(mentor);
     }
+
+    @Transactional
+    public void activateMentor(Long mentorId) {
+        Mentor mentor = findMentor(mentorId);
+
+        if(!mentor.getUser().getId().equals(userService.getLoginMemberId())) {
+            throw new ApiException(MoijaHttpStatus.FORBIDDEN);
+        }
+
+        if(mentor.isActivate()) {
+            throw new ApiException(MoijaHttpStatus.BAD_REQUEST);
+        }
+
+        mentor.updateActivate(true);
+        mentorRepository.save(mentor);
+    }
+
+    @Transactional
+    public void deactivateMentor(Long mentorId) {
+        Mentor mentor = findMentor(mentorId);
+
+        if(!mentor.getUser().getId().equals(userService.getLoginMemberId())) {
+            throw new ApiException(MoijaHttpStatus.FORBIDDEN);
+        }
+
+        if(!mentor.isActivate()) {
+            throw new ApiException(MoijaHttpStatus.BAD_REQUEST);
+        }
+
+        mentor.updateActivate(false);
+        mentorRepository.save(mentor);
+    }
 }
