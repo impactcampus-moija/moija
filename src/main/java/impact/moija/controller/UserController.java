@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,6 +48,12 @@ public class UserController {
     @PostMapping("/users/logout")
     public BaseResponse<Void> logout(@CookieValue("Refresh-Token") String refreshToken) {
         userService.logout(refreshToken);
+        return BaseResponse.ok();
+    }
+
+    @PutMapping("/users/independence-auth")
+    public BaseResponse<Void> authenticateIndependence() {
+        userService.addIndependenceRole();
         return BaseResponse.ok();
     }
 }

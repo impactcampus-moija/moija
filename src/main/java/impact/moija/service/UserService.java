@@ -2,9 +2,9 @@ package impact.moija.service;
 
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
-import impact.moija.domain.user.Location;
 import impact.moija.domain.user.RefreshToken;
 import impact.moija.domain.user.User;
+import impact.moija.domain.user.UserRole;
 import impact.moija.dto.jwt.TokenResponseDto;
 import impact.moija.dto.user.AuthRequestDto;
 import impact.moija.dto.user.SignupRequestDto;
@@ -28,10 +28,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @RequiredArgsConstructor
+@Transactional
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
@@ -41,14 +42,12 @@ public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    @Transactional
     public User signup(SignupRequestDto signupRequestDto) {
         User user = signupRequestDto.toEntity(passwordEncoder);
 
         return userRepository.save(user);
     }
 
-    @Transactional
     public TokenResponseDto login(final HttpServletResponse response, final AuthRequestDto authRequestDto) {
         final Authentication authentication = authenticate(authRequestDto);
 
@@ -119,6 +118,16 @@ public class UserService implements UserDetailsService {
         return tokenProvider.generateTokenResponse(TokenType.ACCESS_TOKEN, user);
     }
 
+    public void addIndependenceRole() {
+        Long loginMemberId = getLoginMemberId();
+        User user = userRepository.findById(loginMemberId).orElseThrow(() ->
+                new ApiException(MoijaHttpStatus.UNAUTHORIZED)
+        );
+
+        user.addRole(UserRole.ROLE_INDEPENDENCE);
+    }
+
+    //TODO : loginUserId로 변경
     public Long getLoginMemberId() {
         try {
             return Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());

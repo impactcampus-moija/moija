@@ -43,9 +43,6 @@ public class SecurityConfig {
                                 .permitAll()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)
-                .exceptionHandling((configurer) ->
-                        configurer
-                                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .apply(new JwtSecurityConfig(tokenProvider));
         return http.build();
     }
