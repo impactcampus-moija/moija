@@ -7,6 +7,7 @@ import impact.moija.domain.mentoring.Mentor;
 import impact.moija.domain.mentoring.Mentoring;
 import impact.moija.domain.mentoring.MentoringStatus;
 import impact.moija.domain.user.User;
+import impact.moija.dto.common.PkResponseDto;
 import impact.moija.dto.mentoring.MenteeDetailResponseDto;
 import impact.moija.dto.mentoring.MenteeRequestDto;
 import impact.moija.repository.mentoring.MenteeRepository;
@@ -36,7 +37,13 @@ public class MenteeService {
     }
 
     @Transactional
-    public void applyMentee(Long mentorId, MenteeRequestDto dto) {
+    public PkResponseDto applyMentee(Long mentorId, MenteeRequestDto dto) {
+        Mentor mentor = findMentor(mentorId);
+
+        if (mentor.getUser().getId().equals(userService.getLoginMemberId())) {
+            throw new ApiException(MoijaHttpStatus.FORBIDDEN);
+        }
+
         Mentee mentee = menteeRepository.save(dto.toEntity(
                 User.builder()
                         .id(userService.getLoginMemberId())
@@ -44,14 +51,14 @@ public class MenteeService {
                 , MentoringStatus.PENDING
         ));
 
-        Mentor mentor = findMentor(mentorId);
-
         mentoringRepository.save(
                 Mentoring.builder()
                         .mentee(mentee)
                         .mentor(mentor)
                         .build()
         );
+
+        return PkResponseDto.of(mentee.getId());
     }
 
     @Transactional
@@ -61,7 +68,7 @@ public class MenteeService {
     }
 
     @Transactional
-    public void updateMentee(Long menteeId, MenteeRequestDto mentee) {
+    public PkResponseDto updateMentee(Long menteeId, MenteeRequestDto mentee) {
         Mentee oldMentee = findMentee(menteeId);
 
         if(!oldMentee.getUser().getId().equals(userService.getLoginMemberId())) {
@@ -70,6 +77,8 @@ public class MenteeService {
 
         oldMentee.updateMentee(mentee);
         menteeRepository.save(oldMentee);
+
+        return PkResponseDto.of(oldMentee.getId());
     }
 
     @Transactional

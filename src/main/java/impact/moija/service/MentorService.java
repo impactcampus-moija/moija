@@ -7,6 +7,8 @@ import impact.moija.domain.mentoring.MentoringRecruitment;
 import impact.moija.domain.mentoring.MentoringTag;
 import impact.moija.domain.user.User;
 import impact.moija.dto.common.ImageResponseDto;
+import impact.moija.dto.common.PageResponse;
+import impact.moija.dto.common.PkResponseDto;
 import impact.moija.dto.mentoring.MentorDetailResponseDto;
 import impact.moija.dto.mentoring.MentorListResponseDto;
 import impact.moija.dto.mentoring.MentorRequestDto;
@@ -44,12 +46,12 @@ public class MentorService {
     }
 
     @Transactional
-    public void applyMentor(MentorRequestDto dto, MultipartFile file) {
+    public PkResponseDto applyMentor(MentorRequestDto dto, MultipartFile file) {
 
         Mentor mentor = mentorRepository.save(dto.toEntity(
                 User.builder()
-                    .id(userService.getLoginMemberId())
-                    .build()
+                        .id(userService.getLoginMemberId())
+                        .build()
                 , true
         ));
 
@@ -57,20 +59,26 @@ public class MentorService {
             imageService.createImage("mentor", mentor.getId(), file);
         }
 
-        for(String tagName : dto.getTags()) {
+        if (dto.getTags().isEmpty()) {
+            throw new ApiException(MoijaHttpStatus.INVALID_MENTOR_TAG);
+        }
+
+        for (String tagName : dto.getTags()) {
             MentoringTag tag = findTag(tagName);
 
             recruitmentRepository.save(
                     MentoringRecruitment.builder()
-                        .mentor(mentor)
-                        .tag(tag)
-                        .build()
+                            .mentor(mentor)
+                            .tag(tag)
+                            .build()
             );
         }
+
+        return PkResponseDto.of(mentor.getId());
     }
 
     @Transactional
-    public Page<MentorListResponseDto> getMentors(String tagName, Pageable pageable) {
+    public PageResponse<MentorListResponseDto> getMentors(String tagName, Pageable pageable) {
         List<Mentor> mentors;
         if (tagName != null) {
             mentors = mentorRepository.findByTagAndActivateIsTrue(findTag(tagName));
@@ -86,17 +94,21 @@ public class MentorService {
         // List -> Page
         int start = (int) pageable.getOffset();
         int end = Math.min((start + pageable.getPageSize()), dtos.size());
-        return new PageImpl<>(dtos.subList(start, end), pageable, dtos.size());
+        return PageResponse.of(
+                new PageImpl<>(dtos.subList(start, end), pageable, dtos.size())
+        );
     }
 
     @Transactional
-    public Page<MentorListResponseDto> getSearchMentors(String keyword, Pageable pageable) {
+    public PageResponse<MentorListResponseDto> getSearchMentors(String keyword, Pageable pageable) {
         Page<Mentor> mentors = mentorRepository.findByBriefContainingAndActivateIsTrue(keyword, pageable);
 
-        return mentors.map(mentor -> {
-            ImageResponseDto image = imageService.getImage("mentor", mentor.getId());
-            return MentorListResponseDto.of(mentor, image.getUrl());
-        });
+        return PageResponse.of(
+                mentors.map(mentor -> {
+                    ImageResponseDto image = imageService.getImage("mentor", mentor.getId());
+                    return MentorListResponseDto.of(mentor, image.getUrl());
+                })
+        );
     }
 
     @Transactional
@@ -107,14 +119,14 @@ public class MentorService {
     }
 
     @Transactional
-    public void updateMentor(MentorRequestDto mentor, MultipartFile file, Long mentorId) {
+    public PkResponseDto updateMentor(MentorRequestDto mentor, MultipartFile file, Long mentorId) {
         Mentor oldMentor = findMentor(mentorId);
 
-        if(!oldMentor.getUser().getId().equals(userService.getLoginMemberId())) {
+        if (!oldMentor.getUser().getId().equals(userService.getLoginMemberId())) {
             throw new ApiException(MoijaHttpStatus.FORBIDDEN);
         }
 
-        if(file != null) {
+        if (file != null) {
             imageService.deleteImage("mentor", oldMentor.getId());
             imageService.createImage("mentor", oldMentor.getId(), file);
         }
@@ -124,7 +136,11 @@ public class MentorService {
         oldMentor.updateMentor(mentor);
         Mentor newMentor = mentorRepository.save(oldMentor);
 
-        for(String tagName : mentor.getTags()) {
+        if (mentor.getTags().isEmpty()) {
+            throw new ApiException(MoijaHttpStatus.INVALID_MENTOR_TAG);
+        }
+
+        for (String tagName : mentor.getTags()) {
             recruitmentRepository.save(
                     MentoringRecruitment.builder()
                             .mentor(newMentor)
@@ -132,13 +148,15 @@ public class MentorService {
                             .build()
             );
         }
+
+        return PkResponseDto.of(newMentor.getId());
     }
 
     @Transactional
     public void deleteMentor(Long mentorId) {
         Mentor mentor = findMentor(mentorId);
 
-        if(!mentor.getUser().getId().equals(userService.getLoginMemberId())) {
+        if (!mentor.getUser().getId().equals(userService.getLoginMemberId())) {
             throw new ApiException(MoijaHttpStatus.FORBIDDEN);
         }
 
@@ -148,34 +166,38 @@ public class MentorService {
     }
 
     @Transactional
-    public void activateMentor(Long mentorId) {
+    public PkResponseDto activateMentor(Long mentorId) {
         Mentor mentor = findMentor(mentorId);
 
-        if(!mentor.getUser().getId().equals(userService.getLoginMemberId())) {
+        if (!mentor.getUser().getId().equals(userService.getLoginMemberId())) {
             throw new ApiException(MoijaHttpStatus.FORBIDDEN);
         }
 
-        if(mentor.isActivate()) {
+        if (mentor.isActivate()) {
             throw new ApiException(MoijaHttpStatus.BAD_REQUEST);
         }
 
         mentor.updateActivate(true);
         mentorRepository.save(mentor);
+
+        return PkResponseDto.of(mentor.getId());
     }
 
     @Transactional
-    public void deactivateMentor(Long mentorId) {
+    public PkResponseDto deactivateMentor(Long mentorId) {
         Mentor mentor = findMentor(mentorId);
 
-        if(!mentor.getUser().getId().equals(userService.getLoginMemberId())) {
+        if (!mentor.getUser().getId().equals(userService.getLoginMemberId())) {
             throw new ApiException(MoijaHttpStatus.FORBIDDEN);
         }
 
-        if(!mentor.isActivate()) {
+        if (!mentor.isActivate()) {
             throw new ApiException(MoijaHttpStatus.BAD_REQUEST);
         }
 
         mentor.updateActivate(false);
         mentorRepository.save(mentor);
+
+        return PkResponseDto.of(mentor.getId());
     }
 }

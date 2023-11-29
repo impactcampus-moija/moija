@@ -1,6 +1,7 @@
 package impact.moija.controller;
 
 import impact.moija.api.BaseResponse;
+import impact.moija.dto.common.PkResponseDto;
 import impact.moija.dto.mentoring.MenteeDetailResponseDto;
 import impact.moija.dto.mentoring.MenteeRequestDto;
 import impact.moija.service.MenteeService;
@@ -22,10 +23,10 @@ public class MenteeController {
     private final MenteeService menteeService;
 
     @PostMapping("/mentees/mentor/{mentorId}")
-    public BaseResponse<Void> applyMentee(@PathVariable Long mentorId,
-                                          @RequestBody MenteeRequestDto mentee) {
-        menteeService.applyMentee(mentorId, mentee);
-        return BaseResponse.ok();
+    public BaseResponse<PkResponseDto> applyMentee(@PathVariable Long mentorId,
+                                                   @RequestBody MenteeRequestDto mentee) {
+        PkResponseDto id = menteeService.applyMentee(mentorId, mentee);
+        return BaseResponse.created(id);
     }
 
     @GetMapping("/mentees/{menteeId}")
@@ -34,10 +35,10 @@ public class MenteeController {
     }
 
     @PutMapping("/mentees/{menteeId}")
-    public BaseResponse<Void> updateMentee(@PathVariable Long menteeId,
+    public BaseResponse<PkResponseDto> updateMentee(@PathVariable Long menteeId,
                                        @RequestBody MenteeRequestDto mentee) {
-        menteeService.updateMentee(menteeId, mentee);
-        return BaseResponse.ok();
+        PkResponseDto id = menteeService.updateMentee(menteeId, mentee);
+        return BaseResponse.ok(id);
     }
 
     @DeleteMapping("/mentees/{menteeId}")
