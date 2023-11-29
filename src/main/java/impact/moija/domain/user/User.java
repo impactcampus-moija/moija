@@ -25,6 +25,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
@@ -48,6 +49,7 @@ public class User extends BaseTimeEntity implements UserDetails {
     String password;
     String nickname;
     LocalDate birthday;
+    Integer independenceYear;
 
     @Enumerated(EnumType.STRING)
     Location location;
@@ -65,6 +67,16 @@ public class User extends BaseTimeEntity implements UserDetails {
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     RefreshToken refreshToken;
+
+    public String calculateIndependenceStatus() {
+        int currentYear = Year.now().getValue();
+        int independenceYears = currentYear - independenceYear;
+
+        if (independenceYear == null || independenceYears < 0) {
+            return "자립 청소년";
+        }
+        return "자립 준비 " + independenceYears + " 년차";
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

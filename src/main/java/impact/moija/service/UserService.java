@@ -119,6 +119,7 @@ public class UserService implements UserDetailsService {
         return tokenProvider.generateTokenResponse(TokenType.ACCESS_TOKEN, user);
     }
 
+    //TODO : loginUserId로 변경
     public Long getLoginMemberId() {
         try {
             return Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());

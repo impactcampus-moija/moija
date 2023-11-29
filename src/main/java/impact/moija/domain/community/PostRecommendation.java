@@ -24,15 +24,11 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "comments")
-public class Comment extends BaseTimeEntity {
+@Table(name = "post_recommendations")
+public class PostRecommendation extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
-    String content;
-
-    boolean anonymous;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -41,15 +37,4 @@ public class Comment extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     Post post;
-
-    public String getAuthorNickname() {
-        if(anonymous) {
-            return "익명";
-        }
-        return user.getNickname();
-    }
-
-    public boolean isAuthor(long userId) {
-        return user.getId() == userId;
-    }
 }
