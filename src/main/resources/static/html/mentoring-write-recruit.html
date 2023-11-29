@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href = "../css/mentoring-write-recruit.css" rel = 'stylesheet'>
+    <link href = "../css/footer.css" rel = 'stylesheet'>
+    <link href = "../css/nav.css" rel = "stylesheet">
+    <title>모두 이제 자립 - 모이자</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-wrap">
+            <div class="nav-logo">
+                <img class="nav-logo-img" src="../src/nav_logo.png">
+            </div>
+            <nav class="nav-left">
+                <ul class="nav-menu">
+                    <li class="nav-menu-category"><a href="">멘토링</a>
+                      </li>
+                    <li class="nav-menu-category"><a href="">정보</a></li>
+                    <li class="nav-menu-category"><a href="">커뮤니티</a></li>
+                  </ul>
+                  <ul class = "nav-user">
+                      <li class = "nav-log-in"><a href="">Log in</a></li>
+                      <li class = 'nav-sign-up'><a href="">Sign up</a></li>
+                  </ul>
+            </nav>
+        </div>
+    </nav>
+    <main>
+        <div class = 'mentoring-write-application'>
+            <div class = 'mentoring-write-application-title'>
+                <p>멘토링 모집 신청서</p>
+            </div>
+            <div class = 'mentoring-write-application-container'>
+                <div class = 'mentoring-write-application-upper-container'>
+                    <div class = 'application-question'>
+                        <p class = 'application-question-text'>멘토링의 카테고리를 선택해 주세요</p>
+                        <div class = 'application-category-checkbox-container'>
+                            <div class = 'application-category-checkbox'>
+                                <input type="checkbox" id = 'checkbox-job'><label for='checkbox-job'></label>
+                                <p>일자리</p>
+                            </div>
+                            <div class = 'application-category-checkbox'>
+                                <input type="checkbox" id = 'checkbox-home'><label for='checkbox-home'></label>
+                                <p>주거</p>
+                            </div>
+                            <div class = 'application-category-checkbox'>
+                                <input type="checkbox" id = 'checkbox-economy'><label for='checkbox-economy'></label>
+                                <p>경제</p>
+                            </div>
+                            <div class = 'application-category-checkbox' >
+                                <input type="checkbox" id = 'checkbox-life'><label for='checkbox-life'></label>
+                                <p>생활/지원</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class = 'application-question'>
+                        <p class = 'application-question-text'>멘토님의 이름을 입력해 주세요</p>
+                        <input class = 'application-input-text' type = 'text'placeholder='이름 입력'>
+                    </div>
+                    <div class = 'application-question'>
+                        <p class = 'application-question-text'>멘토님의 직업을 입력해 주세요</p>
+                        <input class = 'application-input-text' type = 'text' placeholder="직업 입력 (자유롭게 작성)">
+                    </div>
+                </div>
+                <div class = 'mentoring-write-application-lower-container'>
+                    <div class = 'application-write-aline'>
+                        <p class = 'question-text'>모이자 님이 진행하고자 하는 멘토링 주제를 한줄로 요약해 주세요.</p>
+                        <textarea id = 'application-write-aline'></textarea>
+                    </div>
+                    <div class = 'application-write-free'>
+                        <p class = 'question-text'>모이자 님의 직업 및 진행하고자 하는 멘토링 내용에 대한 경력을 자유롭게 작성해 주세요. (1000자 이내)</p>
+                        <textarea id = 'application-write-free-job'></textarea>
+                    </div>
+                    <div class = 'application-write-free'>
+                        <p class = 'question-text'>모이자 님이 진행하고자 하는 내용 및 진행방식에 대해 자유롭게 작성해 주세요. (1000자 이내)</p>
+                        <textarea id = 'application-write-free-content'></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class = 'mentoring-submit-application'>
+                <button>멘토링을 신청할래요</button>
+            </div>
+        </div>
+        
+        <footer>
+            <div class = 'left-footer'>
+                <p class = 'bold-footer'>임팩트 캠퍼스 IT 서비스 공모전 출품작</p>
+                <p class = 'light-footer'>프론트엔드 | 신민경 조유진  백엔드 | 최세민 박민수</p>
+            </div>
+            <div class = 'right-footer'>
+                <img class = 'footerlogo' src = '../src/footer-logo.png'>
+                <p class = 'bold-footer'>Copyright 2023. moija. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+</body>

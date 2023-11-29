@@ -9,9 +9,11 @@ main{
     align-items: center;
     justify-content: center;
     background-color: #FAFAFA;
+    
 }
 .mentoring-write-application{
     width:1280px;
+    min-height:calc(100vh - 28.94rem);
 }
 .mentoring-write-application-title{
     display: flex;
@@ -35,7 +37,7 @@ main{
     flex-direction: column;
     gap:1.5rem;
 }
-.application-number-container{
+.application-container{
     display: flex;
     gap:1rem;
     align-items: center;
@@ -62,6 +64,7 @@ main{
 }
 .application-number::placeholder{
     color: #D9D9D9;
+    
 }
 .application-write-aline, .application-write-free{
     display: flex;

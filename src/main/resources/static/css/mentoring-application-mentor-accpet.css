@@ -9,21 +9,21 @@ main{
     flex-direction: column;
     align-items: center;
 }
-.mentoring-application-mentor-accept{
+.container{
     width:1280px;
     display:flex;
     flex-direction: column;
     align-items: center;
     gap:3rem;
 }
-.mentoring-application-mentor-accpet-upper-container{
+.upper-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 4.5rem;
     border-bottom: 1px solid #969696;
 }
-.mentor-accept-title{
+.home-title{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,21 +31,21 @@ main{
     margin-top: 6.52rem;
     margin-bottom: 4rem;
 }
-.mentor-accept-title h3{
+.home-title h3{
     color:#181818;
     font-size:2.25rem;
     font-weight: 700;
     letter-spacing: -0.03375rem;
 }
-.mentor-accept-title p{
+.home-title p{
     color:#181818;
     font-size: 1rem;
     font-weight: 400;
 }
 .mentee-application-container{
     background-color:#FFF;
-    width:49rem;
-    padding:1.88rem 1.88rem 3rem 1.88rem;
+    width: 41.875rem;
+    padding:3rem 5.5rem;
     border-radius: 1.25rem;
     border: 1px solid #D9D9D9;
     display:flex;
@@ -67,7 +67,7 @@ main{
     font-size: 1rem;
     font-weight: 400;
 }
-.mentoring-application-mentor-accpet-lower-container{
+.mentoring-application-mentor-accept-lower-container{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -103,4 +103,22 @@ main{
     background-color: #FFF;
     color: #969696;
     border: 1.1px solid #969696;
+}
+.mentoring-reject-reason-container{
+    display:flex;
+    flex-direction: column;
+    gap:1rem;
+    margin-bottom:1.5rem;
+}
+.mentoring-reject-reason-container textarea{
+    width: 52.875rem;
+    height: 6.25rem;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+}
+.mentoring-reject-reason-container p{
+    color:#181818;
+    font-size:1.125rem;
+    font-weight: 500;
+    letter-spacing: 0.01125rem;
 }

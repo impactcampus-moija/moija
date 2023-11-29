@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link href = "../css/mentoring-application-mentor-accpet.css" rel = 'stylesheet'>
+    <link href = "../css/mentoring-mentor-mentee-application.css" rel = 'stylesheet'>
     <link href = "../css/footer.css" rel = 'stylesheet'>
     <link href = "../css/nav.css" rel = "stylesheet">
     <title>모두 이제 자립 - 모이자</title>
@@ -30,12 +30,35 @@
         </div>
     </nav>
     <main>
-        <div class = 'container'>
-            <div class = 'upper-container'>
-                <div class = 'home-title'>
-                    <h3>자이모 님이 멘토링을 신청했습니다.</h3>
-                    <p>“포트폴리오 작성과 취업 컨설팅이 필요한 대학 졸업 예정생입니다.”</p>
+        <div class = 'mentoring-mentor-mentee-application-page'>
+            <div class = 'mentor-accept-title'>
+                <h3>멘티 신청서</h3>
+            </div>
+            <div class = 'mentoring-mentor-mentee-application-upper-container'>
+                <div class = 'mentoring-mentee-info-title'>
+                    <p class = 'mentoring-mentee-info-title-bold'>멘티 정보</p>
+                    <p class = 'mentoring-mentee-info-title-light'>회원님께 멘토링을 신청한 멘티의 정보입니다.</p>
                 </div>
+                <div class = 'mentoring-mentee-info-container'>
+                    <div class = 'mentoring-mentee-info-li'>
+                        <p class = 'mentoring-mentee-info-bold'>이름</p>
+                        <p class = 'mentoring-mentee-info-light'>모이자</p>
+                    </div>
+                    <div class = 'mentoring-mentee-info-li'>
+                        <p class = 'mentoring-mentee-info-bold'>휴대폰 번호</p>
+                        <p class = 'mentoring-mentee-info-light'>010-2499-1627</p>
+                    </div>
+                    <div class = 'mentoring-mentee-info-li'>
+                        <p class = 'mentoring-mentee-info-bold'>이메일</p>
+                        <p class = 'mentoring-mentee-info-light'>jaimo@gmail.com</p>
+                    </div>
+                    <div class = 'mentoring-mentee-info-li'>
+                        <p class = 'mentoring-mentee-info-bold'>연령</p>
+                        <p class = 'mentoring-mentee-info-light'>만 15세 ~ 69세</p>
+                    </div>
+                </div>
+            </div>
+            <div class = 'mentoring-mentor-mentee-application-lower-container'>
                 <div class = 'mentee-application-container'>
                     <div class = 'mentee-application-aline'>
                         <p>모이자 님께 멘토링을 받고 싶은 내용 및 필요한 이유</p>
@@ -46,39 +69,7 @@
                     </p>
                 </div>
             </div>
-            <div id = 'mentor-accept-container-1' class = 'mentoring-application-mentor-accept-lower-container'>
-                <p class = 'mentoring-accept-question'>멘토링을 진행하시겠어요?</p>
-                <div class = 'mentoring-accpet-btn-container'>
-                    <button id = 'agree-mentoring' class= 'mentoring-accpet-orange-btn'>
-                        <img  src = '../src/mentor-accept-btn.png'>
-                        <p>멘토링을 진행할래요</p>
-                    </button>
-                    <button id = 'reject-mentoring' class= 'mentoring-accpet-white-btn'>
-                        <img src = '../src/mentor-reject-btn.png'>
-                        <p>멘토링을 하고싶지 않아요</p>
-                    </button>
-                </div>
-            </div>
-            <div id = 'mentor-accept-container-2' class = 'mentoring-application-mentor-accept-lower-container'>
-                <p class = 'mentoring-accept-question'>멘토링을 수락했습니다.</p>
-                <div class = 'mentoring-accpet-btn-container'>
-                    <button class= 'mentoring-accpet-orange-btn'>
-                        <p>멘티 정보 확인하기</p>
-                    </button>
-                </div>
-            </div>
-            <div id = 'mentor-accept-container-3' class = 'mentoring-application-mentor-accept-lower-container'>
-                <p class = 'mentoring-accept-question'>멘토링을 거절했습니다.</p>
-                <div class = 'mentoring-accpet-btn-container'>
-                    <div class = 'mentoring-reject-reason-container'>
-                        <p>멘토링 거절 사유를 입력해 주세요.</p>
-                        <textarea></textarea>
-                    </div>
-                    <button class= 'mentoring-accpet-orange-btn'>
-                        <p>거절 사유 입력하기</p>
-                    </button>
-                </div>
-            </div>
+        
         </div>
         <footer>
             <div class = 'left-footer'>

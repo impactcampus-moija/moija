@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href = "../css/mentee.certify.css" rel = 'stylesheet'>
+    <link href = "../css/footer.css" rel = 'stylesheet'>
+    <link href = "../css/nav.css" rel = "stylesheet">
+    <title>모두 이제 자립 - 모이자</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-wrap">
+            <div class="nav-logo">
+                <img class="nav-logo-img" src="../src/nav_logo.png">
+            </div>
+            <nav class="nav-left">
+                <ul class="nav-menu">
+                    <li class="nav-menu-category"><a href="">멘토링</a>
+                      </li>
+                    <li class="nav-menu-category"><a href="">정보</a></li>
+                    <li class="nav-menu-category"><a href="">커뮤니티</a></li>
+                  </ul>
+                  <ul class = "nav-user">
+                      <li class = "nav-log-in"><a href="">Log in</a></li>
+                      <li class = 'nav-sign-up'><a href="">Sign up</a></li>
+                  </ul>
+            </nav>
+        </div>
+    </nav>
+    <main>
+        <div class = 'container'>
+            <div class = 'home-titlle-container'>
+                <div class = 'home-title'>
+                    <h3>자립 준비 청년 인증</h3>
+                </div>
+            </div>
+            <div class = 'enroll-file-container'>
+                <div class = 'enrolll-file-explain-container'>
+                    <p class = 'enroll-file-explain-bold'>자립 준비 청년 인증을 위한 파일을 등록해 주세요.</p>
+                    <p class = 'enroll-file-explain-light'>보호종료 확인서 1부 (퇴소 확인서, 쉼터 입소 사실확인서 등 가능)</p>
+                </div>
+                <div class = 'enroll-file-input-container'>
+                    <div class = 'enroll-file-name-box'>
+                        <p id = 'enroll-file-name' class = 'enroll-file-name'>파일 등록 (PDF, JPG, JPEG, PNG 파일 등록 가능)</p>
+                    </div>
+                    <label for = "certification-image" class = "upload-certification-image">첨부파일 등록</label>
+                    <input type = "file" id = "certification-image" class = "certification-image-btn" accpet="image/*"/>
+                </div>
+            </div>
+            <div class = 'btn-container'>
+                <button id = 'apply-certification' class = 'apply-certification'>인증을 신청합니다</button>
+            </div>
+        </div>
+        <footer>
+            <div class = 'left-footer'>
+                <p class = 'bold-footer'>임팩트 캠퍼스 IT 서비스 공모전 출품작</p>
+                <p class = 'light-footer'>프론트엔드 | 신민경 조유진  백엔드 | 최세민 박민수</p>
+            </div>
+            <div class = 'right-footer'>
+                <img class = 'footerlogo' src = '../src/footer-logo.png'>
+                <p class = 'bold-footer'>Copyright 2023. moija. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src = '../js/mentoring-application-mentor-accpet.js'></script>
+</body>
