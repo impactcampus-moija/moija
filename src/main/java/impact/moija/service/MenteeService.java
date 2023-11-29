@@ -7,12 +7,14 @@ import impact.moija.domain.mentoring.Mentor;
 import impact.moija.domain.mentoring.Mentoring;
 import impact.moija.domain.mentoring.MentoringStatus;
 import impact.moija.domain.user.User;
+import impact.moija.dto.mentoring.MenteeDetailResponseDto;
 import impact.moija.dto.mentoring.MenteeRequestDto;
 import impact.moija.repository.mentoring.MenteeRepository;
 import impact.moija.repository.mentoring.MentorRepository;
 import impact.moija.repository.mentoring.MentoringRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -28,6 +30,12 @@ public class MenteeService {
                 .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_MENTOR));
     }
 
+    private Mentee findMentee(Long menteeId) {
+        return menteeRepository.findById(menteeId)
+                .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_MENTEE));
+    }
+
+    @Transactional
     public void applyMentee(Long mentorId, MenteeRequestDto dto) {
         Mentee mentee = menteeRepository.save(dto.toEntity(
                 User.builder()
@@ -44,5 +52,35 @@ public class MenteeService {
                         .mentor(mentor)
                         .build()
         );
+    }
+
+    @Transactional
+    public MenteeDetailResponseDto getMentee(Long menteeId) {
+        Mentee mentee = findMentee(menteeId);
+        return MenteeDetailResponseDto.of(mentee, mentee.getUser());
+    }
+
+    @Transactional
+    public void updateMentee(Long menteeId, MenteeRequestDto mentee) {
+        Mentee oldMentee = findMentee(menteeId);
+
+        if(!oldMentee.getUser().getId().equals(userService.getLoginMemberId())) {
+            throw new ApiException(MoijaHttpStatus.FORBIDDEN);
+        }
+
+        oldMentee.updateMentee(mentee);
+        menteeRepository.save(oldMentee);
+    }
+
+    @Transactional
+    public void deleteMentee(Long menteeId) {
+        Mentee mentee = findMentee(menteeId);
+
+        if(!mentee.getUser().getId().equals(userService.getLoginMemberId())) {
+            throw new ApiException(MoijaHttpStatus.FORBIDDEN);
+        }
+
+        mentoringRepository.deleteAllByMentee(mentee);
+        menteeRepository.delete(mentee);
     }
 }

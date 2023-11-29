@@ -2,6 +2,8 @@ package impact.moija.domain.mentoring;
 
 import impact.moija.domain.common.BaseTimeEntity;
 import impact.moija.domain.user.User;
+import impact.moija.dto.mentoring.MenteeRequestDto;
+import impact.moija.dto.mentoring.MentorRequestDto;
 import java.util.List;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -50,4 +52,12 @@ public class Mentee extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "mentee")
     List<Mentoring> mentorings;
+
+    public void updateMentee(MenteeRequestDto dto) {
+        this.phone = dto.getPhone() != null ? dto.getPhone() : this.phone;
+        this.brief = dto.getBrief() != null ? dto.getBrief() : this.brief;
+        this.content = dto.getContent() != null ? dto.getContent() : this.content;
+    }
+
+
 }
