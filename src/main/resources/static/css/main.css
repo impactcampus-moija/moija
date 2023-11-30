@@ -8,12 +8,22 @@
 }
 
 body{
-    background-color: #fafafa;
+    background-color: #FAFAFA;
+}
+
+main{
+    overflow-x: hidden;
+}
+
+#main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .banner-container{
     background-color: #F5F5F5;
-    width: 120rem;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -228,7 +238,10 @@ body{
     height: 25.12481rem;
 }
 
-.main-contents-img{
+.main-contents-container{
     margin-top: 4.5rem;
-    margin-left: 20rem;
+    width: 1280px;
+}
+
+.main-contents-img{
 }

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href = "../css/community-write.css" rel = 'stylesheet'>
+    <link href = "../css/footer.css" rel = 'stylesheet'>
+    <link href = "../css/nav.css" rel = "stylesheet">
+    <title>모두 이제 자립 - 모이자</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-wrap">
+            <div class="nav-logo">
+                <img class="nav-logo-img" src="../src/nav_logo.png">
+            </div>
+            <nav class="nav-left">
+                <ul class="nav-menu">
+                    <li class="nav-menu-category"><a href="">멘토링</a>
+                      </li>
+                    <li class="nav-menu-category"><a href="">정보</a></li>
+                    <li class="nav-menu-category"><a href="">커뮤니티</a></li>
+                  </ul>
+                  <ul class = "nav-user">
+                      <li class = "nav-log-in"><a href="">Log in</a></li>
+                      <li class = 'nav-sign-up'><a href="">Sign up</a></li>
+                  </ul>
+            </nav>
+        </div>
+    </nav>
+    <main>
+        <div class = 'community-write'>
+            <div class = 'community-write-title'>
+                <p>커뮤니티 글 작성</p>
+            </div>
+            <div class = 'community-write-container'>
+                <div class = 'community-write-upper-container'>
+                    <div class = 'write-nickname-div'>
+                        <p class="question-text">익명으로 작성할래요</p>
+                        <input type='checkbox' id='nicnkname-anonymous'>
+                        <label for='nicnkname-anonymous' class='toggle'></label>
+                    </div>
+                    <div class = 'write-category-container'>
+                        <p class = 'question-text'>게시글의 카테고리를 선택해 주세요.</p>
+                        <select name = "category" class =  "write-category" id = "write-category">
+                            <option disabled selected class = "disabled-selected-option">카테고리 선택</option>
+                            <option value = "주거">주거</option>
+                            <option value = "취업">취업</option>
+                            <option value = "진로">진로</option>
+                            <option value = "생활">생활</option>
+                            <option value = "경제">경제</option>
+                            <option value = "자원">자원</option>
+                        </select>
+                    </div>
+                </div>
+                <div class = 'community-write-lower-container'>
+                    <div class = 'community-write-aline'>
+                        <p class = 'question-text'>게시글의 제목을 작성해 주세요. (50자 이하)</p>
+                        <textarea id = 'community-write-aline'></textarea>
+                    </div>
+                    <div class = 'community-write-free'>
+                        <p class = 'question-text'>게시글의 내용을 작성해 주세요. (3000자 이하)</p>
+                        <textarea id = 'community-write-free'></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class = 'community-submit-application'>
+                <button>게시글을 등록합니다</button>
+            </div>
+        </div>
+
+        <footer>
+            <div class = 'left-footer'>
+                <p class = 'bold-footer'>임팩트 캠퍼스 IT 서비스 공모전 출품작</p>
+                <p class = 'light-footer'>프론트엔드 | 신민경 조유진  백엔드 | 최세민 박민수</p>
+            </div>
+            <div class = 'right-footer'>
+                <img class = 'footerlogo' src = '../src/footer-logo.png'>
+                <p class = 'bold-footer'>Copyright 2023. moija. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+    <script src = ''></script>
+</body>
+</html>

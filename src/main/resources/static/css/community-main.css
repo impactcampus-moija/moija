@@ -8,7 +8,7 @@ body{
     background-color: #FAFAFA;
 }
 
-.main-container{
+#main-container{
     display: flex;
     flex-direction: column;
     align-items: center;
