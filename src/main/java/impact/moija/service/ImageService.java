@@ -1,7 +1,5 @@
 package impact.moija.service;
 
-import impact.moija.api.ApiException;
-import impact.moija.api.MoijaHttpStatus;
 import impact.moija.domain.common.Image;
 import impact.moija.dto.common.ImageResponseDto;
 import impact.moija.repository.ImageRepository;
@@ -24,7 +22,7 @@ public class ImageService {
     }
 
     @Transactional
-    public void createImage(String table, Long id, MultipartFile file) {
+    public String createImage(String table, Long id, MultipartFile file) {
         String url = uploader.uploadFile(file);
 
         imageRepository.save(
@@ -35,6 +33,8 @@ public class ImageService {
                         .url(url)
                         .build()
         );
+
+        return url;
     }
 
     @Transactional

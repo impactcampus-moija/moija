@@ -8,11 +8,13 @@ import impact.moija.domain.mentoring.Mentoring;
 import impact.moija.domain.mentoring.MentoringStatus;
 import impact.moija.domain.user.User;
 import impact.moija.dto.common.PkResponseDto;
-import impact.moija.dto.mentoring.MenteeDetailResponseDto;
+import impact.moija.dto.mentoring.MenteeResponseDto;
 import impact.moija.dto.mentoring.MenteeRequestDto;
 import impact.moija.repository.mentoring.MenteeRepository;
 import impact.moija.repository.mentoring.MentorRepository;
 import impact.moija.repository.mentoring.MentoringRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,17 +46,21 @@ public class MenteeService {
             throw new ApiException(MoijaHttpStatus.FORBIDDEN);
         }
 
+        if (mentoringRepository.existsByMentorAndUserId(mentor, userService.getLoginMemberId())) {
+            throw new ApiException(MoijaHttpStatus.DUPLICATE_MENTEE);
+        }
+
         Mentee mentee = menteeRepository.save(dto.toEntity(
                 User.builder()
                         .id(userService.getLoginMemberId())
                         .build()
-                , MentoringStatus.PENDING
         ));
 
         mentoringRepository.save(
                 Mentoring.builder()
                         .mentee(mentee)
                         .mentor(mentor)
+                        .status(MentoringStatus.PENDING)
                         .build()
         );
 
@@ -62,9 +68,9 @@ public class MenteeService {
     }
 
     @Transactional
-    public MenteeDetailResponseDto getMentee(Long menteeId) {
+    public MenteeResponseDto getMentee(Long menteeId) {
         Mentee mentee = findMentee(menteeId);
-        return MenteeDetailResponseDto.of(mentee, mentee.getUser());
+        return MenteeResponseDto.of(mentee);
     }
 
     @Transactional
@@ -91,5 +97,15 @@ public class MenteeService {
 
         mentoringRepository.deleteAllByMentee(mentee);
         menteeRepository.delete(mentee);
+    }
+
+    @Transactional
+    public List<MenteeResponseDto> getMyMentees() {
+        // TODO : PROGRESS or PROGRESS + CLOSE
+        List<Mentee> mentees = menteeRepository.findByUserId(userService.getLoginMemberId(), MentoringStatus.PROGRESS);
+
+        return mentees.stream()
+                .map(MenteeResponseDto::of)
+                .collect(Collectors.toList());
     }
 }

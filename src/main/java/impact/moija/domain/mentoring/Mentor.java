@@ -41,6 +41,8 @@ public class Mentor extends BaseTimeEntity {
 
     String career;
 
+    String imageUrl;
+
     boolean activate;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -48,7 +50,7 @@ public class Mentor extends BaseTimeEntity {
     User user;
 
     @OneToMany(mappedBy = "mentor")
-    List<MentoringRecruitment> recruitments;
+    List<MentorRecruitment> recruitments;
 
     @OneToMany(mappedBy = "mentor")
     List<Mentoring> mentorings;
@@ -63,5 +65,9 @@ public class Mentor extends BaseTimeEntity {
 
     public void updateActivate(boolean activate) {
         this.activate = activate;
+    }
+
+    public void updateImageUrl(String url) {
+        this.imageUrl = url;
     }
 }

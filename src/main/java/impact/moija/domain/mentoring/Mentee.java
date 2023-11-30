@@ -3,15 +3,11 @@ package impact.moija.domain.mentoring;
 import impact.moija.domain.common.BaseTimeEntity;
 import impact.moija.domain.user.User;
 import impact.moija.dto.mentoring.MenteeRequestDto;
-import impact.moija.dto.mentoring.MentorRequestDto;
 import java.util.List;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -43,9 +39,6 @@ public class Mentee extends BaseTimeEntity {
 
     String content;
 
-    @Enumerated(EnumType.STRING)
-    MentoringStatus status;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     User user;
@@ -58,6 +51,5 @@ public class Mentee extends BaseTimeEntity {
         this.brief = dto.getBrief() != null ? dto.getBrief() : this.brief;
         this.content = dto.getContent() != null ? dto.getContent() : this.content;
     }
-
 
 }

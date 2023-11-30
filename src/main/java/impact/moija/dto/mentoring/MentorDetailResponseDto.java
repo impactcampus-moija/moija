@@ -15,10 +15,13 @@ public class MentorDetailResponseDto {
     private String brief;
     private String introduction;
     private String career;
+    private long matchingCount;
     private boolean activate;
     private List<String> tags;
 
-    public static MentorDetailResponseDto of(Mentor mentor,String url) {
+    public static MentorDetailResponseDto of(Mentor mentor,
+                                             String url,
+                                             long matchingCount) {
         return MentorDetailResponseDto.builder()
                 .id(mentor.getId())
                 .imageUrl(url)
@@ -27,6 +30,7 @@ public class MentorDetailResponseDto {
                 .introduction(mentor.getIntroduction())
                 .career(mentor.getCareer())
                 .activate(mentor.isActivate())
+                .matchingCount(matchingCount)
                 .tags(mentor.getRecruitments()
                         .stream()
                         .map(recruitment -> recruitment.getTag().getName())

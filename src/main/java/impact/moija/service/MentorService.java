@@ -3,8 +3,9 @@ package impact.moija.service;
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
 import impact.moija.domain.mentoring.Mentor;
-import impact.moija.domain.mentoring.MentoringRecruitment;
-import impact.moija.domain.mentoring.MentoringTag;
+import impact.moija.domain.mentoring.MentorRecruitment;
+import impact.moija.domain.mentoring.MentorTag;
+import impact.moija.domain.mentoring.MentoringStatus;
 import impact.moija.domain.user.User;
 import impact.moija.dto.common.ImageResponseDto;
 import impact.moija.dto.common.PageResponse;
@@ -12,10 +13,12 @@ import impact.moija.dto.common.PkResponseDto;
 import impact.moija.dto.mentoring.MentorDetailResponseDto;
 import impact.moija.dto.mentoring.MentorListResponseDto;
 import impact.moija.dto.mentoring.MentorRequestDto;
+import impact.moija.repository.mentoring.MentorRecruitmentRepository;
 import impact.moija.repository.mentoring.MentorRepository;
-import impact.moija.repository.mentoring.MentoringRecruitmentRepository;
-import impact.moija.repository.mentoring.MentoringTagRepository;
+import impact.moija.repository.mentoring.MentorTagRepository;
+import impact.moija.repository.mentoring.MentoringRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -30,12 +33,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class MentorService {
 
     private final MentorRepository mentorRepository;
-    private final MentoringRecruitmentRepository recruitmentRepository;
-    private final MentoringTagRepository tagRepository;
+    private final MentorRecruitmentRepository recruitmentRepository;
+    private final MentorTagRepository tagRepository;
+    private final MentoringRepository mentoringRepository;
     private final UserService userService;
     private final ImageService imageService;
 
-    private MentoringTag findTag(String name) {
+    private MentorTag findTag(String name) {
         return tagRepository.findByName(name)
                 .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_TAG));
     }
@@ -48,26 +52,29 @@ public class MentorService {
     @Transactional
     public PkResponseDto applyMentor(MentorRequestDto dto, MultipartFile file) {
 
-        Mentor mentor = mentorRepository.save(dto.toEntity(
-                User.builder()
-                        .id(userService.getLoginMemberId())
-                        .build()
-                , true
-        ));
-
-        if (file != null && !file.isEmpty()) {
-            imageService.createImage("mentor", mentor.getId(), file);
-        }
-
         if (dto.getTags().isEmpty()) {
             throw new ApiException(MoijaHttpStatus.INVALID_MENTOR_TAG);
         }
 
+        // 활성화 상태로 등록
+        Mentor mentor = dto.toEntity(
+                User.builder()
+                        .id(userService.getLoginMemberId())
+                        .build()
+                , true
+        );
+
+        if (file != null && !file.isEmpty()) {
+            mentor.updateImageUrl(imageService.createImage("mentor", mentor.getId(), file));
+        }
+
+        mentorRepository.save(mentor);
+
         for (String tagName : dto.getTags()) {
-            MentoringTag tag = findTag(tagName);
+            MentorTag tag = findTag(tagName);
 
             recruitmentRepository.save(
-                    MentoringRecruitment.builder()
+                    MentorRecruitment.builder()
                             .mentor(mentor)
                             .tag(tag)
                             .build()
@@ -79,23 +86,18 @@ public class MentorService {
 
     @Transactional
     public PageResponse<MentorListResponseDto> getMentors(String tagName, Pageable pageable) {
-        List<Mentor> mentors;
-        if (tagName != null) {
-            mentors = mentorRepository.findByTagAndActivateIsTrue(findTag(tagName));
-        } else {
-            mentors = mentorRepository.findByActivateIsTrue();
-        }
+        MentorTag tag = tagRepository.findByName(tagName).orElse(null);
 
-        List<MentorListResponseDto> dtos = mentors.stream().map(mentor -> {
-            ImageResponseDto image = imageService.getImage("mentor", mentor.getId());
-            return MentorListResponseDto.of(mentor, image.getUrl());
-        }).toList();
+        List<MentorListResponseDto> mentors = mentorRepository.findByTagAndActivateIsTrue(tag)
+                .stream()
+                .map(mentor -> MentorListResponseDto.of(mentor, countMatchingMentor(mentor)))
+                .toList();
 
         // List -> Page
         int start = (int) pageable.getOffset();
-        int end = Math.min((start + pageable.getPageSize()), dtos.size());
+        int end = Math.min((start + pageable.getPageSize()), mentors.size());
         return PageResponse.of(
-                new PageImpl<>(dtos.subList(start, end), pageable, dtos.size())
+                new PageImpl<>(mentors.subList(start, end), pageable, mentors.size())
         );
     }
 
@@ -104,10 +106,9 @@ public class MentorService {
         Page<Mentor> mentors = mentorRepository.findByBriefContainingAndActivateIsTrue(keyword, pageable);
 
         return PageResponse.of(
-                mentors.map(mentor -> {
-                    ImageResponseDto image = imageService.getImage("mentor", mentor.getId());
-                    return MentorListResponseDto.of(mentor, image.getUrl());
-                })
+                mentors.map(mentor ->
+                        MentorListResponseDto.of(mentor, countMatchingMentor(mentor))
+                )
         );
     }
 
@@ -115,7 +116,20 @@ public class MentorService {
     public MentorDetailResponseDto getMentor(Long mentorId) {
         Mentor mentor = findMentor(mentorId);
         ImageResponseDto image = imageService.getImage("mentor", mentor.getId());
-        return MentorDetailResponseDto.of(mentor, image.getUrl());
+        return MentorDetailResponseDto.of(
+                mentor,
+                image.getUrl(),
+                countMatchingMentor(mentor)
+        );
+    }
+
+    @Transactional
+    public List<MentorListResponseDto> getMyMentors() {
+        List<Mentor> mentors = mentorRepository.findByUserId(userService.getLoginMemberId());
+
+        return mentors.stream()
+                .map(mentor -> MentorListResponseDto.of(mentor, countMatchingMentor(mentor)))
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -128,26 +142,24 @@ public class MentorService {
 
         if (file != null) {
             imageService.deleteImage("mentor", oldMentor.getId());
-            imageService.createImage("mentor", oldMentor.getId(), file);
+            oldMentor.updateImageUrl(imageService.createImage("mentor", oldMentor.getId(), file));
         }
 
-        recruitmentRepository.deleteAllByMentor(oldMentor);
+        if (!mentor.getTags().isEmpty()) {
+            recruitmentRepository.deleteAllByMentor(oldMentor);
+
+            for (String tagName : mentor.getTags()) {
+                recruitmentRepository.save(
+                        MentorRecruitment.builder()
+                                .mentor(oldMentor)
+                                .tag(findTag(tagName))
+                                .build()
+                );
+            }
+        }
 
         oldMentor.updateMentor(mentor);
         Mentor newMentor = mentorRepository.save(oldMentor);
-
-        if (mentor.getTags().isEmpty()) {
-            throw new ApiException(MoijaHttpStatus.INVALID_MENTOR_TAG);
-        }
-
-        for (String tagName : mentor.getTags()) {
-            recruitmentRepository.save(
-                    MentoringRecruitment.builder()
-                            .mentor(newMentor)
-                            .tag(findTag(tagName))
-                            .build()
-            );
-        }
 
         return PkResponseDto.of(newMentor.getId());
     }
@@ -199,5 +211,13 @@ public class MentorService {
         mentorRepository.save(mentor);
 
         return PkResponseDto.of(mentor.getId());
+    }
+
+    private long countMatchingMentor(Mentor mentor) {
+        return mentoringRepository.countMatchingMentor(
+                mentor,
+                MentoringStatus.PROGRESS,
+                MentoringStatus.CLOSE
+        );
     }
 }

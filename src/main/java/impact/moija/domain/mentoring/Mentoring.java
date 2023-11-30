@@ -1,7 +1,10 @@
 package impact.moija.domain.mentoring;
 
 import impact.moija.domain.common.BaseTimeEntity;
+import impact.moija.dto.mentoring.MentoringRequestDto;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,4 +38,14 @@ public class Mentoring extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mentor_id")
     Mentor mentor;
+
+    String reject;
+
+    @Enumerated(EnumType.STRING)
+    MentoringStatus status;
+
+    public void updateStatus(MentoringRequestDto dto) {
+        this.status = dto.getStatus() != null ? dto.getStatus() : this.status;
+        this.reject = dto.getReason() != null ? dto.getReason() : this.reject;
+    }
 }

@@ -2,12 +2,12 @@ package impact.moija.service;
 
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
-import impact.moija.domain.mentoring.Mentee;
 import impact.moija.domain.mentoring.Mentor;
+import impact.moija.domain.mentoring.Mentoring;
 import impact.moija.domain.mentoring.MentoringStatus;
-import impact.moija.dto.mentoring.MenteeListResponseDto;
-import impact.moija.repository.mentoring.MenteeRepository;
-import impact.moija.repository.mentoring.MentorRepository;
+import impact.moija.dto.common.PkResponseDto;
+import impact.moija.dto.mentoring.MentoringResponseDto;
+import impact.moija.dto.mentoring.MentoringRequestDto;
 import impact.moija.repository.mentoring.MentoringRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,34 +18,56 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Service
 public class MentoringService {
-
-    private final MentorRepository mentorRepository;
-    private final MenteeRepository menteeRepository;
+    private final MentoringRepository mentoringRepository;
     private final UserService userService;
 
-    private Mentor findMentor(Long mentorId) {
-        return mentorRepository.findById(mentorId)
-                .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_MENTOR));
+    private Mentoring findMentoring(Long mentoringId) {
+        return mentoringRepository.findById(mentoringId)
+                .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_MENTORING));
     }
 
+
     @Transactional
-    public List<MenteeListResponseDto> getPendingMentoring(Long mentorId) {
-        Mentor mentor = findMentor(mentorId);
-        List<Mentee> mentees = menteeRepository.findByMentorWithMentoringStatus(mentor, MentoringStatus.PENDING);
-        return mentees.stream()
-                .map(mentee -> MenteeListResponseDto.of(mentee, mentee.getUser()))
+    public List<MentoringResponseDto> getPendingMentoring() {
+        List<Mentoring> mentorings = mentoringRepository.findByUserIdAndStatus(
+                userService.getLoginMemberId()
+                , MentoringStatus.PENDING);
+
+        return mentorings.stream()
+                .map(MentoringResponseDto::of)
                 .collect(Collectors.toList());
     }
 
     @Transactional
-    public List<MenteeListResponseDto> getMyMentoring() {
-        List<Mentee> mentees = menteeRepository.findByMenteeWithoutMentoringStatus(
+    public List<MentoringResponseDto> getMyMentoring() {
+        List<Mentoring> mentorings = mentoringRepository.findByUserIdExceptStatus(
                 userService.getLoginMemberId()
                 , MentoringStatus.PENDING
         );
 
-        return mentees.stream()
-                .map(mentee -> MenteeListResponseDto.of(mentee, mentee.getUser()))
+        return mentorings.stream()
+                .map(MentoringResponseDto::of)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public MentoringResponseDto getMentoring(Long mentoringId) {
+        return MentoringResponseDto.of(findMentoring(mentoringId));
+    }
+
+    @Transactional
+    public PkResponseDto updateMentoringStatus(Long menteeId, MentoringRequestDto dto) {
+        Mentoring mentoring = findMentoring(menteeId);
+        Mentor mentor = mentoring.getMentor();
+
+        if (!mentor.getUser().getId().equals(userService.getLoginMemberId())) {
+            throw new ApiException(MoijaHttpStatus.FORBIDDEN);
+        }
+
+        mentoring.updateStatus(dto);
+        mentoringRepository.save(mentoring);
+
+        return PkResponseDto.of(mentoring.getId());
+    }
+
 }

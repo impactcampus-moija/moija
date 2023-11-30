@@ -2,9 +2,10 @@ package impact.moija.controller;
 
 import impact.moija.api.BaseResponse;
 import impact.moija.dto.common.PkResponseDto;
-import impact.moija.dto.mentoring.MenteeDetailResponseDto;
+import impact.moija.dto.mentoring.MenteeResponseDto;
 import impact.moija.dto.mentoring.MenteeRequestDto;
 import impact.moija.service.MenteeService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class MenteeController {
 
     private final MenteeService menteeService;
 
-    @PostMapping("/mentees/mentor/{mentorId}")
+    @PostMapping("/mentors/{mentorId}/mentees")
     public BaseResponse<PkResponseDto> applyMentee(@PathVariable Long mentorId,
                                                    @RequestBody MenteeRequestDto mentee) {
         PkResponseDto id = menteeService.applyMentee(mentorId, mentee);
@@ -30,13 +31,18 @@ public class MenteeController {
     }
 
     @GetMapping("/mentees/{menteeId}")
-    public BaseResponse<MenteeDetailResponseDto> getMentee(@PathVariable Long menteeId) {
+    public BaseResponse<MenteeResponseDto> getMentee(@PathVariable Long menteeId) {
         return BaseResponse.ok(menteeService.getMentee(menteeId));
+    }
+
+    @GetMapping("/mentees/me")
+    public BaseResponse<List<MenteeResponseDto>> getMyMentees() {
+        return BaseResponse.ok(menteeService.getMyMentees());
     }
 
     @PutMapping("/mentees/{menteeId}")
     public BaseResponse<PkResponseDto> updateMentee(@PathVariable Long menteeId,
-                                       @RequestBody MenteeRequestDto mentee) {
+                                                    @RequestBody MenteeRequestDto mentee) {
         PkResponseDto id = menteeService.updateMentee(menteeId, mentee);
         return BaseResponse.ok(id);
     }
