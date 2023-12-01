@@ -1,10 +1,8 @@
 package impact.moija.domain.mentoring;
 
 import impact.moija.domain.common.BaseTimeEntity;
-import impact.moija.dto.mentoring.MentoringRequestDto;
+import impact.moija.domain.user.User;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,27 +23,17 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "mentorings")
-public class Mentoring extends BaseTimeEntity {
+@Table(name = "mentor_recommendations")
+public class MentorRecommendation extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mentee_id")
-    Mentee mentee;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mentor_id")
     Mentor mentor;
 
-    String reject;
-
-    @Enumerated(EnumType.STRING)
-    MentoringStatus status;
-
-    public void updateStatus(MentoringRequestDto dto) {
-        this.status = dto.getStatus() != null ? dto.getStatus() : this.status;
-        this.reject = dto.getReason() != null ? dto.getReason() : this.reject;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    User user;
 }

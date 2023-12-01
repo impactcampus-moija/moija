@@ -1,6 +1,11 @@
 package impact.moija.domain.user;
 
 import impact.moija.domain.common.BaseTimeEntity;
+import impact.moija.domain.mentoring.Mentee;
+import impact.moija.domain.mentoring.Mentor;
+import java.util.List;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -66,6 +71,13 @@ public class User extends BaseTimeEntity implements UserDetails {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     RefreshToken refreshToken;
 
+
+    @OneToOne(mappedBy = "user")
+    Mentor mentor;
+
+    @OneToMany(mappedBy = "user")
+    List<Mentee> mentees;
+
     public String calculateIndependenceStatus() {
 //        int currentYear = Year.now().getValue();
 //        int independenceYears = currentYear - independenceYear;
@@ -75,6 +87,7 @@ public class User extends BaseTimeEntity implements UserDetails {
 //        }
 //        return "자립 준비 " + independenceYears + " 년차";
     }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
