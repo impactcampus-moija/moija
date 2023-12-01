@@ -1,7 +1,9 @@
 package impact.moija.dto.common;
 
-import java.util.List;
+
 import lombok.Getter;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 @Getter
@@ -22,3 +24,4 @@ public class PageResponse<T> {
         return new PageResponse<>(data);
     }
 }
+

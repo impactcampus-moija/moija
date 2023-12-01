@@ -4,6 +4,7 @@
     font-family: Noto Sans KR;
 }
 footer{
+    background-color: #fafafa;
     display: flex;
     color:#5D5D5D;
     font-size:1rem;
@@ -13,7 +14,7 @@ footer{
     gap: 38.8125rem;
     border-top:1px solid #5D5D5D;
     width: 1280;
-    margin-top: 2rem;
+    margin-top: 12rem;
 }
 .bold-footer{
     font-weight: 700;

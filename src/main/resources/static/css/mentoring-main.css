@@ -3,6 +3,11 @@
     padding: 0;
     font-family: Noto Sans KR;
 }
+
+body{
+    background-color: #FAFAFA;
+}
+
 .banner-container{
     background-color: #F5F5F5;
     width: 100vw;
@@ -87,6 +92,10 @@
     margin-top:4.4rem;
     margin-bottom: 3rem;
 }
+.mentor-search-category-container{
+    display: flex;
+    gap:0.625rem;
+}
 .mentor-search-category-check{
     text-align: center;
     color:#FFF;
@@ -97,10 +106,6 @@
     border-radius: 1.5rem;
     border:1px solid #023047;
     background-color: #023047;
-}
-.mentor-search-category-container{
-    display: flex;
-    gap:0.625rem;
 }
 .mentor-search-category{
     color:#023047;
@@ -219,6 +224,7 @@
 .page-nation{
     display:flex;
     gap:0.5rem;
+    margin-top: 4.5rem;
 }
 .page-check, .page{
     width: 3rem;
@@ -228,7 +234,7 @@
     align-items: center;
     border-radius:1rem;
     color:#181818;
-    margin-top: 4.5rem;
+    
 }
 .page-check{
     background-color: #FCA340;

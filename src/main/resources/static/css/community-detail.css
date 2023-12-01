@@ -1,0 +1,196 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Noto Sans KR;
+    list-style: none;
+}
+
+body{
+    background-color: #FAFAFA;
+}
+
+.main-container{
+    margin-top: 6.52rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.community-detail-container{
+    width: 1280px;
+    min-height:calc(100vh - 28.94rem);
+    margin-top: 4.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.community-detail-container-title{
+    color: #181818;
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+}
+
+.community-detail-card{
+    width: 41.875rem;
+    display: inline-flex;
+    padding: 3rem 5.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 1.25rem;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+}
+
+.community-detail-category{
+    color: #181818;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+
+    padding: 0.375rem 1rem;
+    border-radius: 1.5rem;
+    background: #FAFAFA;
+}
+
+.community-detail-card-title{
+    color: #181818;
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: -0.01125rem;
+    
+    margin-top: 0.75rem;
+}
+
+.community-detail-card-info{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    gap: 0.25rem;
+
+    margin-top: 0.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: solid 1px #D9D9D9;
+}
+
+.community-detail-card-info p{
+    color: #5D5D5D;
+    font-size: 0.875rem;
+    font-weight: 350;
+}
+
+.community-detail-card-commentinfo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+
+.community-detail-card-contents{
+    color: #181818;
+    font-size: 1rem;
+    font-weight: 400;
+
+    margin-top: 0.75rem;
+}
+
+.thumbsup-btn{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+
+    padding: 0.38rem 1rem;
+    border-radius: 0.75rem;
+    background: #FCA340;
+    align-items: center;
+
+    margin: 3rem 18rem 0;
+}
+
+.thumbsup-btn p{
+    color: #FFF;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+.community-detail-comment-input{
+    width: 49.875rem;
+    margin-top: 3rem;
+
+    padding: 1.25rem 1.5rem;
+    border-radius: 1.25rem;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+}
+
+.community-detail-comment-input::placeholder{
+    color: #D9D9D9;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.comment-count-div{
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comment-count-bold{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.0125rem;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.comment-count-num{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.0125rem;
+}
+
+.comment-card-list{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.comment-card{
+    width: 49.875rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: 1.25rem;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start
+}
+
+.comment-card-nickname{
+    color: #5D5D5D;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 6.75rem;
+}
+
+.comment-card-contents{
+    color: #5D5D5D;
+    font-size: 1rem;
+    font-weight: 400;
+}

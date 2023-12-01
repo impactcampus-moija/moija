@@ -23,10 +23,12 @@ import org.springframework.util.StringUtils;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Key;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class TokenProvider {
@@ -48,13 +50,22 @@ public class TokenProvider {
     }
 
     public TokenResponseDto generateTokenResponse(TokenType tokenType, Authentication authentication) {
-        return generateTokenResponse(tokenType,
+        return generateTokenResponse(
+                tokenType,
                 Long.valueOf(authentication.getName()),
-                authentication.getAuthorities().iterator().next().getAuthority());
+                joinAuthorities(authentication.getAuthorities())
+        );
     }
 
     public TokenResponseDto generateTokenResponse(TokenType tokenType, User user) {
-        return generateTokenResponse(tokenType, user.getId(), user.getRole().toString());
+        return generateTokenResponse(tokenType, user.getId(), joinAuthorities(user.getAuthorities()));
+    }
+
+    private String joinAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        return authorities
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
     }
 
     private TokenResponseDto generateTokenResponse(TokenType tokenType, Long memberId, String authority) {
@@ -82,10 +93,15 @@ public class TokenProvider {
             throw new ApiException(MoijaHttpStatus.INVALID_TOKEN);
         }
 
-        Collection<? extends GrantedAuthority> authority = Collections.singleton(
-                new SimpleGrantedAuthority(claims.get(AUTHORITY_KEY).toString())
-        );
+        Collection<? extends GrantedAuthority> authority = parseAuthority(claims.get(AUTHORITY_KEY).toString());
+
         return new UsernamePasswordAuthenticationToken(claims.getSubject(), "", authority);
+    }
+
+    private Collection<? extends GrantedAuthority> parseAuthority(String authority) {
+        return Arrays.stream(authority.split(","))
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toSet());
     }
 
     public void validateToken(TokenType tokenType, String token) {

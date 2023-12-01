@@ -1,0 +1,208 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Noto Sans KR;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FAFAFA;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:4.53rem;
+}
+.banner-container{
+    width:100vw;
+    display: flex;
+    justify-content: center;
+    gap:8.44rem;
+    padding:8.03rem 0rem 8.54rem 0rem;
+    background-color: #F5F5F5;
+}
+.banner-left-container{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    gap:2rem;
+}
+.banner-left-text-container{
+    display:flex;
+    flex-direction:column;
+    gap:0.75rem;
+}
+.banner-left-bold-text{
+    color: #181818;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.075rem;
+}
+.banner-left-light-text{
+    color:#181818;
+    font-size:1.125rem;
+    font-weight: 400;
+}
+
+.banner-left-btn-container button{
+    color:#FFF;
+    font-size:1.25rem;
+    letter-spacing: -0.0125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FCA340;
+    border-radius: 1.5rem;
+    padding:0.75rem 2rem;
+}
+.banner-right-container{
+    padding: 0.625rem 5.5rem 0.625rem 0.625rem;
+}
+.banner-right-container img{
+    width:30rem;
+    height:12.5rem;
+}
+.info-container{
+    width:1280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:4.5rem;
+    margin-top:4.53rem;
+}
+.container-title h3{
+    color: #181818;
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.03375rem;
+}
+.container-sub-title{
+    margin-top:2.25rem;
+    margin-bottom: 1.5rem;
+}
+.container-sub-title p{
+    color: #181818;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.01875rem;
+}
+.policy-info-li-container{
+    display:flex;
+    flex-direction: column;
+    gap:2rem;
+    align-items: center;
+}
+.policy-info-li-row-container{
+    display:inline-flex;
+    gap:1.25rem;
+}
+.policy-info-li{
+    width: 19.0625rem;
+    height: 15rem;
+    border-radius: 1.875rem;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+}
+.policy-info-li-upper{
+    display:flex;
+    justify-content: flex-end;
+    padding:1.25rem 1.88rem 1.31rem 0rem;
+}
+.policy-info-category{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.375rem 1.25rem;
+    border-radius: 1.5rem;
+    background: #FAFAFA;
+}
+.policy-info-category p{
+    color: #181818;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.policy-info-li-lower{
+    display: flex;
+    flex-direction: column;
+    gap:0.38rem;
+    margin-left: 1.87rem;
+}
+.policy-info-li-lower-bold{
+    color: #181818;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+.policy-info-li-lower-light{
+    color: #181818;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: -0.015rem;
+}
+.policy-filtering{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:1.5rem;
+    margin:3rem 0rem 4rem 0rem;
+}
+.policy-category-container{
+    display: inline-flex;
+    gap:0.62rem;
+}
+.policy-category-container button{
+    text-align: center;
+    font-size: 0.9375rem;
+    
+    width:7.5rem;
+    height:3rem;
+    border-radius: 1.5rem;
+}
+.policy-category-checked{
+    color:#FFF;
+    border:1px solid #023047;
+    background-color: #023047;
+    font-weight: 700;
+}
+.policy-category{
+    color:#023047;
+    border:1px solid #D8D8D8;
+    background-color: #FFF;
+    font-weight: 500;
+
+}
+.plicy-search-container input{
+    width: 38.42875rem;
+    height:1.4375rem;
+    padding:1.28rem 1.76rem 1.26rem 1.06rem;
+    border-radius: 1.5rem;
+    border: 1px solid #D9D9D9;
+    background-color: #FFF;
+}
+.plicy-search-container input::placeholder{
+    color:#969696;
+    font-size:1rem;
+    font-weight: 400;
+}
+.page-nation{
+    display:flex;
+    gap:0.5rem;
+}
+.page-check, .page{
+    width: 3rem;
+    height:3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:1rem;
+    color:#181818;
+}
+.page-check{
+    background-color: #FCA340;
+}
+.page{
+    background-color: #FFF;
+}

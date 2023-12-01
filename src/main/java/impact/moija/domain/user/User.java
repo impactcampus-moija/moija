@@ -16,6 +16,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,11 +26,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -40,19 +45,32 @@ public class User extends BaseTimeEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @Column(unique = true)
     String email;
+
     String password;
     String nickname;
-    LocalDate birthDay;
+    LocalDate birthday;
+    Integer independenceYear;
 
     @Enumerated(EnumType.STRING)
     Location location;
 
     @Enumerated(EnumType.STRING)
-    UserRole role;
+    Gender gender;
+
+    @Enumerated(EnumType.STRING)
+    @ElementCollection
+    @CollectionTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
+    Set<UserRole> roles;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     RefreshToken refreshToken;
+
 
     @OneToOne(mappedBy = "user")
     Mentor mentor;
@@ -60,10 +78,24 @@ public class User extends BaseTimeEntity implements UserDetails {
     @OneToMany(mappedBy = "user")
     List<Mentee> mentees;
 
+    public String calculateIndependenceStatus() {
+//        int currentYear = Year.now().getValue();
+//        int independenceYears = currentYear - independenceYear;
+//
+//        if (independenceYear == null || independenceYears < 0) {
+            return "자립 청소년";
+//        }
+//        return "자립 준비 " + independenceYears + " 년차";
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
-        return Collections.singleton(authority);
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toSet());
+    }
+
+    public void addRole(UserRole role) {
+        roles.add(role);
     }
 
     @Override

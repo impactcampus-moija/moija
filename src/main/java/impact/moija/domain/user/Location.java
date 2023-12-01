@@ -1,8 +1,17 @@
 package impact.moija.domain.user;
 
+import impact.moija.api.ApiException;
+import impact.moija.api.MoijaHttpStatus;
 import impact.moija.domain.policy.PolicyType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
@@ -26,8 +35,27 @@ public enum Location {
     SEJONG("세종", "003002017"),
     ;
 
+    private static final Map<String, Location> names = Arrays.stream(Location.values())
+            .collect(Collectors.toMap(
+                    Location::getName,
+                    Function.identity(),
+                    (existing, replacement) -> existing,
+                    LinkedHashMap::new
+            ));
+
     private final String name;
     private final String code;
+
+    public static Location findByName(String name) {
+        if(!names.containsKey(name)) {
+            throw new ApiException(MoijaHttpStatus.INVALID_LOCATION_NAME);
+        }
+        return names.get(name);
+    }
+
+    public static Set<String> getNames() {
+        return names.keySet();
+    }
 
     public static Location findByCode(String code) {
         for(Location location : Location.values()) {

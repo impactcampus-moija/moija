@@ -1,0 +1,204 @@
+*{
+    padding:0;
+    margin: 0;
+    font-family: Noto Sans KR;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FAFAFA;
+}
+.mentoring-write-application{
+    width:1280px;
+}
+.mentoring-write-application-title{
+    display: flex;
+    justify-content: center;
+    margin:6.5rem 0rem 4.5rem 0rem;
+}
+.mentoring-write-application-title p{
+    color: #181818;
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.03375rem;
+}
+.mentoring-write-application-container{
+    display: flex;
+    flex-direction: column;
+    gap:3rem;
+}
+.mentoring-write-application-upper-container{
+    display: flex;
+    flex-direction: column;
+    gap:1.5rem;
+}
+.application-number-container{
+    display: flex;
+    gap:1rem;
+    align-items: center;
+}
+.mentoring-write-application-lower-container{
+    display: flex;
+    flex-direction: column;
+    gap:3rem;
+}
+.question-text{
+    color: #181818;
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: 0.01125rem;
+}
+.application-number{
+    width: 14.125rem;
+    height: 1.375rem;
+    background-color: #FFF;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    padding:0.75rem;
+    border: 1px solid #D9D9D9;
+}
+.application-number::placeholder{
+    color: #D9D9D9;
+    
+}
+.application-write-aline, .application-write-free{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+}
+.application-write-aline textarea{
+    width: 80rem;
+    height: 6.25rem;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+}
+.application-write-free textarea{
+    width: 80rem;
+    height: 12.5rem;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+}
+.mentoring-submit-application{
+    display:flex;
+    justify-content: center;
+    margin-top: 4.5rem;
+}
+.mentoring-submit-application button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.625rem;
+    background: var(--o-110, #FB9119);
+    color:#FFF;
+    font-size: 1rem;
+    font-weight: 500;
+    padding:0.625rem 6.25rem;
+}
+.application-question{
+    display: flex;
+    align-items: center;
+    gap:0.53rem;
+}
+.application-question-text{
+    width: 16.875rem;
+    color:#181818;
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: 0.01125rem;
+}
+.application-input-text{
+    display: flex;
+    width: 11.4375rem;
+    padding: 0.75rem;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #D9D9D9;
+    font-size: 0.9375rem;
+    font-weight: 400;
+}
+.application-category-checkbox-container{
+    display:flex;
+    align-items: center;
+}
+.application-input-text::placeholder{
+    color: #D9D9D9;
+}
+.application-category-checkbox{
+    display:flex;
+    align-items: center;
+    gap:0.5rem;
+    padding:0.75rem 0.625rem;
+    
+}
+.application-category-checkbox p{
+    color: #5D5D5D;
+    font-size:1.125rem;
+    font-weight: 500;
+    letter-spacing: -0.01125rem;
+}
+.application-input-question{
+    color:#181818;
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: 0.01125rem;
+}
+.file-input-container{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+}
+.enroll-file-input-container{
+    display:flex;
+    gap:0.5rem;
+}
+.enroll-file-name-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #D9D9D9;
+    padding: 0.75rem 6.25rem;
+    background-color: #FFF;
+}
+.enroll-file-name-box p{
+    color:#D9D9D9;
+    font-size: 0.9375rem;
+    font-weight: 400;
+}
+.upload-certification-image{
+    color:#FFF;
+    font-size:0.9375rem;
+    font-weight: 500;
+    letter-spacing: -0.00938rem;
+    padding:0.75rem 1rem;
+    border-radius: 0.625rem;
+    background-color: #FB9119;
+}
+.certification-image-btn{
+    display:none;
+}
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    display: inline-block;
+    width: 1.125rem;
+    height: 1.25rem;
+    border: 2px solid #969696;
+    background-color: #FFF;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + label {
+    content:"";
+    border: 2px solid #FB9119;
+    background-color: #FB9119;
+    color:#FFF;
+    background-image: url('../src/mentor-accept-btn.png');
+    background-repeat: no-repeat;
+    background-position: 50%;
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href = "../css/mentoring-write-application.css" rel = 'stylesheet'>
+    <link href = "../css/footer.css" rel = 'stylesheet'>
+    <link href = "../css/nav.css" rel = "stylesheet">
+    <title>모두 이제 자립 - 모이자</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-wrap">
+            <div class="nav-logo">
+                <img class="nav-logo-img" src="../src/nav_logo.png">
+            </div>
+            <nav class="nav-left">
+                <ul class="nav-menu">
+                    <li class="nav-menu-category"><a href="">멘토링</a>
+                      </li>
+                    <li class="nav-menu-category"><a href="">정보</a></li>
+                    <li class="nav-menu-category"><a href="">커뮤니티</a></li>
+                  </ul>
+                  <ul class = "nav-user">
+                      <li class = "nav-log-in"><a href="">Log in</a></li>
+                      <li class = 'nav-sign-up'><a href="">Sign up</a></li>
+                  </ul>
+            </nav>
+        </div>
+    </nav>
+    <main>
+        <div class = 'mentoring-write-application'>
+            <div class = 'mentoring-write-application-title'>
+                <p>모이자 멘토님께 멘토링</p>
+            </div>
+            <div class = 'mentoring-write-application-container'>
+                <div class = 'mentoring-write-application-upper-container'>
+                    <div class = 'application-number-container'>
+                        <p class = 'question-text'>번호 제공에 동의합니다. (동의시, 이메일이 아닌 전화를 통해 멘토링이 진행됩니다.)</p>
+                        <input type='checkbox' id='application-agree-number'>
+                        <label for='application-agree-number' class='toggle'></label>
+                    </div>
+                    <div class = 'application-number-container'>
+                        <p class = 'question-text'>전화 연락을 위한 휴대폰 번호를 입력해 주세요.</p>
+                        <input class = 'application-number' type = 'text' id = 'application-number' placeholder="전화번호 입력 (- 없이 입력해 주세요)">
+                    </div>
+                </div>
+                <div class = 'mentoring-write-application-lower-container'>
+                    <div class = 'application-write-aline'>
+                        <p class = 'question-text'>모이자 님께 받고싶은 멘토링 주제를 한 줄로 요약해 주세요.</p>
+                        <textarea id = 'application-write-aline'></textarea>
+                    </div>
+                    <div class = 'application-write-free'>
+                        <p class = 'question-text'>모이자 님께 멘토링을 받고 싶은 내용 및 필요한 이유를 자유롭게 작성해 주세요. (1000자 이내)</p>
+                        <textarea id = 'application-write-free'></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class = 'mentoring-submit-application'>
+                <button id = 'apply-mentoring'>멘토링을 신청할래요</button>
+            </div>
+        </div>
+        
+        <footer>
+            <div class = 'left-footer'>
+                <p class = 'bold-footer'>임팩트 캠퍼스 IT 서비스 공모전 출품작</p>
+                <p class = 'light-footer'>프론트엔드 | 신민경 조유진  백엔드 | 최세민 박민수</p>
+            </div>
+            <div class = 'right-footer'>
+                <img class = 'footerlogo' src = '../src/footer-logo.png'>
+                <p class = 'bold-footer'>Copyright 2023. moija. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+</body>

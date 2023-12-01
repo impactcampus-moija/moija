@@ -1,0 +1,137 @@
+*{
+    padding:0;
+    margin: 0;
+    font-family: Noto Sans KR;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FAFAFA;
+}
+.mentoring-write-application{
+    width:1280px;
+}
+.mentoring-write-application-title{
+    display: flex;
+    justify-content: center;
+    margin:6.5rem 0rem 4.5rem 0rem;
+}
+.mentoring-write-application-title p{
+    color: #181818;
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.03375rem;
+}
+.mentoring-write-application-container{
+    display: flex;
+    flex-direction: column;
+    gap:3rem;
+}
+.mentoring-write-application-upper-container{
+    display: flex;
+    flex-direction: column;
+    gap:1.5rem;
+}
+.application-number-container{
+    display: flex;
+    gap:1rem;
+    align-items: center;
+}
+.mentoring-write-application-lower-container{
+    display: flex;
+    flex-direction: column;
+    gap:3rem;
+}
+.question-text{
+    color: #181818;
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: 0.01125rem;
+}
+.application-number{
+    width: 14.125rem;
+    height: 1.375rem;
+    background-color: #FFF;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    padding:0.75rem;
+    border: 1px solid #D9D9D9;
+}
+.application-number::placeholder{
+    color: #D9D9D9;
+}
+.application-write-aline, .application-write-free{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+}
+.application-write-aline textarea{
+    width: 80rem;
+    height: 6.25rem;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+}
+.application-write-free textarea{
+    width: 80rem;
+    height: 12.5rem;
+    border: 1px solid #D9D9D9;
+    background: #FFF;
+}
+.mentoring-submit-application{
+    display:flex;
+    justify-content: center;
+    margin-top: 4.5rem;
+}
+.mentoring-submit-application button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.625rem;
+    background: var(--o-110, #FB9119);
+    color:#FFF;
+    font-size: 1rem;
+    font-weight: 500;
+    padding:0.625rem 6.25rem;
+}
+
+/* 토글 만들기 made by gpt */
+input[type='checkbox'] {
+    display: none;
+}
+
+label.toggle {
+display: inline-block;
+width: 2.5rem; /* 토글 버튼의 너비 */
+height: 1.25rem; /* 토글 버튼의 높이 */
+background-color: #FAFAFA; /* 토글 버튼의 배경색 */
+border-radius: 0.625rem; /* 라벨의 모양을 둥글게 만듭니다. */
+border: 0.125rem solid #969696; /* 토글 버튼의 테두리 */
+position: relative;
+cursor: pointer;
+}
+
+label.toggle:after {
+content: '';
+position: absolute;
+top: 0.125rem;
+left: 0.125rem;
+width: 1rem; /* 토글 버튼 내부의 너비 */
+height: 1rem; /* 토글 버튼 내부의 높이 */
+background-color: #969696; /* 토글 버튼의 색상 */
+border-radius: 50%; /* 둥근 모양의 토글 버튼 */
+transition: 0.3s; /* 부드러운 전환을 위한 transition */
+}
+
+input[type='checkbox']:checked + label.toggle:after {
+background-color: #FFF; /* 체크되었을 때 동그라미 색상 변경 */
+transform: translateX(1.25rem); /* 체크된 상태일 때 토글 버튼을 이동시킵니다. */
+}
+
+/* 체크되었을 때 토글 버튼의 테두리 색상 변경 */
+input[type='checkbox']:checked + label.toggle {
+    background-color: #FB9119;
+    border-color: #FB9119;
+}
