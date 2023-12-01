@@ -2,7 +2,9 @@ package impact.moija.service;
 
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
+import impact.moija.domain.community.Post;
 import impact.moija.domain.mentoring.Mentor;
+import impact.moija.domain.mentoring.MentorRecommendation;
 import impact.moija.domain.mentoring.MentorRecruitment;
 import impact.moija.domain.mentoring.MentorTag;
 import impact.moija.domain.mentoring.Mentoring;
@@ -12,17 +14,20 @@ import impact.moija.domain.user.User;
 import impact.moija.dto.common.ImageResponseDto;
 import impact.moija.dto.common.PageResponse;
 import impact.moija.dto.common.PkResponseDto;
+import impact.moija.dto.common.RecommendationResponseDto;
 import impact.moija.dto.mentoring.MentorDetailResponseDto;
 import impact.moija.dto.mentoring.MentorListResponseDto;
 import impact.moija.dto.mentoring.MentorRequestDto;
 import impact.moija.dto.mentoring.MentoringReviewRequestDto;
 import impact.moija.dto.mentoring.MentoringReviewResponseDto;
+import impact.moija.repository.mentoring.MentorRecommendationRepository;
 import impact.moija.repository.mentoring.MentorRecruitmentRepository;
 import impact.moija.repository.mentoring.MentorRepository;
 import impact.moija.repository.mentoring.MentorTagRepository;
 import impact.moija.repository.mentoring.MentoringRepository;
 import impact.moija.repository.mentoring.MentoringReviewRepository;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -42,6 +47,7 @@ public class MentorService {
     private final MentorTagRepository tagRepository;
     private final MentoringRepository mentoringRepository;
     private final MentoringReviewRepository reviewRepository;
+    private final MentorRecommendationRepository recommendationRepository;
     private final UserService userService;
     private final ImageService imageService;
 
@@ -104,7 +110,8 @@ public class MentorService {
                 .map(mentor -> MentorListResponseDto.of(
                         mentor,
                         countMatchingMentor(mentor),
-                        countMentoringReview(mentor)
+                        countMentoringReview(mentor),
+                        getRecommendation(mentor.getId())
                 ))
                 .toList();
 
@@ -124,7 +131,8 @@ public class MentorService {
                 mentors.map(mentor -> MentorListResponseDto.of(
                                 mentor,
                                 countMatchingMentor(mentor),
-                                countMentoringReview(mentor)
+                                countMentoringReview(mentor),
+                                getRecommendation(mentor.getId())
                 )));
     }
 
@@ -136,7 +144,8 @@ public class MentorService {
                 mentor,
                 image.getUrl(),
                 countMatchingMentor(mentor),
-                countMentoringReview(mentor)
+                countMentoringReview(mentor),
+                getRecommendation(mentor.getId())
         );
     }
 
@@ -148,7 +157,9 @@ public class MentorService {
                 .map(mentor -> MentorListResponseDto.of(
                         mentor,
                         countMatchingMentor(mentor),
-                        countMentoringReview(mentor)))
+                        countMentoringReview(mentor),
+                        getRecommendation(mentor.getId()
+                )))
                 .collect(Collectors.toList());
     }
 
@@ -284,4 +295,48 @@ public class MentorService {
     }
 
     // TODO : 후기 수정과 삭제
+
+    public RecommendationResponseDto likeMentor(Long mentorId) {
+        Long userId = userService.getLoginMemberId();
+        Mentor mentor = findMentor(mentorId);
+
+        Optional<MentorRecommendation> recommendation =
+                recommendationRepository.findByMentorIdAndUserId(mentorId, userId);
+
+        if (recommendation.isPresent()) {
+            return unlikePost(mentorId, recommendation.get());
+        }
+
+        return likePost(userId, mentorId);
+    }
+
+    private RecommendationResponseDto likePost(long loginUserId, Long mentorId) {
+        MentorRecommendation recommendation = MentorRecommendation.builder()
+                .user(User.builder().id(loginUserId).build())
+                .mentor(Mentor.builder().id(mentorId).build())
+                .build();
+        recommendationRepository.save(recommendation);
+
+        return RecommendationResponseDto.builder()
+                .recommendationCount(mentorRepository.countRecommendation(mentorId))
+                .hasRecommend(true)
+                .build();
+    }
+
+    private RecommendationResponseDto unlikePost(Long mentorId, MentorRecommendation recommendation) {
+        recommendationRepository.delete(recommendation);
+
+        return RecommendationResponseDto.builder()
+                .recommendationCount(mentorRepository.countRecommendation(mentorId))
+                .hasRecommend(false)
+                .build();
+    }
+
+    private RecommendationResponseDto getRecommendation(Long mentorId) {
+        Long userId = userService.getLoginMemberId();
+        return RecommendationResponseDto.builder()
+                .hasRecommend(recommendationRepository.findByMentorIdAndUserId(mentorId, userId).isPresent())
+                .recommendationCount(mentorRepository.countRecommendation(mentorId))
+                .build();
+    }
 }

@@ -1,6 +1,7 @@
 package impact.moija.dto.mentoring;
 
 import impact.moija.domain.mentoring.Mentor;
+import impact.moija.dto.common.RecommendationResponseDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;
@@ -16,9 +17,13 @@ public class MentorListResponseDto {
     private String brief;
     private long matchingCount;
     private long reviewCount;
+    private RecommendationResponseDto recommendation;
     private List<String> tags;
 
-    public static MentorListResponseDto of (Mentor mentor, long matchingCount, long reviewCount) {
+    public static MentorListResponseDto of (Mentor mentor,
+                                            long matchingCount,
+                                            long reviewCount,
+                                            RecommendationResponseDto recommendation) {
         return MentorListResponseDto.builder()
                 .id(mentor.getId())
                 .imageUrl(mentor.getImageUrl())
@@ -27,6 +32,7 @@ public class MentorListResponseDto {
                 .brief(mentor.getBrief())
                 .matchingCount(matchingCount)
                 .reviewCount(reviewCount)
+                .recommendation(recommendation)
                 .tags(mentor.getRecruitments()
                         .stream()
                         .map(recruitment -> recruitment.getTag().getName())

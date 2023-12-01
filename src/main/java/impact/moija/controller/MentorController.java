@@ -3,6 +3,7 @@ package impact.moija.controller;
 import impact.moija.api.BaseResponse;
 import impact.moija.dto.common.PageResponse;
 import impact.moija.dto.common.PkResponseDto;
+import impact.moija.dto.common.RecommendationResponseDto;
 import impact.moija.dto.mentoring.MentorDetailResponseDto;
 import impact.moija.dto.mentoring.MentorListResponseDto;
 import impact.moija.dto.mentoring.MentorRequestDto;
@@ -104,5 +105,10 @@ public class MentorController {
     @GetMapping("/mentors/reviews/{reviewId}")
     public BaseResponse<MentoringReviewResponseDto> getMentorReview(@PathVariable Long reviewId) {
         return BaseResponse.ok(mentorService.getMentorReview(reviewId));
+    }
+
+    @PostMapping("/mentors/{mentorId}/recommendations")
+    public BaseResponse<RecommendationResponseDto> likeMentor(@PathVariable Long mentorId) {
+        return BaseResponse.ok(mentorService.likeMentor(mentorId));
     }
 }

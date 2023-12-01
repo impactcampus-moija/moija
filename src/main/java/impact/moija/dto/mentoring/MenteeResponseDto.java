@@ -12,7 +12,7 @@ public class MenteeResponseDto {
     private Long id;
     private String name;
     private String email;
-    private LocalDate age;
+    private LocalDate age; // TODO : 나이 형식
     private String phone;
     private String brief;
     private String content;

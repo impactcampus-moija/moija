@@ -28,4 +28,10 @@ public interface MentorRepository extends JpaRepository<Mentor, Long> {
             + "where mtr.mentee.user.id = :id "
             + "and m.activate = true")
     List<Mentor> findByUserId(@Param("id") Long userId);
+
+    @Query("select count(m) from Post m " +
+            "join MentorRecommendation mr " +
+            "on m = mr.mentor " +
+            "where m.id = :mentorId")
+    long countRecommendation(@Param("mentorId") Long mentorId);
 }
