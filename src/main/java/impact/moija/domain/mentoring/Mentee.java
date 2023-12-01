@@ -46,6 +46,9 @@ public class Mentee extends BaseTimeEntity {
     @OneToMany(mappedBy = "mentee")
     List<Mentoring> mentorings;
 
+    @OneToMany(mappedBy = "mentee")
+    List<MentoringReview> reviews;
+
     public void updateMentee(MenteeRequestDto dto) {
         this.phone = dto.getPhone() != null ? dto.getPhone() : this.phone;
         this.brief = dto.getBrief() != null ? dto.getBrief() : this.brief;

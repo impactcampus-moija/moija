@@ -5,6 +5,7 @@ import impact.moija.domain.mentoring.Mentor;
 import impact.moija.domain.mentoring.Mentoring;
 import impact.moija.domain.mentoring.MentoringStatus;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -38,4 +39,10 @@ public interface MentoringRepository extends JpaRepository<Mentoring, Long> {
     long countMatchingMentor(@Param("mentor") Mentor mentor,
                              @Param("first") MentoringStatus first,
                              @Param("second") MentoringStatus second);
+
+    @Query("select mtr from Mentoring as mtr "
+            + "where mtr.mentor.id = :mentorId "
+            + "and mtr.mentee.user.id = :userId ")
+    Optional<Mentoring> findByMentorIdAndUserId(@Param("mentorId") Long mentorId,
+                                                @Param("userId") Long userId);
 }

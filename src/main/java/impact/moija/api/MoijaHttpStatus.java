@@ -19,6 +19,8 @@ public enum MoijaHttpStatus {
     BAD_REQUEST(400, HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
     INVALID_MENTOR_TAG(40004, HttpStatus.BAD_REQUEST, "올바르지 않은 멘토링 태그입니다."),
     DUPLICATE_MENTEE(40005, HttpStatus.BAD_REQUEST, "해당 멘토에게 중복 지원하였습니다."),
+
+    INVALID_MENTORING_STATUS(40006, HttpStatus.BAD_REQUEST, "올바르지 않은 멘토링 상태입니다."),
     /**
      * 401
      */
@@ -41,6 +43,7 @@ public enum MoijaHttpStatus {
 
     NOT_FOUND_MENTORING(40403, HttpStatus.NOT_FOUND, "멘토링이 존재하지 않습니다."),
     NOT_FOUND_TAG(40404, HttpStatus.NOT_FOUND, "태그가 존재하지 않습니다."),
+    NOT_FOUND_MENTORING_REVIEW(40405, HttpStatus.NOT_FOUND, "멘토링 후기가 존재하지 않습니다."),
     /**
      * 500
      */

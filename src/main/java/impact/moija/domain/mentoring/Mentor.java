@@ -55,6 +55,9 @@ public class Mentor extends BaseTimeEntity {
     @OneToMany(mappedBy = "mentor")
     List<Mentoring> mentorings;
 
+    @OneToMany(mappedBy = "mentor")
+    List<MentoringReview> reviews;
+
     public void updateMentor(MentorRequestDto dto) {
         this.occupation = dto.getOccupation() != null ? dto.getOccupation() : this.occupation;
         this.brief = dto.getBrief() != null ? dto.getBrief() : this.brief;

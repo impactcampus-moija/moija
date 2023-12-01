@@ -6,6 +6,8 @@ import impact.moija.dto.common.PkResponseDto;
 import impact.moija.dto.mentoring.MentorDetailResponseDto;
 import impact.moija.dto.mentoring.MentorListResponseDto;
 import impact.moija.dto.mentoring.MentorRequestDto;
+import impact.moija.dto.mentoring.MentoringReviewRequestDto;
+import impact.moija.dto.mentoring.MentoringReviewResponseDto;
 import impact.moija.service.MentorService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -66,7 +69,6 @@ public class MentorController {
     public BaseResponse<Void> deleteMentor(@PathVariable Long mentorId) {
         mentorService.deleteMentor(mentorId);
         return BaseResponse.ok();
-
     }
 
     @GetMapping("/mentors/me")
@@ -84,5 +86,23 @@ public class MentorController {
     public BaseResponse<PkResponseDto> deactivateMentor(@PathVariable Long mentorId) {
         PkResponseDto id = mentorService.deactivateMentor(mentorId);
         return BaseResponse.ok(id);
+    }
+
+    // TODO : 파일 분리
+    @PostMapping("/mentors/{mentorId}/reviews")
+    public BaseResponse<PkResponseDto> createMentorReview(@PathVariable Long mentorId,
+                                                          @RequestBody MentoringReviewRequestDto review) {
+        PkResponseDto id = mentorService.createMentorReview(mentorId, review);
+        return BaseResponse.created(id);
+    }
+
+    @GetMapping("/mentors/{mentorId}/reviews")
+    public BaseResponse<List<MentoringReviewResponseDto>> getMentorReviews(@PathVariable Long mentorId) {
+        return BaseResponse.ok(mentorService.getMentorReviews(mentorId));
+    }
+
+    @GetMapping("/mentors/reviews/{reviewId}")
+    public BaseResponse<MentoringReviewResponseDto> getMentorReview(@PathVariable Long reviewId) {
+        return BaseResponse.ok(mentorService.getMentorReview(reviewId));
     }
 }

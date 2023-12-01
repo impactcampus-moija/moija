@@ -5,6 +5,8 @@ import impact.moija.api.MoijaHttpStatus;
 import impact.moija.domain.mentoring.Mentor;
 import impact.moija.domain.mentoring.MentorRecruitment;
 import impact.moija.domain.mentoring.MentorTag;
+import impact.moija.domain.mentoring.Mentoring;
+import impact.moija.domain.mentoring.MentoringReview;
 import impact.moija.domain.mentoring.MentoringStatus;
 import impact.moija.domain.user.User;
 import impact.moija.dto.common.ImageResponseDto;
@@ -13,10 +15,13 @@ import impact.moija.dto.common.PkResponseDto;
 import impact.moija.dto.mentoring.MentorDetailResponseDto;
 import impact.moija.dto.mentoring.MentorListResponseDto;
 import impact.moija.dto.mentoring.MentorRequestDto;
+import impact.moija.dto.mentoring.MentoringReviewRequestDto;
+import impact.moija.dto.mentoring.MentoringReviewResponseDto;
 import impact.moija.repository.mentoring.MentorRecruitmentRepository;
 import impact.moija.repository.mentoring.MentorRepository;
 import impact.moija.repository.mentoring.MentorTagRepository;
 import impact.moija.repository.mentoring.MentoringRepository;
+import impact.moija.repository.mentoring.MentoringReviewRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +41,7 @@ public class MentorService {
     private final MentorRecruitmentRepository recruitmentRepository;
     private final MentorTagRepository tagRepository;
     private final MentoringRepository mentoringRepository;
+    private final MentoringReviewRepository reviewRepository;
     private final UserService userService;
     private final ImageService imageService;
 
@@ -47,6 +53,11 @@ public class MentorService {
     private Mentor findMentor(Long mentorId) {
         return mentorRepository.findById(mentorId)
                 .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_MENTOR));
+    }
+
+    private MentoringReview findReview(Long reviewId) {
+        return reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new ApiException(MoijaHttpStatus.NOT_FOUND_MENTORING_REVIEW));
     }
 
     @Transactional
@@ -90,7 +101,11 @@ public class MentorService {
 
         List<MentorListResponseDto> mentors = mentorRepository.findByTagAndActivateIsTrue(tag)
                 .stream()
-                .map(mentor -> MentorListResponseDto.of(mentor, countMatchingMentor(mentor)))
+                .map(mentor -> MentorListResponseDto.of(
+                        mentor,
+                        countMatchingMentor(mentor),
+                        countMentoringReview(mentor)
+                ))
                 .toList();
 
         // List -> Page
@@ -106,10 +121,11 @@ public class MentorService {
         Page<Mentor> mentors = mentorRepository.findByBriefContainingAndActivateIsTrue(keyword, pageable);
 
         return PageResponse.of(
-                mentors.map(mentor ->
-                        MentorListResponseDto.of(mentor, countMatchingMentor(mentor))
-                )
-        );
+                mentors.map(mentor -> MentorListResponseDto.of(
+                                mentor,
+                                countMatchingMentor(mentor),
+                                countMentoringReview(mentor)
+                )));
     }
 
     @Transactional
@@ -119,7 +135,8 @@ public class MentorService {
         return MentorDetailResponseDto.of(
                 mentor,
                 image.getUrl(),
-                countMatchingMentor(mentor)
+                countMatchingMentor(mentor),
+                countMentoringReview(mentor)
         );
     }
 
@@ -128,7 +145,10 @@ public class MentorService {
         List<Mentor> mentors = mentorRepository.findByUserId(userService.getLoginMemberId());
 
         return mentors.stream()
-                .map(mentor -> MentorListResponseDto.of(mentor, countMatchingMentor(mentor)))
+                .map(mentor -> MentorListResponseDto.of(
+                        mentor,
+                        countMatchingMentor(mentor),
+                        countMentoringReview(mentor)))
                 .collect(Collectors.toList());
     }
 
@@ -220,4 +240,48 @@ public class MentorService {
                 MentoringStatus.CLOSE
         );
     }
+
+    private long countMentoringReview(Mentor mentor) {
+        return reviewRepository.countMentoringReviewByMentor(mentor);
+    }
+
+    // TODO : 파일분리
+
+    @Transactional
+    public PkResponseDto createMentorReview(Long mentorId, MentoringReviewRequestDto dto) {
+        System.out.println(userService.getLoginMemberId());
+        Mentoring mentoring = mentoringRepository
+                .findByMentorIdAndUserId(mentorId, userService.getLoginMemberId())
+                .orElseThrow(() -> {
+                    throw new ApiException(MoijaHttpStatus.NOT_FOUND_MENTORING);
+                });
+
+        if (!mentoring.getStatus().equals(MentoringStatus.CLOSE)) {
+            throw new ApiException(MoijaHttpStatus.INVALID_MENTORING_STATUS);
+        }
+
+        // TODO : 중복 후기 처리
+
+        MentoringReview review = dto.toEntity(mentoring.getMentor(), mentoring.getMentee());
+
+        return PkResponseDto.of(reviewRepository.save(review).getId());
+    }
+
+    @Transactional
+    public List<MentoringReviewResponseDto> getMentorReviews(Long mentorId) {
+        Mentor mentor = findMentor(mentorId);
+
+        return reviewRepository.findByMentor(mentor).stream()
+                .map(MentoringReviewResponseDto::of)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public MentoringReviewResponseDto getMentorReview(Long reviewId) {
+        MentoringReview review = findReview(reviewId);
+
+        return MentoringReviewResponseDto.of(review);
+    }
+
+    // TODO : 후기 수정과 삭제
 }
