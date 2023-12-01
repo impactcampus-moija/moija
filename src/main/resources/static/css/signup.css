@@ -28,6 +28,11 @@ h3{
     letter-spacing: -0.033rem;
     margin-bottom : 4.5rem;
 }
+
+.signup-containers{
+    margin-top: 6.5rem;
+}
+
 .signup-container-1, .signup-container-2, .signup-container-3{
     background-color: #FFFFFF;
     width: 52.875rem;
@@ -67,7 +72,7 @@ h3{
     font-size: 1rem;
     font-weight: 350;
     color: #969696;
-    margin-top:3rem;
+    margin-top:1.2rem;
     margin-bottom: -1rem;
 }
 .signup-container-1 .signup-input-container{
@@ -102,6 +107,7 @@ h3{
     gap:1.25rem;
 }
 .signup-id-check{
+    cursor: pointer;
     padding: 0.81rem 0rem;
     border : 1px solid #D9D9D9;
     border-radius: 0.625rem;
@@ -113,9 +119,21 @@ h3{
     width:6.75rem;
     
 }
+
+.signup-button-container{
+    background-color: #FFF;
+}
+
+.signup-button-container :hover{
+    border: none;
+    background-color: #FCA340;
+    cursor: pointer;
+}
+
 .signup-button-1, .signup-button-2{
-    width: 25.8125rem;
-    height: 3.125rem;
+    /* width: 25.8125rem;
+    height: 3.125rem; */
+    padding: 0.75rem 10.84375rem;
     border : 1px solid #D9D9D9;
     border-radius: 1.25rem;
     margin-top : 4rem;
@@ -123,26 +141,26 @@ h3{
     justify-content: center;
     align-items: center;
 }
+
 .signup-button-3{
-    width: 25.8125rem;
-    height: 3.125rem;
-    background-color: #FCA340;
-    opacity: 0.9;
+    /* width: 25.8125rem;
+    height: 3.125rem; */
+    padding: 0.75rem 6.44rem;
+    background-color: #fff;
+    border : 1px solid #D9D9D9;
     border-radius: 1.25rem;
-    margin-top : 4rem;
+    margin-top : 3rem;
     display:flex;
     justify-content: center;
     align-items: center;
 }
 .signup-button p {
     font-size: 1.125rem;
-    font-weight: 500;
     color : #D9D9D9
 }
 .signup-button-3 p {
     font-size: 1.125rem;
-    font-weight: 500;
-    color : #FFF;
+    color : #181818;
 }
 /* container-2 */
 .signup-container-2 .signup-input-div{
@@ -168,6 +186,7 @@ h3{
     border-radius: 0.625rem;
 }
 select{
+    cursor: pointer;
     padding:0.81rem 0.75rem 0.81rem 0.75rem;
     background-color: #FFFFFF;
     border : 1px solid #D9D9D9;
@@ -227,14 +246,15 @@ select option:checked {
 }
 .radio_box{
     display:flex;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 0.8rem;
 }
 input[type='radio'] {
     -webkit-appearance: none; 
     -moz-appearance: none; 
     appearance: none; 
-    width: 18px;
-    height: 18px;
+    width: 1rem;
+    height: 1rem;
     border: 2px solid #ccc; 
     border-radius: 50%;
     outline: none;

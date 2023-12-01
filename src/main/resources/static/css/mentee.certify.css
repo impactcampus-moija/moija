@@ -70,6 +70,7 @@ main{
     font-weight: 400;
 }
 .upload-certification-image{
+    cursor: pointer;
     color:#FFF;
     font-size:0.9375rem;
     font-weight: 500;
@@ -82,6 +83,7 @@ main{
     display:none;
 }
 .apply-certification{
+    cursor: pointer;
     color:#FFF;
     font-size: 1rem;
     font-weight: 500;
