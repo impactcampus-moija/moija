@@ -127,6 +127,15 @@ public class UserService implements UserDetailsService {
         user.addRole(UserRole.ROLE_INDEPENDENCE);
     }
 
+    public void addMentorRole() {
+        Long loginMemberId = getLoginMemberId();
+        User user = userRepository.findById(loginMemberId).orElseThrow(() ->
+                new ApiException(MoijaHttpStatus.UNAUTHORIZED)
+        );
+
+        user.addRole(UserRole.ROLE_MENTOR);
+    }
+
     //TODO : loginUserId로 변경
     public Long getLoginMemberId() {
         try {

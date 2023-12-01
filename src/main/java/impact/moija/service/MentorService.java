@@ -98,6 +98,8 @@ public class MentorService {
             );
         }
 
+        userService.addMentorRole();
+
         return PkResponseDto.of(mentor.getId());
     }
 

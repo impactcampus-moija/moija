@@ -14,6 +14,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
+@PreAuthorize("hasAnyRole('USER')")
 public class MentorController {
 
     private final MentorService mentorService;
@@ -59,6 +61,7 @@ public class MentorController {
     }
 
     @PutMapping("/mentors/{mentorId}")
+    @PreAuthorize("hasAnyRole('MENTOR')")
     public BaseResponse<PkResponseDto> updateMentor(@RequestPart MentorRequestDto mentor,
                                                     @RequestPart(required = false) MultipartFile image,
                                                     @PathVariable Long mentorId) {
@@ -67,6 +70,7 @@ public class MentorController {
     }
 
     @DeleteMapping("/mentors/{mentorId}")
+    @PreAuthorize("hasAnyRole('MENTOR')")
     public BaseResponse<Void> deleteMentor(@PathVariable Long mentorId) {
         mentorService.deleteMentor(mentorId);
         return BaseResponse.ok();
@@ -78,12 +82,14 @@ public class MentorController {
     }
 
     @PatchMapping("/mentors/{mentorId}/activate")
+    @PreAuthorize("hasAnyRole('MENTOR')")
     public BaseResponse<PkResponseDto> activateMentor(@PathVariable Long mentorId) {
         PkResponseDto id = mentorService.activateMentor(mentorId);
         return BaseResponse.ok(id);
     }
 
     @PatchMapping("/mentors/{mentorId}/deactivate")
+    @PreAuthorize("hasAnyRole('MENTOR')")
     public BaseResponse<PkResponseDto> deactivateMentor(@PathVariable Long mentorId) {
         PkResponseDto id = mentorService.deactivateMentor(mentorId);
         return BaseResponse.ok(id);
@@ -91,6 +97,7 @@ public class MentorController {
 
     // TODO : 파일 분리
     @PostMapping("/mentors/{mentorId}/reviews")
+    @PreAuthorize("hasAnyRole('INDEPENDENCE')")
     public BaseResponse<PkResponseDto> createMentorReview(@PathVariable Long mentorId,
                                                           @RequestBody MentoringReviewRequestDto review) {
         PkResponseDto id = mentorService.createMentorReview(mentorId, review);
