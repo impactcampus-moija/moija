@@ -87,6 +87,7 @@ main{
     margin-top: 4.5rem;
 }
 .mentoring-submit-application button{
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -168,6 +169,7 @@ main{
     font-weight: 400;
 }
 .upload-certification-image{
+    cursor: pointer;
     color:#FFF;
     font-size:0.9375rem;
     font-weight: 500;

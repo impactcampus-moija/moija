@@ -52,6 +52,7 @@ main{
     padding:2.31rem 2.22rem;
 }
 .application-status-list-bold-font{
+    cursor: pointer;
     color: #181818;
     font-size: 1.25rem;
     font-weight: 700;
@@ -63,6 +64,7 @@ main{
     font-weight: 350;
 }
 .application-status-orange-btn, .application-status-white-btn{
+    cursor: pointer;
     display:flex;
     gap:0.62rem;
     padding:0.38rem 1rem;
@@ -136,6 +138,7 @@ main{
     margin-top: 1.75rem;
 }
 .mentors-info-container{
+    cursor: pointer;
     display:flex;
     gap:1.5rem;
     background-color: #FFF;
@@ -212,6 +215,7 @@ main{
     letter-spacing: -0.01875rem;
 }
 .be-mentee{
+    cursor: pointer;
     display:flex;
     padding: 0.75em 1.5rem;
     justify-content: center;

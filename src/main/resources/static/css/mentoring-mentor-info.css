@@ -108,6 +108,7 @@ main{
     gap: 0.75rem;
 }
 .mentoring-profile-orange-btn, .mentoring-profile-white-btn{
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,6 +133,7 @@ main{
     gap:0.69rem;
 }
 .mentoring-profile-short-white-btn{
+    cursor: pointer;
     color:#969696;
     font-size: 1rem;
     font-weight: 500;
@@ -220,6 +222,7 @@ main{
     gap:1rem;
 }
 .mentoring-review{
+    cursor: pointer;
     width:10rem;
     height: 12.25rem;
     background-color: #FFF;

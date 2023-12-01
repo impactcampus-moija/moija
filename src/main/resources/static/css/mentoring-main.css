@@ -45,6 +45,7 @@ body{
     letter-spacing: -0.01125rem;
 }
 .banner-button-orange{
+    cursor: pointer;
     color:#FFF;
     text-align:center;
     font-size:1.25rem;
@@ -57,6 +58,7 @@ body{
     border-radius: 1.5rem;
 }
 .banner-button-white{
+    cursor: pointer;
     color:#5D5D5D;
     text-align: center;
     font-size: 1.25rem;
@@ -97,6 +99,7 @@ body{
     gap:0.625rem;
 }
 .mentor-search-category-check{
+    cursor: pointer;
     text-align: center;
     color:#FFF;
     font-size:1rem;
@@ -108,6 +111,7 @@ body{
     background-color: #023047;
 }
 .mentor-search-category{
+    cursor: pointer;
     color:#023047;
     text-align: center;
     font-size: 1rem;
@@ -162,6 +166,7 @@ body{
 
 
 .mentor-search-mentor-div{
+    cursor: pointer;
     width:14.5625rem;
     border-radius: 1.5rem;
     border-radius: 1.5rem;

@@ -89,6 +89,7 @@ main{
     margin-top: 4.5rem;
 }
 .mentoring-submit-application button{
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
