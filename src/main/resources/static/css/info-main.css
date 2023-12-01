@@ -47,6 +47,7 @@ main{
 }
 
 .banner-left-btn-container button{
+    cursor: pointer;
     color:#FFF;
     font-size:1.25rem;
     letter-spacing: -0.0125rem;
@@ -100,6 +101,7 @@ main{
     gap:1.25rem;
 }
 .policy-info-li{
+    cursor: pointer;
     width: 19.0625rem;
     height: 15rem;
     border-radius: 1.875rem;
@@ -154,6 +156,7 @@ main{
     gap:0.62rem;
 }
 .policy-category-container button{
+    cursor: pointer;
     text-align: center;
     font-size: 0.9375rem;
     

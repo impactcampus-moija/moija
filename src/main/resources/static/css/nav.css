@@ -26,7 +26,6 @@
 .nav-left{
     display: flex;
     align-items: center;
-    gap: 6.1875rem;
 }
 
 .nav-logo-img{
@@ -88,19 +87,28 @@
     line-height: normal;
 }
 
-.nav-user{
+.nav-user-login{
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 3.2rem;
 }
 
+.nav-user-logout{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.56rem;
+}
+
 .nav-log-in a{
     color: #181818;
     text-align: center;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
+}
+
+.nav-user-logout a{
+    color: #181818;
 }
 
 .nav-sign-up{
@@ -119,4 +127,35 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+}
+
+#login-wrap{
+    display: none;
+    margin-left: 6.1875rem;
+}
+
+#logout-wrap{
+    display: flex;
+    margin-left: 6.1875rem;
+}
+
+
+.login-user{
+    color: #181818;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.login-user b{
+    cursor: pointer;
+    text-decoration-line: underline;
+}
+
+.nav-logout{
+    color: #181818;
+    text-align: center;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    text-decoration-line: underline;
 }

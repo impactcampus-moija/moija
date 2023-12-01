@@ -96,10 +96,12 @@ main{
     border-radius: 0.625rem;
 }
 .mentoring-accpet-orange-btn{
+    cursor: pointer;
     color:#FFF;
     background-color: #FB9119;
 }
 .mentoring-accpet-white-btn{
+    cursor: pointer;
     background-color: #FFF;
     color: #969696;
     border: 1.1px solid #969696;

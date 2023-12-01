@@ -97,6 +97,7 @@ main{
     align-items: center;
 }
 .info-detail-link-btn button{
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
