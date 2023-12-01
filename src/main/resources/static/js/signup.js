@@ -45,6 +45,8 @@ function updateDays(){
     }
 }
 
+selectElement_month.addEventListener('change', updateDays);
+
 //버튼 누르면 다음 페이지로
 const container1 = document.getElementById('signup-container-1');
 const container2 = document.getElementById('signup-container-2');
