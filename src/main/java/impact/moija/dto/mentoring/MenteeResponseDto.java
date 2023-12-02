@@ -23,7 +23,7 @@ public class MenteeResponseDto {
                 .id(mentee.getId())
                 .name(user.getNickname())
                 .email(user.getEmail())
-                .age(user.getBirthDay())
+                .age(user.getBirthday())
                 .phone(mentee.getPhone())
                 .brief(mentee.getBrief())
                 .content(mentee.getContent())

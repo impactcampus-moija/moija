@@ -2,6 +2,7 @@ package impact.moija.domain.policy;
 
 import impact.moija.domain.common.BaseTimeEntity;
 import impact.moija.domain.user.Location;
+import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import lombok.AccessLevel;
@@ -41,6 +42,7 @@ public class Policy extends BaseTimeEntity {
 
     String introduction;
 
+    @Column(columnDefinition = "TEXT")
     String content;
 
     String age;
