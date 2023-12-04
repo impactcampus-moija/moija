@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <link href="../css/mentoring-activity-form.css" rel='stylesheet'>
+    <link href="../css/footer.css" rel='stylesheet'>
+    <link href="../css/nav.css" rel="stylesheet">
+    <title>모두 이제 자립 - 모이자</title>
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-wrap">
+        <div class="nav-logo">
+            <img class="nav-logo-img" src="../src/nav_logo.png">
+        </div>
+        <div class="nav-left">
+            <ul class="nav-menu">
+                <li class="nav-menu-category"><a href="">멘토링</a>
+                </li>
+                <li class="nav-menu-category"><a href="">정보</a></li>
+                <li class="nav-menu-category"><a href="">커뮤니티</a></li>
+            </ul>
+
+            <ul id="login-wrap" class="nav-user-login">
+                <li class="nav-log-in"><a href="">Log in</a></li>
+                <li class='nav-sign-up'><a href="">Sign up</a></li>
+            </ul>
+
+            <ul id="logout-wrap" class="nav-user-logout">
+                <li class="login-user"><a href="">자립 1년차 <b>모이자</b>님</a></li>
+                <li class='nav-logout'><a href="">logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<main>
+    <div class='mentoring-write-application'>
+        <div class='mentoring-write-application-title'>
+            <p>멘토링 모집 신청서</p>
+        </div>
+        <div class='mentoring-write-application-container'>
+            <div class='mentoring-write-application-upper-container'>
+                <div class='application-write-aline'>
+                    <p class='application-question-text'>해당 회차의 진행 날짜와 시간을 입력해 주세요.</p>
+                    <div class="datetime-question-container">
+                        <input class='datetime-text-input' type='text' placeholder='yyyy'>
+                        년&nbsp;&nbsp;&nbsp;
+                        <input class='datetime-text-input' type='text' placeholder='mm'>
+                        월&nbsp;&nbsp;&nbsp;
+                        <input class='datetime-text-input' type='text' placeholder='dd'>
+                        일&nbsp;&nbsp;&nbsp;
+                        <input class='datetime-text-input' type='text' placeholder='hh'>
+                        시&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+                        <input class='datetime-text-input' type='text' placeholder='hh'>
+                        시&nbsp;&nbsp;&nbsp;
+                    </div>
+                </div>
+                <div class='application-write-aline'>
+                    <p class='application-question-text'>해당 회차의 온/오프라인 여부를 알려주세요</p>
+                    <input class='application-input-text' type='text' placeholder="온/오프라인 여부">
+                </div>
+            </div>
+            <div class='mentoring-write-application-lower-container'>
+                <div class='application-write-aline'>
+                    <p class='question-text'>해당 회차의 멘토링 주제를 입력해 주세요.</p>
+                    <textarea id='application-write-aline'></textarea>
+                </div>
+                <div class='application-write-free'>
+                    <p class='question-text'>해당 회차의 멘토링 활동 내용을 작성해 주세요.</p>
+                    <textarea id='application-write-free-job'></textarea>
+                </div>
+                <div class='application-write-free'>
+                    <p class='question-text'>멘토링 관련 문의 및 건의사항이 있다면 작성해 주세요.</p>
+                    <textarea id='application-write-free-content'></textarea>
+                </div>
+            </div>
+        </div>
+        <div class='mentoring-submit-application'>
+            <a href="mentoring-mentee-report.html">
+                <button>활동 기록 완료</button>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class='left-footer'>
+            <p class='bold-footer'>임팩트 캠퍼스 IT 서비스 공모전 출품작</p>
+            <p class='light-footer'>프론트엔드 | 신민경 조유진 백엔드 | 최세민 박민수</p>
+        </div>
+        <div class='right-footer'>
+            <img class='footerlogo' src='../src/footer-logo.png'>
+            <p class='bold-footer'>Copyright 2023. moija. All rights reserved.</p>
+        </div>
+    </footer>
+</main>
+</body>
