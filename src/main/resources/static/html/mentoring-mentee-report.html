@@ -1,0 +1,92 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href = "../css/mentoring-mentor-mentee-application.css" rel = 'stylesheet'>
+    <link href = "../css/mentoring-application-mentor-accpet.css" rel = 'stylesheet'>
+    <link href = "../css/footer.css" rel = 'stylesheet'>
+    <link href = "../css/nav.css" rel = "stylesheet">
+    <title>모두 이제 자립 - 모이자</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-wrap">
+            <div class="nav-logo">
+                <img class="nav-logo-img" src="../src/nav_logo.png">
+            </div>
+            <div class="nav-left">
+                <ul class="nav-menu">
+                    <li class="nav-menu-category"><a href="">멘토링</a>
+                      </li>
+                    <li class="nav-menu-category"><a href="">정보</a></li>
+                    <li class="nav-menu-category"><a href="">커뮤니티</a></li>
+                </ul>
+                
+                <ul id="login-wrap" class = "nav-user-login">
+                        <li class = "nav-log-in"><a href="">Log in</a></li>
+                        <li class = 'nav-sign-up'><a href="">Sign up</a></li>
+                </ul>
+                
+                <ul id = "logout-wrap" class = "nav-user-logout">
+                        <li class = "login-user"><a href="">자립 1년차 <b>모이자</b>님</a></li>
+                        <li class = 'nav-logout'><a href="">logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class = 'mentoring-mentor-mentee-application-page'>
+            <div class = 'mentor-accept-title'>
+                <h3>멘토링 활동 기록</h3>
+            </div>
+            <div class = 'mentoring-mentor-mentee-application-upper-container'>
+                <div class = 'mentoring-mentee-info-title'>
+                    <p class = 'mentoring-mentee-info-title-bold'>멘토링 활동 기록 요약</p>
+                    <p class = 'mentoring-mentee-info-title-light'>멘토링 활동 1회차 기록</p>
+                </div>
+                <div class = 'mentoring-mentee-info-container'>
+                    <div class = 'mentoring-mentee-info-li'>
+                        <p class = 'mentoring-mentee-info-bold'>주제</p>
+                        <p class = 'mentoring-mentee-info-light'>교육</p>
+                    </div>
+                    <div class = 'mentoring-mentee-info-li'>
+                        <p class = 'mentoring-mentee-info-bold'>활동 시간</p>
+                        <p class = 'mentoring-mentee-info-light'>2023.12.02 15:00 ~ 18:00</p>
+                    </div>
+                    <div class = 'mentoring-mentee-info-li'>
+                        <p class = 'mentoring-mentee-info-bold'>온오프라인</p>
+                        <p class = 'mentoring-mentee-info-light'>온라인</p>
+                    </div>
+                </div>
+            </div>
+            <div id = 'mentor-accept-container-1' class = 'mentoring-application-mentor-accept-lower-container'>
+                <p class = 'mentoring-accept-question'>멘토링 활동이 위와 같이 진행 되었나요?</p>
+                <div class = 'mentoring-accpet-btn-container'>
+                    <button id = 'agree-mentoring' class= 'mentoring-accpet-orange-btn'>
+                        <img  src = '../src/mentor-accept-btn.png'>
+                        <p>네, 위와 같이 진행 되었습니다.</p>
+                    </button>
+                    <button id = 'reject-mentoring' class= 'mentoring-accpet-white-btn'>
+                        <img src = '../src/mentor-reject-btn.png'>
+                        <p>아니오, 진행 사항과 다릅니다.</p>
+                    </button>
+                </div>
+            </div>
+        
+        </div>
+        <footer>
+            <div class = 'left-footer'>
+                <p class = 'bold-footer'>임팩트 캠퍼스 IT 서비스 공모전 출품작</p>
+                <p class = 'light-footer'>프론트엔드 | 신민경 조유진  백엔드 | 최세민 박민수</p>
+            </div>
+            <div class = 'right-footer'>
+                <img class = 'footerlogo' src = '../src/footer-logo.png'>
+                <p class = 'bold-footer'>Copyright 2023. moija. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src = '../js/mentoring-application-mentor-accpet.js'></script>
+</body>
