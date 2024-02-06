@@ -1,8 +1,7 @@
 package impact.moija.domain.user;
 
 import impact.moija.domain.common.BaseTimeEntity;
-import impact.moija.domain.mentoring.Mentee;
-import impact.moija.domain.mentoring.Mentor;
+import impact.moija.domain.mentoring.MentoringRecruitment;
 import java.util.List;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -26,7 +25,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -71,12 +69,6 @@ public class User extends BaseTimeEntity implements UserDetails {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user")
     RefreshToken refreshToken;
 
-
-    @OneToOne(mappedBy = "user")
-    Mentor mentor;
-
-    @OneToMany(mappedBy = "user")
-    List<Mentee> mentees;
 
     public String calculateIndependenceStatus() {
 //        int currentYear = Year.now().getValue();

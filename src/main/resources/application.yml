@@ -1,4 +1,46 @@
 spring:
+  profiles:
+    include: secret
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+jwt:
+  secret-key:
+    access: 9d1c06fbfe379a638f537ac78ef53cacf7b343ac339321bfdf2869dddab071d8cf6e66573c20622551c749c62af38c9a99665fe4ac383871b16572b6947176ae
+    refresh: 1d6cb23d1d53c959c5a405203c3ad5bf2d80992c8214324af144886d00086bacb38bb018e32267107a50f407f6c67cb9bf2e2e86243796fe15f656d2da77bd30
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  # Datasource
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=1
+    username: h2test
+    password: h2test
+  # JPA
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  # Datasource
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/moija?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
@@ -18,14 +60,3 @@ spring:
       hibernate.format_sql: true
       dialect: org.hibernate.dialect.MySQL8InnoDBDialect
 
-  profiles:
-    include: secret
-
-logging:
-  level:
-    org.hibernate.SQL: debug
-
-jwt:
-  secret-key:
-    access: 9d1c06fbfe379a638f537ac78ef53cacf7b343ac339321bfdf2869dddab071d8cf6e66573c20622551c749c62af38c9a99665fe4ac383871b16572b6947176ae
-    refresh: 1d6cb23d1d53c959c5a405203c3ad5bf2d80992c8214324af144886d00086bacb38bb018e32267107a50f407f6c67cb9bf2e2e86243796fe15f656d2da77bd30
