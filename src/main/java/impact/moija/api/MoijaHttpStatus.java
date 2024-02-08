@@ -23,6 +23,7 @@ public enum MoijaHttpStatus {
     INVALID_MENTOR_TAG(40004, HttpStatus.BAD_REQUEST, "올바르지 않은 멘토링 태그입니다."),
     DUPLICATE_MENTEE(40005, HttpStatus.BAD_REQUEST, "해당 멘토에게 중복 지원하였습니다."),
     INVALID_MENTORING_STATUS(40006, HttpStatus.BAD_REQUEST, "올바르지 않은 멘토링 상태입니다."),
+    ALREADEY_INDPENDENCE(40007, HttpStatus.BAD_REQUEST, "이미 자립 청소년 인증 상태입니다."),
     /**
      * 401
      */
@@ -42,18 +43,20 @@ public enum MoijaHttpStatus {
     NOT_FOUND_IMAGE(40401, HttpStatus.NOT_FOUND, "이미지가 존재하지 않습니다."),
     NOT_FOUND_POST(40402, HttpStatus.NOT_FOUND, "게시물이 존재하지 않습니다."),
     NOT_FOUND_COMMENT(40403, HttpStatus.NOT_FOUND, "댓글이 존재하지 않습니다"),
+    NOT_FOUND_USER(40404, HttpStatus.NOT_FOUND, "회원이 존재하지 않습니다"),
+
 
     NOT_FOUND_MENTORING(40404, HttpStatus.NOT_FOUND, "멘토링이 존재하지 않습니다."),
     NOT_FOUND_TAG(40405, HttpStatus.NOT_FOUND, "태그가 존재하지 않습니다."),
     NOT_FOUND_MENTORING_REVIEW(40406, HttpStatus.NOT_FOUND, "멘토링 후기가 존재하지 않습니다."),
     NOT_FOUND_MENTOR(40407, HttpStatus.NOT_FOUND, "멘토가 존재하지 않습니다."),
     NOT_FOUND_MENTEE(40408, HttpStatus.NOT_FOUND, "멘티가 존재하지 않습니다."),  
+
     /**
      * 500
      */
     FAIL_CONVERT_XML(500, HttpStatus.INTERNAL_SERVER_ERROR, "XML 데이터 변환에 실패했습니다."),
-    FAIL_UPLOAD_S3(500, HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다."),
-    ;
+    FAIL_UPLOAD_S3(500, HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다.");
 
     private final int statusCode;
     private final HttpStatus httpStatus;

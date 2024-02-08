@@ -2,14 +2,17 @@ package impact.moija.service;
 
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
+import impact.moija.domain.user.Independence;
 import impact.moija.domain.user.RefreshToken;
 import impact.moija.domain.user.User;
 import impact.moija.domain.user.UserRole;
 import impact.moija.dto.jwt.TokenResponseDto;
 import impact.moija.dto.user.AuthRequestDto;
+import impact.moija.dto.user.IndependenceRequestDto;
 import impact.moija.dto.user.SignupRequestDto;
 import impact.moija.jwt.TokenProvider;
 import impact.moija.jwt.TokenType;
+import impact.moija.repository.user.IndependenceRepository;
 import impact.moija.repository.user.RefreshTokenRepository;
 import impact.moija.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,19 +26,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.HashSet;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @Transactional
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final IndependenceRepository independenceRepository;
     private final RefreshTokenRepository refreshTokenRepository;
 
     private final TokenProvider tokenProvider;
@@ -118,22 +121,16 @@ public class UserService implements UserDetailsService {
         return tokenProvider.generateTokenResponse(TokenType.ACCESS_TOKEN, user);
     }
 
-    public void addIndependenceRole() {
+    @Transactional
+    public void certificateIndependence(IndependenceRequestDto independenceRequestDto) {
         Long loginMemberId = getLoginMemberId();
-        User user = userRepository.findById(loginMemberId).orElseThrow(() ->
-                new ApiException(MoijaHttpStatus.UNAUTHORIZED)
-        );
+        independenceRepository.findByUserId(loginMemberId)
+                .ifPresent(independence -> {
+                    throw new ApiException(MoijaHttpStatus.ALREADEY_INDPENDENCE);
+                });
 
-        user.addRole(UserRole.ROLE_INDEPENDENCE);
-    }
-
-    public void addMentorRole() {
-        Long loginMemberId = getLoginMemberId();
-        User user = userRepository.findById(loginMemberId).orElseThrow(() ->
-                new ApiException(MoijaHttpStatus.UNAUTHORIZED)
-        );
-
-        user.addRole(UserRole.ROLE_MENTOR);
+        Independence independence = independenceRequestDto.toEntity(loginMemberId);
+        independenceRepository.save(independence);
     }
 
     //TODO : loginUserId로 변경

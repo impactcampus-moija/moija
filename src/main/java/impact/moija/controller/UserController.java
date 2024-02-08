@@ -5,16 +5,18 @@ import impact.moija.domain.user.Location;
 import impact.moija.domain.user.User;
 import impact.moija.dto.jwt.TokenResponseDto;
 import impact.moija.dto.user.AuthRequestDto;
+import impact.moija.dto.user.IndependenceRequestDto;
 import impact.moija.dto.user.SignupRequestDto;
 import impact.moija.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Set;
@@ -51,9 +53,9 @@ public class UserController {
         return BaseResponse.ok();
     }
 
-    @PutMapping("/users/independence-auth")
-    public BaseResponse<Void> authenticateIndependence() {
-        userService.addIndependenceRole();
+    @PostMapping("/users/independence-certificate")
+    public BaseResponse<Void> certificateIndependence(@RequestBody IndependenceRequestDto independenceRequestDto) {
+        userService.certificateIndependence(independenceRequestDto);
         return BaseResponse.ok();
     }
 }

@@ -34,4 +34,6 @@ public interface MentorRepository extends JpaRepository<Mentor, Long> {
             "on m = mr.mentor " +
             "where m.id = :mentorId")
     long countRecommendation(@Param("mentorId") Long mentorId);
+
+    Page<Mentor> findByActivateIsFalse(Pageable pageable);
 }

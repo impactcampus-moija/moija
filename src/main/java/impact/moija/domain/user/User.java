@@ -52,7 +52,6 @@ public class User extends BaseTimeEntity implements UserDetails {
     String password;
     String nickname;
     LocalDate birthday;
-    Integer independenceYear;
 
     @Enumerated(EnumType.STRING)
     Location location;
@@ -74,6 +73,9 @@ public class User extends BaseTimeEntity implements UserDetails {
 
     @OneToOne(mappedBy = "user")
     Mentor mentor;
+
+    @OneToOne(mappedBy = "user")
+    Independence independence;
 
     @OneToMany(mappedBy = "user")
     List<Mentee> mentees;

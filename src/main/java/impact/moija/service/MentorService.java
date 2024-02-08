@@ -78,7 +78,7 @@ public class MentorService {
                 User.builder()
                         .id(userService.getLoginMemberId())
                         .build()
-                , true
+                , false
         );
 
         if (file != null && !file.isEmpty()) {
@@ -97,8 +97,6 @@ public class MentorService {
                             .build()
             );
         }
-
-        userService.addMentorRole();
 
         return PkResponseDto.of(mentor.getId());
     }
