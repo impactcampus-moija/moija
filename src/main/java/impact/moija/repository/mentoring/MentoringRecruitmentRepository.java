@@ -20,4 +20,9 @@ public interface MentoringRecruitmentRepository extends JpaRepository<MentoringR
     Page<MentoringRecruitment> findByCategoryAndKeyword(Pageable pageable,
                                                         @Param("category") String category,
                                                         @Param("keyword") String keyword);
+
+    @Query("select count(m) from MentoringRecruitment m "
+            + "join fetch MentorRecommendation mr on m = mr.recruitment "
+            + "where m.id = :recruitmentId ")
+    long countRecommendation(@Param("recruitmentId") Long recruitmentId);
 }
