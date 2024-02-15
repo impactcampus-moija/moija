@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class MentoringCategoryValidator implements ConstraintValidator<Category, String> {
+public class MentoringCategoryValidator implements ConstraintValidator<CheckMentoringCategory, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
