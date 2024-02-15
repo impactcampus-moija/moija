@@ -11,13 +11,16 @@ import static org.mockito.Mockito.verify;
 
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
+import impact.moija.domain.mentoring.MentorRecommendation;
 import impact.moija.domain.mentoring.MentoringRecruitment;
 import impact.moija.domain.user.User;
 import impact.moija.dto.common.PageResponse;
 import impact.moija.dto.common.PkResponseDto;
+import impact.moija.dto.common.RecommendationResponseDto;
 import impact.moija.dto.mentoring.MentoringRecruitmentDetailResponseDto;
 import impact.moija.dto.mentoring.MentoringRecruitmentListResponseDto;
 import impact.moija.dto.mentoring.MentoringRecruitmentRequestDto;
+import impact.moija.repository.mentoring.MentorRecommendationRepository;
 import impact.moija.repository.mentoring.MentoringRecruitmentRepository;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -40,6 +43,8 @@ public class MentoringRecruitmentServiceTest {
     private MentoringRecruitmentService target;
     @Mock
     private MentoringRecruitmentRepository mentoringRecruitmentRepository;
+    @Mock
+    private MentorRecommendationRepository mentorRecommendationRepository;
     @Mock
     private UserService userService;
     @Mock
@@ -101,11 +106,13 @@ public class MentoringRecruitmentServiceTest {
         // given
         Pageable pageable = PageRequest.of(0, 8);
 
-        doReturn(new PageImpl<>(List.of(
-                MentoringRecruitment.builder().category("일자리,주거").brief("구직활동에 도움을 드릴게요").activate(true).build(),
-                MentoringRecruitment.builder().category("일자리,주거").brief("취직하고 싶으신 분").activate(true).build(),
-                MentoringRecruitment.builder().category("주거").brief("부동산 서류 작성 도움을 드릴게요").activate(true).build()
-        ), pageable, 4))
+        doReturn(new PageImpl<>(
+                List.of(
+                        MentoringRecruitment.builder().category("일자리,주거").brief("구직활동에 도움을 드릴게요").activate(true).build(),
+                        MentoringRecruitment.builder().category("일자리,주거").brief("취직하고 싶으신 분").activate(true).build(),
+                        MentoringRecruitment.builder().category("주거").brief("부동산 서류 작성 도움을 드릴게요").activate(true).build()
+                ), pageable, 4)
+        )
                 .when(mentoringRecruitmentRepository)
                 .findByCategoryAndKeyword(
                     any(PageRequest.class),
@@ -295,6 +302,50 @@ public class MentoringRecruitmentServiceTest {
         target.deleteMentoringRecruitment(RECRUITMENT_ID);
 
         // then
+    }
+
+    @Test
+    public void 멘토링모집서좋아요성공() {
+        // given
+        doReturn(USER_ID)
+                .when(userService)
+                .getLoginMemberId();
+        doReturn(Optional.empty())
+                .when(mentorRecommendationRepository)
+                .findByUserIdAndRecruitmentId(anyLong(), anyLong());
+        doReturn(1L)
+                .when(mentoringRecruitmentRepository)
+                .countRecommendation(anyLong());
+        doReturn(Optional.of(MentoringRecruitment.builder().build()))
+                .when(mentoringRecruitmentRepository)
+                .findById(anyLong());
+        // when
+        RecommendationResponseDto result = target.mentorRecommendation(RECRUITMENT_ID);
+
+        // then
+        assertThat(result.isHasRecommend()).isTrue();
+    }
+
+    @Test
+    public void 멘토링모집서좋아요취소성공() {
+        doReturn(USER_ID)
+                .when(userService)
+                .getLoginMemberId();
+        doReturn(Optional.of(MentorRecommendation.builder().build()))
+                .when(mentorRecommendationRepository)
+                .findByUserIdAndRecruitmentId(anyLong(), anyLong());
+        doReturn(1L)
+                .when(mentoringRecruitmentRepository)
+                .countRecommendation(anyLong());
+        doReturn(Optional.of(MentoringRecruitment.builder().build()))
+                .when(mentoringRecruitmentRepository)
+                .findById(anyLong());
+
+        // when
+        RecommendationResponseDto result = target.mentorRecommendation(RECRUITMENT_ID);
+
+        // then
+        assertThat(result.isHasRecommend()).isFalse();
     }
 
     private MentoringRecruitmentRequestDto updateDto() {

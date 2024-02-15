@@ -2,8 +2,10 @@ package impact.moija.repository;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import impact.moija.domain.mentoring.MentorRecommendation;
 import impact.moija.domain.mentoring.MentoringRecruitment;
 import impact.moija.domain.user.User;
+import impact.moija.repository.mentoring.MentorRecommendationRepository;
 import impact.moija.repository.mentoring.MentoringRecruitmentRepository;
 import impact.moija.repository.user.UserRepository;
 import java.util.List;
@@ -18,9 +20,12 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 @DataJpaTest
 public class MentoringRecruitmentRepositoryTest {
+    private final Long RECRUITMENT_ID = 1L;
     private final Long USER_ID = 1L;
     @Autowired
-    private MentoringRecruitmentRepository target;
+    private MentoringRecruitmentRepository recruitmentRepository;
+    @Autowired
+    private MentorRecommendationRepository recommendationRepository;
     @Autowired
     private UserRepository userRepository;
 
@@ -31,7 +36,7 @@ public class MentoringRecruitmentRepositoryTest {
         final MentoringRecruitment recruitment = mentoringRecruitment(user);
 
         // when
-        final MentoringRecruitment result = target.save(recruitment);
+        final MentoringRecruitment result = recruitmentRepository.save(recruitment);
 
         // then
         assertThat(result.getId()).isNotNull();
@@ -47,8 +52,8 @@ public class MentoringRecruitmentRepositoryTest {
         final MentoringRecruitment recruitment = mentoringRecruitment(user);
 
         // when
-        target.save(recruitment);
-        final MentoringRecruitment result = target.findByUserId(USER_ID).orElse(null);
+        recruitmentRepository.save(recruitment);
+        final MentoringRecruitment result = recruitmentRepository.findByUserId(USER_ID).orElse(null);
 
         // then
         assertThat(result).isNotNull();
@@ -84,12 +89,12 @@ public class MentoringRecruitmentRepositoryTest {
                         .activate(false)
                         .build()
         );
-        List<MentoringRecruitment> save = target.saveAll(recruitments);
+        List<MentoringRecruitment> save = recruitmentRepository.saveAll(recruitments);
 
         Pageable pageable = PageRequest.of(0,8);
         // when
 
-        Page<MentoringRecruitment> result = target.findByCategoryAndKeyword(pageable, "일자리", "도움");
+        Page<MentoringRecruitment> result = recruitmentRepository.findByCategoryAndKeyword(pageable, "일자리", "도움");
 
         // then
         assertThat(result.getContent().size()).isEqualTo(1);
@@ -99,6 +104,28 @@ public class MentoringRecruitmentRepositoryTest {
         }
     }
 
+    @Test
+    public void 멘토링모집서추천개수조회(){
+        // given
+        List<User> users = userRepository.saveAll(List.of(
+                User.builder().id(1L).build(),
+                User.builder().id(2L).build(),
+                User.builder().id(3L).build()
+        ));
+
+        MentoringRecruitment recruitment = recruitmentRepository.save(
+                MentoringRecruitment.builder().id(RECRUITMENT_ID).build()
+        );
+
+        for (User user : users) {
+            recommendationRepository.save(MentorRecommendation.builder().user(user).recruitment(recruitment).build());
+        }
+
+        // when
+        long result = recruitmentRepository.countRecommendation(RECRUITMENT_ID);
+        // then
+        assertThat(result).isEqualTo(3L);
+    }
 
     private MentoringRecruitment mentoringRecruitment(User user) {
         return MentoringRecruitment.builder()
