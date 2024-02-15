@@ -32,16 +32,19 @@ public class MentoringRecruitment extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Column(nullable = false)
     String category;
 
+    @Column(nullable = false)
     String name;
 
     String imageUrl;
 
+    @Column(nullable = false)
     String brief;
-    @Column(columnDefinition = "TEXT")
+
     String introduction;
-    @Column(columnDefinition = "TEXT")
+
     String career;
 
     String occupation;

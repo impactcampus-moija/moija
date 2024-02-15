@@ -3,7 +3,7 @@ package impact.moija.dto.mentoring;
 import com.sun.istack.NotNull;
 import impact.moija.domain.mentoring.MentoringRecruitment;
 import impact.moija.domain.user.User;
-import impact.moija.validator.CheckMentoringCategory;
+import impact.moija.validator.Category;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MentoringRecruitmentRequestDto {
 
-    @CheckMentoringCategory
+    @Category
     String category;
     @NotNull
     String name;

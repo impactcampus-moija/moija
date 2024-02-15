@@ -2,16 +2,12 @@ package impact.moija.service;
 
 import impact.moija.api.ApiException;
 import impact.moija.api.MoijaHttpStatus;
-import impact.moija.domain.mentoring.MentorRecommendation;
 import impact.moija.domain.mentoring.MentoringRecruitment;
-import impact.moija.domain.user.User;
 import impact.moija.dto.common.PageResponse;
 import impact.moija.dto.common.PkResponseDto;
-import impact.moija.dto.common.RecommendationResponseDto;
 import impact.moija.dto.mentoring.MentoringRecruitmentDetailResponseDto;
 import impact.moija.dto.mentoring.MentoringRecruitmentListResponseDto;
 import impact.moija.dto.mentoring.MentoringRecruitmentRequestDto;
-import impact.moija.repository.mentoring.MentorRecommendationRepository;
 import impact.moija.repository.mentoring.MentoringRecruitmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class MentoringRecruitmentService {
 
     private final MentoringRecruitmentRepository mentoringRecruitmentRepository;
-    private final MentorRecommendationRepository mentorRecommendationRepository;
     private final UserService userService;
     private final ImageService imageService;
 
@@ -118,42 +113,5 @@ public class MentoringRecruitmentService {
         }
 
         mentoringRecruitmentRepository.delete(recruitment);
-    }
-
-    public RecommendationResponseDto mentorRecommendation(Long recruitmentId) {
-        Long loginUserId = userService.getLoginMemberId();
-        MentoringRecruitment recruitment = findMentoringRecruitment(recruitmentId);
-
-        MentorRecommendation recommendation = mentorRecommendationRepository
-                .findByUserIdAndRecruitmentId(recruitmentId, loginUserId).orElse(null);
-
-        if (recommendation == null) {
-            return createMentorRecommendation(recruitmentId, loginUserId);
-        }
-
-        return deleteMentorRecommendation(recruitmentId, recommendation);
-    }
-
-    private RecommendationResponseDto createMentorRecommendation(Long recruitmentId, Long userId) {
-        MentorRecommendation recommendation = MentorRecommendation.builder()
-                .recruitment(MentoringRecruitment.builder().id(recruitmentId).build())
-                .user(User.builder().id(userId).build())
-                .build();
-
-        mentorRecommendationRepository.save(recommendation);
-
-        return RecommendationResponseDto.builder()
-                .hasRecommend(true)
-                .recommendationCount(mentoringRecruitmentRepository.countRecommendation(recruitmentId))
-                .build();
-    }
-
-    private RecommendationResponseDto deleteMentorRecommendation(Long recruitmentId, MentorRecommendation recommendation) {
-        mentorRecommendationRepository.delete(recommendation);
-
-        return RecommendationResponseDto.builder()
-                .hasRecommend(false)
-                .recommendationCount(mentoringRecruitmentRepository.countRecommendation(recruitmentId))
-                .build();
     }
 }
