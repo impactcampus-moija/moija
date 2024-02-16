@@ -48,7 +48,6 @@ spring:
     username: root
     password: root
 
-
   jpa:
     open-in-view: true
     hibernate:

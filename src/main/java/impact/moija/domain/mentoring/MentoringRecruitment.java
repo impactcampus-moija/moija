@@ -69,4 +69,6 @@ public class MentoringRecruitment extends BaseTimeEntity {
     public void convertActivate() {
         this.activate = !this.activate;
     }
+
+    public void updateActivate(boolean activate) { this.activate = activate; }
 }

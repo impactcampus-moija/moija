@@ -19,10 +19,13 @@ public enum MoijaHttpStatus {
     INVALID_LOCATION_NAME(40001, HttpStatus.BAD_REQUEST, "올바르지 않은 않은 지역입니다."),
     INVALID_GENDER_NAME(40002, HttpStatus.BAD_REQUEST, "올바르지 않은 성별입니다."),
     INVALID_POST_CATEGORY(40003, HttpStatus.BAD_REQUEST, "올바르지 않은 게시물 카테고리입니다."),
+
     INVALID_MENTORING_APPLICATION(40004, HttpStatus.BAD_REQUEST, "올바르지 않은 멘토링 지원서 제출 입니다"),
     INVALID_MENTORING_REASON(40006, HttpStatus.BAD_REQUEST, "올바르지 않은 거절 사유입니다."),
     DUPLICATE_MENTORING_RECRUITMENT(40007, HttpStatus.BAD_REQUEST, "이미 작성한 멘토링 모집서가 있습니다."),
     DUPLICATE_MENTORING_APPLICATION(40008, HttpStatus.BAD_REQUEST, "해당 모집서에 제출한 지원서가 있습니다."),
+    ALREADEY_INDPENDENCE(40007, HttpStatus.BAD_REQUEST, "이미 자립 청소년 인증 상태입니다."),
+
     /**
      * 401
      */
@@ -42,17 +45,21 @@ public enum MoijaHttpStatus {
     NOT_FOUND_IMAGE(40401, HttpStatus.NOT_FOUND, "이미지가 존재하지 않습니다."),
     NOT_FOUND_POST(40402, HttpStatus.NOT_FOUND, "게시물이 존재하지 않습니다."),
     NOT_FOUND_COMMENT(40403, HttpStatus.NOT_FOUND, "댓글이 존재하지 않습니다"),
+    NOT_FOUND_USER(40404, HttpStatus.NOT_FOUND, "회원이 존재하지 않습니다"),
+
 
     NOT_FOUND_MENTORING(40404, HttpStatus.NOT_FOUND, "멘토링이 존재하지 않습니다."),
     NOT_FOUND_TAG(40405, HttpStatus.NOT_FOUND, "태그가 존재하지 않습니다."),
     NOT_FOUND_MENTORING_REVIEW(40406, HttpStatus.NOT_FOUND, "멘토링 후기가 존재하지 않습니다."),
     NOT_FOUND_MENTORING_RECRUITMENT(40407, HttpStatus.NOT_FOUND, "멘토링 모집서가 존재하지 않습니다."),
     NOT_FOUND_MENTORING_APPLICATION(40408, HttpStatus.NOT_FOUND, "멘토링 지원서가 존재하지 않습니다."),
+
     /**
      * 500
      */
     FAIL_CONVERT_XML(500, HttpStatus.INTERNAL_SERVER_ERROR, "XML 데이터 변환에 실패했습니다."),
     FAIL_UPLOAD_S3(500, HttpStatus.INTERNAL_SERVER_ERROR, "파일 업로드에 실패했습니다."), ;
+
 
     private final int statusCode;
     private final HttpStatus httpStatus;
