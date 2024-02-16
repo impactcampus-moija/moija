@@ -22,7 +22,7 @@ public enum MoijaHttpStatus {
     INVALID_MENTORING_APPLICATION(40004, HttpStatus.BAD_REQUEST, "올바르지 않은 멘토링 지원서 제출 입니다"),
     INVALID_MENTORING_REASON(40006, HttpStatus.BAD_REQUEST, "올바르지 않은 거절 사유입니다."),
     DUPLICATE_MENTORING_RECRUITMENT(40007, HttpStatus.BAD_REQUEST, "이미 작성한 멘토링 모집서가 있습니다."),
-    DUPLICATE_MENTORING_APPLICATION(40008, HttpStatus.BAD_REQUEST, "해당 모집서에 지원한 지원서가 있습니다."),
+    DUPLICATE_MENTORING_APPLICATION(40008, HttpStatus.BAD_REQUEST, "해당 모집서에 제출한 지원서가 있습니다."),
     /**
      * 401
      */

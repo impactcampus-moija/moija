@@ -47,7 +47,7 @@ public class MentoringRecruitmentService {
             throw new ApiException(MoijaHttpStatus.DUPLICATE_MENTORING_RECRUITMENT);
         }
 
-        MentoringRecruitment recruitment = mentoringRecruitmentRepository.save(dto.toEntity(loginUserId, true));
+        MentoringRecruitment recruitment = mentoringRecruitmentRepository.save(dto.toEntity(loginUserId, false));
 
         // dirty checking
         if (image != null && !image.isEmpty()) {

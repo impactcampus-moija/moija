@@ -24,4 +24,6 @@ public interface MentoringRecruitmentRepository extends JpaRepository<MentoringR
             + "join fetch MentorRecommendation mr on m = mr.recruitment "
             + "where m.id = :recruitmentId ")
     long countRecommendation(@Param("recruitmentId") Long recruitmentId);
+
+    Page<MentoringRecruitment> findByActivateIsFalse(Pageable pageable);
 }
