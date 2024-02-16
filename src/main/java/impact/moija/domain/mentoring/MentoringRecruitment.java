@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -32,26 +33,23 @@ public class MentoringRecruitment extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
     String category;
 
-    @Column(nullable = false)
     String name;
 
     String imageUrl;
 
-    @Column(nullable = false)
     String brief;
-
+    @Column(columnDefinition = "TEXT")
     String introduction;
-
+    @Column(columnDefinition = "TEXT")
     String career;
 
     String occupation;
 
     boolean activate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     User user;
 

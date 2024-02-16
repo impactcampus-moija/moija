@@ -147,4 +147,12 @@ public class MentoringApplicationService {
 
         return PkResponseDto.of(applicationId);
     }
+
+    public List<MentoringApplicationListResponseDto> getMyMentoringApplications() {
+        Long loginUserId = userService.getLoginMemberId();
+
+        List<MentoringApplication> applications = applicationRepository.findByUserId(loginUserId);
+
+        return applications.stream().map(MentoringApplicationListResponseDto::of).toList();
+    }
 }

@@ -410,4 +410,24 @@ public class MentoringApplicationServiceTest {
         assertThat(result.getId()).isEqualTo(RECRUITMENT_ID);
     }
 
+    @Test
+    public void 나의멘토링지원서목록조회성공() {
+        // given
+        doReturn(USER_ID)
+                .when(userService)
+                .getLoginMemberId();
+
+        doReturn(List.of(
+                MentoringApplication.builder().build(),
+                MentoringApplication.builder().build(),
+                MentoringApplication.builder().build()))
+                .when(applicationRepository)
+                .findByUserId(anyLong());
+
+        // when
+        List<MentoringApplicationListResponseDto> result = target.getMyMentoringApplications();
+
+        // then
+        assertThat(result.size()).isEqualTo(3);
+    }
 }

@@ -70,4 +70,35 @@ class MentoringApplicationRepositoryTest {
         assertThat(result.size()).isEqualTo(2);
     }
 
+    @Test
+    public void 나의멘토링지원서목록조회() {
+        // given
+        List<User> user = userRepository.saveAll(
+                List.of(
+                        User.builder().id(1L).build(),
+                        User.builder().id(2L).build()
+                )
+        );
+
+        List<MentoringRecruitment> recruitment = recruitmentRepository.saveAll(
+                List.of(
+                        MentoringRecruitment.builder().id(1L).build(),
+                        MentoringRecruitment.builder().id(2L).build()
+                )
+        );
+
+        applicationRepository.saveAll(
+                List.of(
+                        MentoringApplication.builder().id(1L).recruitment(recruitment.get(0)).user(user.get(0)).build(),
+                        MentoringApplication.builder().id(2L).recruitment(recruitment.get(0)).user(user.get(1)).build(),
+                        MentoringApplication.builder().id(3L).recruitment(recruitment.get(1)).user(user.get(0)).build()
+                )
+        );
+
+        // when
+        List<MentoringApplication> result = applicationRepository.findByUserId(1L);
+
+        // then
+        assertThat(result.size()).isEqualTo(2);
+    }
 }

@@ -19,4 +19,8 @@ public interface MentoringApplicationRepository extends JpaRepository<MentoringA
             + "where m.recruitment.id = :recruitmentId "
             + "and m.status = impact.moija.domain.mentoring.MentoringStatus.PENDING")
     List<MentoringApplication> findByRecruitmentIdAndStatusIsPending(@Param("recruitmentId") Long recruitmentId);
+
+    @Query("select m from MentoringApplication m "
+            + "where m.user.id = :userId")
+    List<MentoringApplication> findByUserId(@Param("userId") Long userId);
 }
