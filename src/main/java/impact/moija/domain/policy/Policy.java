@@ -38,21 +38,26 @@ public class Policy extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     Location location;
 
+    @Column(length = 1000)
     String name;
 
+    @Column(length = 1000)
     String introduction;
 
     @Column(columnDefinition = "TEXT")
     String content;
 
-    String age;
+    Integer minAge;
+    Integer maxAge;
 
     String major;
 
+    @Column(length = 1000)
     String employment;
 
     String special;
 
+    @Column(length = 1000)
     String period;
 
     String url;
