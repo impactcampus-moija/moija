@@ -5,6 +5,7 @@ import impact.moija.domain.user.Location;
 import impact.moija.domain.user.User;
 import impact.moija.dto.jwt.TokenResponseDto;
 import impact.moija.dto.user.AuthRequestDto;
+import impact.moija.dto.user.IndependenceRequestDto;
 import impact.moija.dto.user.SignupRequestDto;
 import impact.moija.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -51,9 +52,9 @@ public class AuthController {
         return BaseResponse.ok();
     }
 
-    @PutMapping("/users/independence-auth")
-    public BaseResponse<Void> authenticateIndependence() {
-        userService.addIndependenceRole();
+    @PostMapping("/users/independence-certificate")
+    public BaseResponse<Void> certificateIndependence(@RequestBody IndependenceRequestDto independenceRequestDto) {
+        userService.certificateIndependence(independenceRequestDto);
         return BaseResponse.ok();
     }
 }

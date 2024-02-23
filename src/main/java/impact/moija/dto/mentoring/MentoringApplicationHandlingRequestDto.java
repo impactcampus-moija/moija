@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MentoringApplicationHandlingRequestDto {
 
-    @CheckMentoringStatus(value = {"REFUSE, PROGRESS"})
+    @CheckMentoringStatus(value = {"REFUSE", "PROGRESS"})
     private MentoringStatus status;
     private String reason;
 }

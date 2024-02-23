@@ -71,11 +71,9 @@ public class MentoringRecruitmentControllerTest {
     @ParameterizedTest
     @MethodSource("invalidMentoringRecruitmentParameter")
     @WithMockCustomUser(email = "mentor@google.com", password = "password", roles = {"ROLE_USER", "ROLE_MENTOR"})
-    public void 멘토링모집서등록실패_잘못된파라미터() throws Exception {
+    public void 멘토링모집서등록실패_잘못된파라미터(MentoringRecruitmentRequestDto requestDto) throws Exception {
         // given
         final String url = "/api/mentoring/recruitment";
-
-        MentoringRecruitmentRequestDto requestDto = invalidRecruitment();
 
         MockMultipartFile recruitment = new MockMultipartFile("recruitment",
                 null,
@@ -93,15 +91,6 @@ public class MentoringRecruitmentControllerTest {
         resultActions.andDo(print())
                 .andExpect(status().isBadRequest());
     }
-    private MentoringRecruitmentRequestDto invalidRecruitment() {
-        return MentoringRecruitmentRequestDto.builder()
-                .name("멘토1")
-                .brief("한줄 소개1")
-                .career("경력1")
-                .introduction("멘토링 소개1")
-                .occupation("직업")
-                .build();
-    }
     private static Stream<Arguments> invalidMentoringRecruitmentParameter() {
         return Stream.of(
                 Arguments.of(MentoringRecruitmentRequestDto.builder()
@@ -113,7 +102,7 @@ public class MentoringRecruitmentControllerTest {
                         .occupation("직업")
                         .build()),
                 Arguments.of(MentoringRecruitmentRequestDto.builder()
-                        .category("주거,,일자리")
+                        .category("주거, ,일자리")
                         .name("멘토1")
                         .brief("한줄 소개1")
                         .career("경력1")

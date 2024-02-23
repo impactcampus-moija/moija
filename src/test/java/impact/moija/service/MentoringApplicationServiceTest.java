@@ -140,15 +140,20 @@ public class MentoringApplicationServiceTest {
     @Test
     public void 대기멘토링지원서목록조회성공() {
         // given
-        doReturn(Optional.of(MentoringRecruitment.builder().id(RECRUITMENT_ID).build()))
+        doReturn(USER_ID)
+                .when(userService)
+                .getLoginMemberId();
+        doReturn(Optional.of(MentoringRecruitment.builder()
+                .id(RECRUITMENT_ID)
+                .user(User.builder().id(USER_ID).build())
+                .build()))
                 .when(recruitmentRepository)
-                .findById(RECRUITMENT_ID);
+                .findById(anyLong());
         doReturn(
                 List.of(
-                        MentoringApplication.builder().build(),
-                        MentoringApplication.builder().build(),
-                        MentoringApplication.builder().build()
-                        )
+                        MentoringApplication.builder().id(1L).user(User.builder().nickname("user1").build()).build(),
+                        MentoringApplication.builder().id(2L).user(User.builder().nickname("user2").build()).build(),
+                        MentoringApplication.builder().id(3L).user(User.builder().nickname("user3").build()).build())
         )
                 .when(applicationRepository)
                 .findByRecruitmentIdAndStatusIsPending(anyLong());
@@ -193,6 +198,11 @@ public class MentoringApplicationServiceTest {
     @Test
     public void 멘토링지원서상세조회실패_멘토링지원서없음() {
         // given
+        doReturn(Optional.of(MentoringRecruitment.builder()
+                .id(RECRUITMENT_ID)
+                .build()))
+                .when(recruitmentRepository)
+                .findById(anyLong());
         doReturn(Optional.empty())
                 .when(applicationRepository)
                 .findById(anyLong());
@@ -233,13 +243,21 @@ public class MentoringApplicationServiceTest {
     @Test
     public void 멘토링지원서상세조회성공() {
         // given
+        doReturn(Optional.of(MentoringRecruitment.builder()
+                .id(RECRUITMENT_ID)
+                .user(User.builder().id(USER_ID).birthday(LocalDate.now()).build())
+                .build()))
+                    .when(recruitmentRepository)
+                    .findById(anyLong());
         doReturn(Optional.of(MentoringApplication.builder()
             .id(APPLICATION_ID)
-            .user(User.builder().id(USER_ID).birthday(LocalDate.now()).build())
+            .user(User.builder().id(2L).birthday(LocalDate.now()).build())
             .build()))
                 .when(applicationRepository)
                 .findById(anyLong());
-
+        doReturn(USER_ID)
+                .when(userService)
+                .getLoginMemberId();
         // when
         final MentoringApplicationDetailResponseDto result = target
                 .getMentoringApplication(RECRUITMENT_ID, APPLICATION_ID);
@@ -263,7 +281,7 @@ public class MentoringApplicationServiceTest {
 
         // when
         final ApiException result = assertThrows(ApiException.class,
-                () -> target.updateMentoringApplication(anyLong(), any(MentoringApplicationRequestDto.class)));
+                () -> target.updateMentoringApplication(APPLICATION_ID, createDto()));
 
         // then
         assertThat(result.getStatus()).isEqualTo(MoijaHttpStatus.FORBIDDEN);
@@ -318,9 +336,6 @@ public class MentoringApplicationServiceTest {
     @Test
     public void 멘토링지원서삭제실패_존재하지않음() {
         // given
-        doReturn(USER_ID)
-                .when(userService)
-                .getLoginMemberId();
         doReturn(Optional.empty())
                 .when(applicationRepository)
                 .findById(anyLong());
@@ -340,7 +355,7 @@ public class MentoringApplicationServiceTest {
                 .getLoginMemberId();
 
         doReturn(Optional.of(
-                MentoringRecruitment.builder()
+                MentoringApplication.builder()
                         .user(User.builder().id(USER_ID).build())
                         .build()))
                 .when(applicationRepository)
@@ -418,9 +433,9 @@ public class MentoringApplicationServiceTest {
                 .getLoginMemberId();
 
         doReturn(List.of(
-                MentoringApplication.builder().build(),
-                MentoringApplication.builder().build(),
-                MentoringApplication.builder().build()))
+                MentoringApplication.builder().id(1L).user(User.builder().nickname("user1").build()).build(),
+                MentoringApplication.builder().id(2L).user(User.builder().nickname("user2").build()).build(),
+                MentoringApplication.builder().id(3L).user(User.builder().nickname("user3").build()).build()))
                 .when(applicationRepository)
                 .findByUserId(anyLong());
 

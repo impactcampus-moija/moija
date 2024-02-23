@@ -11,7 +11,7 @@ public class MentoringCategoryValidator implements ConstraintValidator<CheckMent
     public boolean isValid(String value, ConstraintValidatorContext context) {
         // 1. null 처리
         if(value == null) {
-            return true;
+            return false;
         }
 
         StringTokenizer st = new StringTokenizer(value, ",");
@@ -20,12 +20,11 @@ public class MentoringCategoryValidator implements ConstraintValidator<CheckMent
             String name = st.nextToken();
 
             // 2. 빈 문자열 및 공백 처리
-            if (name.isEmpty() || name.isBlank()) {
-                return false;
-            }
+            if (name.isEmpty() || name.isBlank()) return false;
+
 
             // 3. 오타 처리
-            return MentoringCategory.isExist(name);
+            if(!MentoringCategory.isExist(name)) return false;
         }
 
         return true;
