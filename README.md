@@ -48,8 +48,10 @@
 ### IA (Information Architecture)
 ![image](https://github.com/impactcampus-moija/moija/assets/75938496/0f5e60ba-0246-4158-8705-219ea85ad9f7)
 
+
 ### ERD 설계
 ![image](https://github.com/impactcampus-moija/moija/assets/75938496/51f122e2-bbfd-4bcb-aaa3-9efbb10c3e3e)
 
 
-
+### 인터뷰👀
+(https://blog.naver.com/riblog/223325541491)
