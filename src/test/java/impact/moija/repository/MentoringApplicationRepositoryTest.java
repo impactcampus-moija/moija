@@ -10,40 +10,17 @@ import impact.moija.repository.mentoring.MentoringApplicationRepository;
 import impact.moija.repository.mentoring.MentoringRecruitmentRepository;
 import impact.moija.repository.user.UserRepository;
 import java.util.List;
-import javax.validation.constraints.AssertTrue;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 
 @ActiveProfiles("test")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class MentoringApplicationRepositoryTest {
-    private static User USER(Long id) {
-        return User.builder().id(id).build();
-    }
-
-    private static MentoringRecruitment RECRUITMENT(Long id, User user) {
-        return MentoringRecruitment.builder()
-                .user(user)
-                .id(id)
-                .build();
-    }
-
-    private static MentoringApplication APPLICATION(Long id, MentoringRecruitment recruitment, User user, MentoringStatus status) {
-        return MentoringApplication.builder()
-                .recruitment(recruitment)
-                .user(user)
-                .status(status)
-                .id(id)
-                .build();
-    }
 
     @Autowired
     private UserRepository userRepository;
@@ -66,7 +43,7 @@ class MentoringApplicationRepositoryTest {
                 .user(users.get(0))
                 .build());
 
-        MentoringApplication application = applicationRepository.save(
+        applicationRepository.save(
                 MentoringApplication.builder()
                         .recruitment(recruitment)
                         .user(users.get(1))

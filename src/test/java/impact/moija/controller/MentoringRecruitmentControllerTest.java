@@ -4,17 +4,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.google.gson.Gson;
 import impact.moija.api.ApiException;
-import impact.moija.api.BaseResponse;
 import impact.moija.api.MoijaHttpStatus;
 import impact.moija.config.SecurityConfig;
-import impact.moija.domain.mentoring.MentoringRecruitment;
 import impact.moija.dto.common.PageResponse;
 import impact.moija.dto.common.PkResponseDto;
 import impact.moija.dto.mentoring.MentoringRecruitmentDetailResponseDto;

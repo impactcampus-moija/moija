@@ -4,7 +4,6 @@ import impact.moija.domain.mentoring.MentoringApplication;
 import impact.moija.domain.mentoring.MentoringRecruitment;
 import impact.moija.domain.mentoring.MentoringStatus;
 import impact.moija.domain.user.User;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

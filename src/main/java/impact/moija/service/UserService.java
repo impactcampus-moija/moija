@@ -5,7 +5,6 @@ import impact.moija.api.MoijaHttpStatus;
 import impact.moija.domain.user.Independence;
 import impact.moija.domain.user.RefreshToken;
 import impact.moija.domain.user.User;
-import impact.moija.domain.user.UserRole;
 import impact.moija.dto.jwt.TokenResponseDto;
 import impact.moija.dto.user.AuthRequestDto;
 import impact.moija.dto.user.IndependenceRequestDto;
@@ -15,6 +14,10 @@ import impact.moija.jwt.TokenType;
 import impact.moija.repository.user.IndependenceRepository;
 import impact.moija.repository.user.RefreshTokenRepository;
 import impact.moija.repository.user.UserRepository;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -26,12 +29,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 @RequiredArgsConstructor
 @Transactional

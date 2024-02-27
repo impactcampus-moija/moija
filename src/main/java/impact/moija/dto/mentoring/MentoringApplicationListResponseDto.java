@@ -1,7 +1,6 @@
 package impact.moija.dto.mentoring;
 
 import impact.moija.domain.mentoring.MentoringApplication;
-import impact.moija.domain.mentoring.MentoringRecruitment;
 import impact.moija.domain.mentoring.MentoringStatus;
 import lombok.Builder;
 import lombok.Data;

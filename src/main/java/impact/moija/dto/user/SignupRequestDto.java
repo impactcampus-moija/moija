@@ -4,13 +4,11 @@ import impact.moija.domain.user.Gender;
 import impact.moija.domain.user.Location;
 import impact.moija.domain.user.User;
 import impact.moija.domain.user.UserRole;
+import java.time.LocalDate;
+import java.util.Collections;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
 
 @Getter
 @Builder

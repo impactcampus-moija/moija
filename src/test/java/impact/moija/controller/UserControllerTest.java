@@ -1,23 +1,17 @@
 package impact.moija.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import com.google.gson.Gson;
 import impact.moija.config.SecurityConfig;
-import impact.moija.dto.common.PkResponseDto;
 import impact.moija.dto.mentoring.MentoringApplicationListResponseDto;
-import impact.moija.dto.mentoring.MentoringApplicationRequestDto;
 import impact.moija.jwt.JwtAccessDeniedHandler;
 import impact.moija.jwt.JwtAuthenticationEntryPoint;
 import impact.moija.jwt.TokenProvider;
 import impact.moija.mock.WithMockCustomUser;
 import impact.moija.service.MentoringApplicationService;
-import impact.moija.service.MentoringRecruitmentService;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +26,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @Import({SecurityConfig.class, TokenProvider.class, JwtAccessDeniedHandler.class, JwtAuthenticationEntryPoint.class })
 @WebMvcTest(UserController.class)
-class UserControllerTest {
+public class UserControllerTest {
 
     @MockBean
     private MentoringApplicationService applicationService;

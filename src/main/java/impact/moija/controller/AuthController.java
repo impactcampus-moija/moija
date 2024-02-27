@@ -5,20 +5,17 @@ import impact.moija.domain.user.Location;
 import impact.moija.domain.user.User;
 import impact.moija.dto.jwt.TokenResponseDto;
 import impact.moija.dto.user.AuthRequestDto;
-import impact.moija.dto.user.IndependenceRequestDto;
 import impact.moija.dto.user.SignupRequestDto;
 import impact.moija.service.UserService;
+import java.util.Set;
+import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletResponse;
-import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController

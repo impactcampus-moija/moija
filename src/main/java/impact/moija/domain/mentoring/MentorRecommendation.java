@@ -1,7 +1,6 @@
 package impact.moija.domain.mentoring;
 
 import impact.moija.domain.common.BaseTimeEntity;
-import impact.moija.domain.community.Post;
 import impact.moija.domain.user.User;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
