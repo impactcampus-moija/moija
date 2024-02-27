@@ -4,6 +4,8 @@ import impact.moija.domain.policy.Policy;
 import impact.moija.domain.policy.PolicyType;
 import impact.moija.domain.user.Location;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -65,12 +67,14 @@ public class PolicyRequestListDto {
         private String typeCode;
 
         public Policy toEntity() {
+            int[] parsedAge = parseAgeRange(age);
             return Policy.builder()
                     .number(this.number)
                     .name(this.name)
                     .introduction(this.introduction)
                     .content(this.content)
-                    .age(this.age)
+                    .minAge(parsedAge[0])
+                    .maxAge(parsedAge[1])
                     .major(this.major)
                     .employment(this.employment)
                     .special(this.special)
@@ -79,6 +83,23 @@ public class PolicyRequestListDto {
                     .type(PolicyType.findByCode(this.typeCode))
                     .location(Location.findByCode(this.locationCode))
                     .build();
+        }
+
+        private int[] parseAgeRange(String ageString) {
+            int[] ageRange = new int[2];
+            if (ageString.equals("제한없음")) {
+                ageRange[0] = -1;
+                ageRange[1] = -1;
+            } else {
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(ageString);
+                int count = 0;
+                while (matcher.find() && count < 2) {
+                    ageRange[count] = Integer.parseInt(matcher.group());
+                    count++;
+                }
+            }
+            return ageRange;
         }
     }
 }

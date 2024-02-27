@@ -51,10 +51,4 @@ public class AuthController {
         userService.logout(refreshToken);
         return BaseResponse.ok();
     }
-
-    @PostMapping("/users/independence-certificate")
-    public BaseResponse<Void> certificateIndependence(@RequestBody IndependenceRequestDto independenceRequestDto) {
-        userService.certificateIndependence(independenceRequestDto);
-        return BaseResponse.ok();
-    }
 }
