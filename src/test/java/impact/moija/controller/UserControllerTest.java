@@ -12,6 +12,7 @@ import impact.moija.jwt.JwtAuthenticationEntryPoint;
 import impact.moija.jwt.TokenProvider;
 import impact.moija.mock.WithMockCustomUser;
 import impact.moija.service.MentoringApplicationService;
+import impact.moija.service.UserService;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,6 +31,8 @@ public class UserControllerTest {
 
     @MockBean
     private MentoringApplicationService applicationService;
+    @MockBean
+    private UserService userService;
     @Autowired
     private MockMvc mockMvc;
     private Gson gson;
