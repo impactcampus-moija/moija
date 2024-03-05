@@ -45,7 +45,7 @@ jobs:
 
     # Docker 이미지 빌드
     - name: Docker Image Build
-      run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/moija
+      run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/moija .
 
     # Docker Hub 이미지 푸시
     - name: Docker Hub Push
