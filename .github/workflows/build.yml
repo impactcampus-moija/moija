@@ -27,9 +27,7 @@ jobs:
     - name: Create application-secret.yml and Paste APPLICATION_SECRET
       env:
         APPLICATION_SECRET: ${{ secrets.APPLICATION_SECRET }}
-        APPLICATION_SECRET_DIR: src/main/resources
-        APPLICATION_SECRET_FILENAME: application-secret.yml
-      run: echo $APPLICATION_SECRET | base64 --decode > $APPLICATION_SECRET_DIR/$APPLICATION_SECRET_DIR_FILENAME
+      run: echo $APPLICATION_SECRET | base64 --decode > ./src/main/resources/application-secret.yml
 
     - name: Check File
       run: cat ./src/main/resources/application-secret.yml
