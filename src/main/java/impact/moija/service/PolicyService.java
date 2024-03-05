@@ -58,7 +58,7 @@ public class PolicyService {
         }
     }
 
-    @Value("${API-KEY}")
+    @Value("${moija.apiKey}")
     private String APIKEY;
     private final RestTemplate template;
     private final PolicyRepository policyRepository;
