@@ -23,6 +23,17 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    # application-secret.yml Injection
+    - name: Create application-secret.yml and Paste APPLICATION_SECRET
+      env:
+        APPLICATION_SECRET: ${{ secrets.APPLICATION_SECRET }}
+        APPLICATION_SECRET_DIR: src/main/resources
+        APPLICATION_SECRET_FILENAME: application-secret.yml
+      run: echo $APPLICATION_SECRET | base64 --decode > $APPLICATION_SECRET_DIR/$APPLICATION_SECRET_DIR_FILENAME
+
+    - name: Check File
+      run: cat ./src/main/resources/application-secret.yml
+
     # Spring Boot Application Build
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
@@ -30,16 +41,16 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    # Docker 이미지 빌드
-    - name: Docker Image Build
-      run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/moija
-
-    # Docker Hub 로그인
+      # Docker Hub 로그인
     - name: Docker Hub Login
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+    # Docker 이미지 빌드
+    - name: Docker Image Build
+      run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/moija
 
     # Docker Hub 이미지 푸시
     - name: Docker Hub Push
