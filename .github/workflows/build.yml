@@ -50,20 +50,16 @@ jobs:
     # Docker Hub 이미지 푸시
     - name: Docker Hub Push
       run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/moija
-  dependency-submission:
 
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up JDK 17
-      uses: actions/setup-java@v4
+    # Docker compose 실행
+    - name: Excuting Remote SSH Commands Using Password
+      uses: appleboy/ssh-action@master
       with:
-        java-version: '17'
-        distribution: 'temurin'
-        
-    - name: Generate and submit dependency graph
-      uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+        host: ${{ secrets.SERVER_IP }}
+        username: ec2-user
+        key: ${{ secrets.SERVER_PRIVATE_IP }}
+        script: |
+          sudo docker rm -f $(docker ps -qa) 
+          sudo docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/moija
+          docker-compose up -d
+          docker image prune -f 
