@@ -13,7 +13,7 @@
 |     팀원     |                       역할                        |
 | :---------: | :----------------------------------------------: | 
 |  [신민경](https://github.com/minggwen)  |     PM, 프론트엔드 개발   |
-| [조유진](https://github.com/2oooo914)  |   디자인, 프론트엔드 개발  |
+| [조유진](https://github.com/ohcuy)  |   디자인, 프론트엔드 개발  |
 |  [박민수](https://github.com/pmsu2007)  | 백엔드 개발 | 
 |  [최세민](https://github.com/seminchoi)  | 백엔드 개발  | 
 
